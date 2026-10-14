@@ -1,0 +1,14 @@
+{
+  "results": [
+    "Lei de tensão consistente",
+    "MOV limita e conduz",
+    "MOV não conduz no regime normal",
+    "Sem DPS não há limitação",
+    "Pausa congela",
+    "Aba inativa congela",
+    "Após surto retorna disponível",
+    "Fim de vida sem proteção",
+    "Substituição recupera proteção"
+  ],
+  "errors": []
+}

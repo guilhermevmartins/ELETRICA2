@@ -1,0 +1,4 @@
+/* Identidade compartilhada por todos os módulos do laboratório. */
+:root{--bg:#121215;--panel:#1c1c21;--line:#37373f;--muted:#b6b3bc;--cyan:#ff777c;--green:#71dcb0;--red:#ff8588;--accent:#ed1c24;color-scheme:dark}
+body{background:var(--bg);color:#f5f3f5}button{background:#29282f;border-color:#4b464f}button:hover{background:#403139}button.active,button[aria-pressed=true]{background:#55252d;border-color:#ff777c;color:#fff0f1}.badge{border-color:#56434a}.canvas-wrap{background:radial-gradient(ellipse at center,#303039,#18181e 75%)}.metric{background:#242329}a{color:#ff969b}.dot{background:#f7d077}progress{accent-color:#ef525b}.status{color:var(--green)}.status.open{color:var(--red)}header{padding-top:24px}header .eyebrow{color:#ff8b90}.part-list button{font-size:12px}.foot{color:#aaa5b0}details p,details li{color:#c2bdc7}.caption{color:#c2bdc7}::selection{background:#b12232;color:white}
+@media(max-width:780px){header h1{font-size:22px}.layout{gap:14px}}

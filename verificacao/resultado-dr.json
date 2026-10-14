@@ -1,0 +1,73 @@
+{
+  "results": [
+    {
+      "ok": true,
+      "name": "Normal mantém contatos fechados e soma zero"
+    },
+    {
+      "ok": true,
+      "name": "70 A sem fuga não aciona IDR"
+    },
+    {
+      "ok": true,
+      "name": "300 mA não atua com fuga de 40 mA"
+    },
+    {
+      "ok": true,
+      "name": "30 mA atua com a mesma fuga"
+    },
+    {
+      "ok": true,
+      "name": "Abertura interrompe corrente na fase e no neutro"
+    },
+    {
+      "ok": true,
+      "name": "Fuga de 0,3 In não dispara no modelo"
+    },
+    {
+      "ok": true,
+      "name": "Falha de isolação libera trava"
+    },
+    {
+      "ok": true,
+      "name": "Rearmar com fuga persistente provoca novo desarme"
+    },
+    {
+      "ok": true,
+      "name": "Remover fuga permite permanecer fechado"
+    },
+    {
+      "ok": true,
+      "name": "Teste interno sem PE em 30 mA"
+    },
+    {
+      "ok": true,
+      "name": "Botão T desarma em 30 mA"
+    },
+    {
+      "ok": true,
+      "name": "Teste interno sem PE em 300 mA"
+    },
+    {
+      "ok": true,
+      "name": "Botão T desarma em 300 mA"
+    },
+    {
+      "ok": true,
+      "name": "Pausa congela atuação"
+    },
+    {
+      "ok": true,
+      "name": "Aba inativa congela atuação"
+    },
+    {
+      "ok": true,
+      "name": "Fuga com carga útil zero mantém balanço correto"
+    },
+    {
+      "ok": true,
+      "name": "Fuga atua mesmo com carga útil zero"
+    }
+  ],
+  "errors": []
+}

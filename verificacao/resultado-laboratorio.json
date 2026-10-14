@@ -1,0 +1,127 @@
+{
+  "results": [
+    {
+      "ok": true,
+      "name": "Motor 28 A em regime permanece fechado"
+    },
+    {
+      "ok": true,
+      "name": "Partida permitida em Ir 24",
+      "detail": {
+        "temps": [
+          86.56146347122647,
+          86.56146347122647,
+          86.56146347122647
+        ]
+      }
+    },
+    {
+      "ok": true,
+      "name": "Partida permitida em Ir 28",
+      "detail": {
+        "temps": [
+          70.22883030539117,
+          70.22883030539117,
+          70.22883030539117
+        ]
+      }
+    },
+    {
+      "ok": true,
+      "name": "Partida permitida em Ir 32",
+      "detail": {
+        "temps": [
+          59.62832320256517,
+          59.62832320256517,
+          59.62832320256517
+        ]
+      }
+    },
+    {
+      "ok": true,
+      "name": "Sobrecarga dispara em Ir 24",
+      "detail": {
+        "time": 9.449999999999843
+      }
+    },
+    {
+      "ok": true,
+      "name": "Sobrecarga dispara em Ir 28",
+      "detail": {
+        "time": 14.599999999999733
+      }
+    },
+    {
+      "ok": true,
+      "name": "Sobrecarga dispara em Ir 32",
+      "detail": {
+        "time": 23.28000000000084
+      }
+    },
+    {
+      "ok": true,
+      "name": "Ajuste térmico altera o tempo de disparo"
+    },
+    {
+      "ok": true,
+      "name": "Diferencial atua por falta de fase",
+      "detail": {
+        "temps": [
+          60.002426630772746,
+          25,
+          60.002426630772746
+        ],
+        "time": 6.059999999999915
+      }
+    },
+    {
+      "ok": true,
+      "name": "Falta de fase abre os três polos"
+    },
+    {
+      "ok": true,
+      "name": "Curto gera disparo magnético e arco"
+    },
+    {
+      "ok": true,
+      "name": "START não ignora trava disparada"
+    },
+    {
+      "ok": true,
+      "name": "Rearme mantém contatos abertos"
+    },
+    {
+      "ok": true,
+      "name": "START com falta persistente desarma novamente"
+    },
+    {
+      "ok": true,
+      "name": "START fecha após eliminar a falta"
+    },
+    {
+      "ok": true,
+      "name": "STOP abre e permite resfriamento"
+    },
+    {
+      "ok": true,
+      "name": "Pausa preserva tempo"
+    },
+    {
+      "ok": true,
+      "name": "Aba inativa congela modelo"
+    },
+    {
+      "ok": true,
+      "name": "Botões START e STOP clicáveis na vista frontal"
+    },
+    {
+      "ok": true,
+      "name": "Regressão DIN: térmico"
+    },
+    {
+      "ok": true,
+      "name": "Regressão DIN: magnético"
+    }
+  ],
+  "errors": []
+}

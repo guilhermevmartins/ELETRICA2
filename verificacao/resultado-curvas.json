@@ -1,0 +1,65 @@
+{
+  "results": [
+    {
+      "ok": true,
+      "name": "0,5 In não dispara"
+    },
+    {
+      "ok": true,
+      "name": "1,5 In dispara termicamente nas três curvas"
+    },
+    {
+      "ok": true,
+      "name": "Ensaio encerra após os três disparos"
+    },
+    {
+      "ok": true,
+      "name": "4 In: somente B magnético"
+    },
+    {
+      "ok": true,
+      "name": "4 In: C e D térmicos e simultâneos"
+    },
+    {
+      "ok": true,
+      "name": "8 In: B e C magnéticos; D aguarda"
+    },
+    {
+      "ok": true,
+      "name": "16 In: três magnéticos"
+    },
+    {
+      "ok": true,
+      "name": "Alterar nominal mantém amperagem e recalcula múltiplo"
+    },
+    {
+      "ok": true,
+      "name": "Mudança reinicia ensaio frio"
+    },
+    {
+      "ok": true,
+      "name": "Instantes precisos em 1000x"
+    },
+    {
+      "ok": true,
+      "name": "Aba inativa congela simulação"
+    },
+    {
+      "ok": true,
+      "name": "Pausa manual congela simulação"
+    },
+    {
+      "ok": true,
+      "name": "Zero ampere válido"
+    },
+    {
+      "ok": true,
+      "name": "Entrada limitada ao máximo"
+    },
+    {
+      "ok": true,
+      "name": "Tempos acima da escala continuam calculados"
+    }
+  ],
+  "errors": []
+}
