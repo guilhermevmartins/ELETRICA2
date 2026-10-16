@@ -58,7 +58,7 @@ function selectModule(id,focus=false){
   if(module.id===id&&!frames.has(id)){const frame=document.createElement('iframe');frame.title='Simulador de '+module.title;frame.src=module.file;frame.id='frame-'+id;frame.addEventListener('load',()=>frame.contentWindow.postMessage({type:'lab-visibility',active:active===module.id},'*'));panel.append(frame);frames.set(id,frame);}
  }
  for(const [key,frame] of frames)frame.contentWindow.postMessage({type:'lab-visibility',active:key===id},'*');
- document.title=(item?item.title:group?group.title:area?area.title:'Áreas de estudo')+' · EletroLab';
+ document.title=landing?'Laboratório de Lousa Digital do SENAI':(item?item.title:group?group.title:area?area.title:'Áreas de estudo')+' · SENAI';
  if(location.hash!=='#'+id)location.hash=id;
  if(catalog&&!focus)document.getElementById('areaTitle').focus({preventScroll:true});
  if(landing&&previous)document.getElementById('brandHome').focus({preventScroll:true});
