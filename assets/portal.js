@@ -55,7 +55,7 @@ function selectModule(id,focus=false){
   document.getElementById('home').setAttribute('role',visibleModules.length?'tabpanel':'region');
  }
  for(const module of modules){const panel=document.getElementById('panel-'+module.id);panel.hidden=module.id!==id;
-  if(module.id===id&&!frames.has(id)){const frame=document.createElement('iframe');frame.title='Simulador de '+module.title;frame.src=module.file;frame.id='frame-'+id;frame.addEventListener('load',()=>frame.contentWindow.postMessage({type:'lab-visibility',active:active===module.id},'*'));panel.append(frame);frames.set(id,frame);}
+  if(module.id===id&&!frames.has(id)){const frame=document.createElement('iframe');frame.title='Simulador de '+module.title;frame.allowFullscreen=true;frame.src=module.file;frame.id='frame-'+id;frame.addEventListener('load',()=>frame.contentWindow.postMessage({type:'lab-visibility',active:active===module.id},'*'));panel.append(frame);frames.set(id,frame);}
  }
  for(const [key,frame] of frames)frame.contentWindow.postMessage({type:'lab-visibility',active:key===id},'*');
  document.title=landing?'Laboratório de Lousa Digital do SENAI':(item?item.title:group?group.title:area?area.title:'Áreas de estudo')+' · SENAI';
