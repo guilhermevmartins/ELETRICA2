@@ -1,0 +1,6 @@
+/* A visão inicial sempre contém o circuito inteiro, inclusive em iframes. */
+.lighting-lab .diagram-scroll{min-width:0;max-width:100%;overflow-x:auto}
+.lighting-lab #circuit{display:block;width:100%!important;min-width:0!important;height:auto;max-width:none!important}
+.lighting-lab .diagram-scroll.diagram-zoomed #circuit{width:max(100%,var(--diagram-natural-width))!important}
+.lighting-lab .diagram-mobile-hint{display:none}
+.lighting-lab .diagram-scroll.diagram-zoomed+.diagram-mobile-hint{display:block}

@@ -4,7 +4,7 @@ const tabs=document.getElementById('tabs'),cards=document.getElementById('cards'
 let active='';
 const areaFor=id=>areas.find(a=>a.modules.includes(id));
 const icon=a=>`<span class="area-icon"><svg viewBox="0 0 48 56" aria-hidden="true"><path d="${a.icon}"/></svg></span>`;
-document.getElementById('areaCards').innerHTML=areas.map((a,i)=>`<a class="area-card" href="#area-${a.id}"><div class="area-card-top">${icon(a)}<span class="area-status ${a.modules.length?'available':''}">${a.groups?`${a.groups.length} grupo disponível`:a.modules.length?`${a.modules.length} ${a.modules.length===1?'simulador disponível':'simuladores disponíveis'}`:'Em preparação'}</span></div><h2>${a.title}</h2><span class="area-subtitle">${a.subtitle}</span><p>${a.description}</p><div class="area-topics">${a.topics}</div><div class="area-action"><span>0${i+1} · Explorar área</span><span aria-hidden="true">↗</span></div></a>`).join('');
+document.getElementById('areaCards').innerHTML=areas.map((a,i)=>`<a class="area-card" href="#area-${a.id}"><div class="area-card-top">${icon(a)}<span class="area-status ${a.modules.length?'available':''}">${a.modules.length?`${a.modules.length} ${a.modules.length===1?'simulador disponível':'simuladores disponíveis'}`:'Em preparação'}</span></div><h2>${a.title}</h2><span class="area-subtitle">${a.subtitle}</span><p>${a.description}</p><div class="area-topics">${a.topics}</div><div class="area-action"><span>0${i+1} · Explorar área</span><span aria-hidden="true">↗</span></div></a>`).join('');
 modules.forEach(item=>{
  const tab=document.createElement('button');tab.className='tab';tab.id='tab-'+item.id;tab.setAttribute('role','tab');tab.setAttribute('aria-selected','false');tab.setAttribute('aria-controls','panel-'+item.id);tab.tabIndex=-1;tab.dataset.module=item.id;tab.innerHTML=`<span>${item.number}</span>${item.short}`;tabs.append(tab);
  const card=document.createElement('article');card.className='module-card';card.dataset.module=item.id;card.innerHTML=`<div class="module-visual"><span class="module-number">MÓDULO ${item.number}</span>${item.id==="motor-vistas"?`<a class="motor-photo-link" href="#${item.id}" aria-label="Explorar ${item.title}">`:""}<img class="${item.imageClass}" src="${item.image}" alt="Referência visual: ${item.title}">${item.id==="motor-vistas"?"</a>":""}</div><div class="module-info"><div class="eyebrow">${item.category}</div><h3>${item.title}</h3><p>${item.description}</p><div class="tags">${item.tags.map(t=>`<span>${t}</span>`).join('')}</div><button class="open-module" data-open="${item.id}" aria-label="Abrir simulador de ${item.title}">Abrir simulador <span aria-hidden="true">↗</span></button></div>`;cards.append(card);
@@ -12,14 +12,14 @@ modules.forEach(item=>{
 });
 for(const area of areas)for(const group of area.groups||[]){
  const card=document.createElement('article');card.className='module-card';card.dataset.group=group.id;card.hidden=true;
- card.innerHTML=`<div class="module-visual"><span class="module-number">GRUPO DE ESTUDO</span><img class="pneumatic" src="assets/pneumatica-capa.svg" alt="Pneumática: energia do ar comprimido"></div><div class="module-info"><div class="eyebrow">${area.title}</div><h3>${group.title}</h3><p>${group.description}</p><div class="tags"><span>Atuadores</span><span>Válvulas</span><span>Lógica e controle</span></div><button class="open-module" data-open="${group.id}">Explorar Pneumática <span aria-hidden="true">↗</span></button></div>`;cards.append(card);
+ card.innerHTML=`<div class="module-visual"><span class="module-number">GRUPO DE ESTUDO</span><img class="pneumatic" src="${group.image||'assets/pneumatica-capa.svg'}" alt="${group.imageAlt||'Pneumática: energia do ar comprimido'}"></div><div class="module-info"><div class="eyebrow">${area.title}</div><h3>${group.title}</h3><p>${group.description}</p><div class="tags">${(group.tags||['Atuadores','Válvulas','Lógica e controle']).map(tag=>`<span>${tag}</span>`).join('')}</div><button class="open-module" data-open="${group.id}">Explorar ${group.title} <span aria-hidden="true">↗</span></button></div>`;cards.append(card);
 }
 function selectModule(id,focus=false){
  const previous=active;
  let item=modules.find(m=>m.id===id),area=areas.find(a=>'area-'+a.id===id||(a.groups||[]).some(g=>g.id===id))||areaFor(id);
  const group=area&&(area.groups||[]).find(g=>g.id===id||(item&&g.modules.includes(item.id)));
  const groupLanding=!!area?.groups&&!group;
- const visibleModules=group?group.modules:groupLanding?[]:area?.modules||[];
+ const visibleModules=group?group.modules:groupLanding?area.modules.filter(id=>!area.groups.some(g=>g.modules.includes(id))):area?.modules||[];
  const catalogTarget=group?group.id:area?'area-'+area.id:'inicio';
  if(!area){id='inicio';item=null;}
  active=id;
@@ -27,7 +27,7 @@ function selectModule(id,focus=false){
  document.getElementById('areasHome').hidden=!landing;
  document.getElementById('home').hidden=!catalog;
  document.getElementById('backAreas').hidden=landing;
- document.getElementById('backAreas').textContent=group?(item?'← Pneumática':'← Automação'):'← Áreas de estudo';
+ document.getElementById('backAreas').textContent=group?(item?'← '+group.title:'← '+area.title):'← Áreas de estudo';
  document.getElementById('workspaceNote').hidden=!item;
  tabs.hidden=landing||!visibleModules.length;
  document.getElementById('tab-inicio').dataset.module=catalogTarget;
@@ -38,15 +38,15 @@ function selectModule(id,focus=false){
   const breadcrumb=document.getElementById('areaBreadcrumb');breadcrumb.replaceChildren();
   const addCrumb=(label,target)=>{const link=document.createElement('a');link.textContent=label;link.href='#'+target;breadcrumb.append(link,document.createTextNode(' / '));};
   addCrumb('Áreas de estudo','inicio');if(group)addCrumb(area.title,'area-'+area.id);breadcrumb.append(document.createTextNode(group?group.title:area.title));
-  document.getElementById('moduleCount').textContent=String(groupLanding?area.groups.length:visibleModules.length).padStart(2,'0');
-  document.querySelector('.hero-side p').textContent=groupLanding?'grupo disponível nesta área':'simuladores disponíveis neste grupo';
-  document.querySelector('#equipmentHeading h2').textContent=groupLanding?'Escolha um grupo de estudo':group?'O que vamos explorar em Pneumática?':'O que vamos estudar hoje?';
-  document.querySelector('#equipmentHeading span').textContent=groupLanding?'EXPLORE O GRUPO ABAIXO':'SELECIONE UM MÓDULO ABAIXO';
+  document.getElementById('moduleCount').textContent=String(groupLanding?area.groups.length+visibleModules.length:visibleModules.length).padStart(2,'0');
+  document.querySelector('.hero-side p').textContent=groupLanding?'opções disponíveis nesta área':group?'simuladores disponíveis neste grupo':'simuladores disponíveis nesta área';
+  document.querySelector('#equipmentHeading h2').textContent=groupLanding?(visibleModules.length?'Escolha um grupo ou simulador':'Escolha um grupo de estudo'):group?'Escolha uma atividade para demonstrar':'O que vamos estudar hoje?';
+  document.querySelector('#equipmentHeading span').textContent=groupLanding?'SELECIONE UMA OPÇÃO ABAIXO':'SELECIONE UM MÓDULO ABAIXO';
   document.getElementById('areaEmpty').hidden=!!area.modules.length;
   document.getElementById('equipmentHeading').hidden=!area.modules.length;
   document.getElementById('learningStrip').hidden=!area.modules.length||!!area.groups;
   document.getElementById('emptyTopics').textContent=area.topics;
-  document.getElementById('tab-inicio').innerHTML='<span>⌂</span>'+(group?'Pneumática':'Selecionar módulo');
+  document.getElementById('tab-inicio').innerHTML='<span>⌂</span>'+(group?group.title:'Selecionar módulo');
   const firstStep=document.querySelector('#learningStrip article');
   firstStep.querySelector('h3').textContent=area.id==='digital'?'Explore a lógica':area.id==='comandos'?'Entre no motor':'Explore a anatomia';
   firstStep.querySelector('p').textContent=area.id==='digital'?'Altere os bits e acompanhe as saídas, as tabelas e a memória dos circuitos.':area.id==='comandos'?'Observe o campo girante, acompanhe as bobinas e experimente os fechamentos.':'Abra a vista explodida e descubra a função de cada componente.';

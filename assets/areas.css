@@ -4,3 +4,7 @@
 .senai-portal .areas-grid .area-card{grid-column:span 2}
 @media(max-width:850px){.senai-portal .areas-grid .area-card,.senai-portal .areas-grid .area-card:last-child{grid-column:span 3}}
 @media(max-width:600px){.senai-portal .areas-grid .area-card,.senai-portal .areas-grid .area-card:last-child{grid-column:auto}}
+
+.module-card[data-group="grupo-interruptores"] .module-visual{background:#f7f7f7}.module-card[data-group="grupo-interruptores"] .module-visual img{background:#f7f7f7;object-fit:contain;padding:45px 12px 18px}.module-card[data-group="grupo-interruptores"] .module-number{color:#454545}
+
+.module-card[data-module="trifasico"] .module-visual{background:#f7f8f7}.module-visual img.campo-magnetico{width:100%;height:auto;max-height:100%;object-fit:contain;padding:35px 5px 12px}.module-card[data-module="trifasico"] .module-number{color:#455263}
