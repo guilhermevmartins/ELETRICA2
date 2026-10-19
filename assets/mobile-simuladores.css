@@ -1,0 +1,54 @@
+/* Exclusivo de telas pequenas. Os estilos e as dimensões do PC não mudam. */
+@media(max-width:700px), (max-width:1100px) and (hover:none) and (pointer:coarse){
+ /* Mantém as cores autorais, inclusive no tema escuro do site, sem inversão automática do navegador. */
+ html[data-theme],html body.senai-module{color-scheme:only light!important}
+ svg,canvas,svg *,canvas *{color-scheme:only light}
+ .senai-module main,.senai-module section,.senai-module article,.senai-module aside{min-width:0}
+ .senai-module input:not([type=range]):not([type=checkbox]):not([type=radio]),.senai-module select{font-size:16px}
+ .senai-module button,.senai-module select,.senai-module summary{min-height:44px}
+ .senai-module input[type=range]{min-height:40px}
+ .senai-module .mobile-diagram-tools{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 12px;background:#e9f2f8;color:#24475e;border-bottom:1px solid #b8cfdf;font:12px/1.5 'Segoe UI',sans-serif}
+ .senai-module .mobile-diagram-tools button{min-height:44px;flex:1;padding:8px 10px;border:1px solid #99b8cc;border-radius:6px;background:#fff;color:#163e58;font:650 12px 'Segoe UI',sans-serif;white-space:normal;touch-action:manipulation}
+ .senai-module .mobile-diagram-tools button[aria-pressed=true]{background:#cfe8f6;border-color:#3786b0;color:#123d55}
+ .mobile-diagram-tools small{flex-basis:100%;color:#405e72;font-size:11px}
+ .mobile-diagram-viewport{display:block;width:100%;max-width:100%;overflow:auto;overscroll-behavior-x:contain;touch-action:pan-x pan-y;scrollbar-width:thin;scrollbar-color:#6f9bb4 #dbe8f0}
+ .mobile-diagram-viewport.is-enlarged{max-height:70svh;min-height:230px;box-shadow:inset 0 0 0 1px #7eaac5}
+ .mobile-diagram-viewport>.mobile-diagram-target{display:block;margin:0!important;max-width:none!important;min-width:0!important}
+ svg.mobile-diagram-target,canvas.mobile-diagram-target{height:auto!important;max-height:none!important;min-height:0!important}
+ .senai-module .mobile-view-tip{padding:10px 14px;margin:0;color:#315970;background:#eaf3f9;border-top:1px solid #bfd4e2;font-size:12px;line-height:1.6}
+ /* O metal e as escalas do instrumento precisam de uma superfície clara nos dois temas. */
+ .senai-module .caliper-lab .stage,.senai-module .caliper-lab.zoomed .stage{background:#f5f8fa!important;color:#18364b;color-scheme:only light!important}
+ .senai-module .caliper-lab .stage-caption{position:relative;inset:auto;display:block;padding:10px 12px;background:#e5eff6;color:#234960!important;border-bottom:1px solid #bed1df}
+ .senai-module .caliper-lab .stage-caption #scaleLabel{font-size:10px;margin-top:3px}
+ .senai-module .caliper-lab .stage-bottom{position:relative;inset:auto;padding:8px 12px;min-height:32px;background:#173b53;color:#eaf5fc!important}
+ .mobile-caliper-paint{position:absolute;pointer-events:none;display:block;z-index:0}
+ .caliper-lab #caliper{background:#f5f8fa;color-scheme:only light!important}
+ .caliper-lab #caliper text{paint-order:stroke;stroke:#fff;stroke-width:.2px}
+ .caliper-lab .toolbar .tool,.caliper-lab .reading-tools .guide-toggle{min-height:46px}
+ .caliper-lab .toolbar #zoom{border-color:#7399b2;background:#d9eaf5;color:#133a55}
+ .lighting-lab #diagramZoom{min-height:46px;border-color:#73b3d1}
+ /* Alguns cortes traziam uma largura mínima de 600–1080px e abriam já cortados. */
+ .v-canvas,.pf-diagram,.diagram-scroll,.cable-scroll,.build-scene-scroll{min-width:0;max-width:100%}
+ .v-canvas>svg,.pf-diagram>svg,.diagram-scroll>#diagram,.cable-scroll>svg,.build-scene-scroll>svg{width:100%;min-width:0!important;height:auto;max-width:100%}
+ .v-stage,.pf-stage{padding:12px!important}
+ .v-layout,.pf-layout{grid-template-columns:1fr}
+ .v-stage-top,.pf-stagehead{flex-wrap:wrap}
+ .v-stage-top h2{font-size:21px}
+ .v-readout,.pf-readout{grid-template-columns:1fr}
+ .v-commandbar button,.pf-actions button{flex:1 1 42%;white-space:normal}
+ .v-speed,.pf-animation-controls{flex-wrap:wrap}
+ .compressores .tools{flex-wrap:wrap}
+ #compressorLab .readout{grid-template-columns:1fr}
+ #compressorLab .work{grid-template-columns:1fr}
+ #compressorLab .readout .part-box{margin-top:14px}
+ #compressorLab .tools{gap:8px}
+ #compressorLab .tools>button{flex:1 1 40%}
+ #compressorLab .tools label{max-width:100%;white-space:normal}
+ #compressorLab .phases{gap:8px}
+ #compressorLab .phases button{padding:10px;font-size:12px}
+ #compressorLab .legend{font-size:12px}
+ #motorViewport{min-height:340px;height:390px}
+ .mobile-diagram-target#stage{flex:none}
+ /* Em celular, cores identificam condutores e não devem ser trocadas pelo navegador. */
+ #circuit,#diagram,#vDiagram,#pfDiagram,#cylinder,#machine,#sample{color-scheme:only light!important}
+}

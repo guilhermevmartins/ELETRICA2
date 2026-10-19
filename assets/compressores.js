@@ -221,6 +221,15 @@
   labels([[230,95,330,180,'Descarga'],[690,95,575,190,'Admissão'],[200,425,cx-90,cy+40,'Rolo'],[700,425,cx+30,cy+30,'Excêntrico'],[600,65,450,120,'Palheta + mola']]);
   return out+text(450,545,'A palheta desliza, mas não acompanha o giro.','caption');
  }
+ function slidingVanes(){
+  const p=window.VaneView?.render(phase,{selected,air:$('air').checked,showHousing:$('vaneShell').checked,showSprings:$('vaneSprings').checked,view:$('vaneView').value});
+  if(!p)return vanes(false);
+  $('vane3dLayer').style.display='block';
+  if($('vaneView').value==='closed'){labels([[180,75,...p.body,'Carcaça com tampa'],[715,470,...p.shaft,'Eixo de acionamento']]);return '';}
+  const notes=[[185,60,...p.body,'Estator / carcaça'],[705,66,...p.vane,'Pastilha deslizante'],[160,365,...p.inlet,'Admissão'],[745,365,...p.outlet,'Descarga'],[200,535,...p.rotor,'Rotor excêntrico'],[715,535,...p.shaft,'Eixo de acionamento']];
+  $('labels').innerHTML=$('names').checked?notes.map(([x,y,px,py,name])=>{const dir=y>450?-1:1;return '<path class="leader" d="M'+x+' '+(y+dir*6)+'V'+(y+dir*18)+'L'+n(px)+' '+n(py)+'"/>'+text(x,y,name,'part-label');}).join(''):'';
+  return '';
+ }
  function vanes(liquid=false){
   const x=450,y=310,R=175,cx=liquid?420:405,cy=310,r=liquid?45:100,edge=liquid?110:R;
   let out=ports([310,190],[310,430]);
@@ -390,11 +399,11 @@
   labels([[220,150,350,220,'Câmara do gás'],[455,410,pinX+15,310,'Pistão P'+(cylinder+1)],[650,465,650,350,'Placa oscilante'],[770,150,760,220,'Polia']]);
   return out+text(450,550,'Corte didático do cilindro escolhido • visualização vetorial','caption');
  }
- const renderers={pistao:piston,membrana:diaphragm,rolo:rolling,palhetas:()=>vanes(false),parafuso:screw,scroll,roots,'anel-liquido':()=>vanes(true),centrifugo:centrifugal,axial,'pistoes-axiais':axialPistons};
- const phaseNames=()=>type.id==='rolo'?['Novo ciclo','Admissão','Compressão','Descarga']:type.id==='palhetas'?['Entrada','Expansão da célula','Compressão','Descarga']:type.id==='anel-liquido'?['Anel de vedação','Admissão','Compressão','Descarga']:type.id==='pistao'||type.id==='membrana'||type.id==='pistoes-axiais'?['Reexpansão','Admissão','Compressão','Descarga']:type.id==='roots'?['Admissão','Aprisionamento','Transporte','Equalização e saída']:['Admissão','Aprisionamento','Compressão','Descarga'];
+ const renderers={pistao:piston,membrana:diaphragm,rolo:rolling,palhetas:slidingVanes,parafuso:screw,scroll,roots,'anel-liquido':()=>vanes(true),centrifugo:centrifugal,axial,'pistoes-axiais':axialPistons};
+ const phaseNames=()=>type.id==='rolo'?['Novo ciclo','Admissão','Compressão','Descarga']:type.id==='palhetas'?['Novo ciclo','Admissão','Compressão','Descarga']:type.id==='anel-liquido'?['Anel de vedação','Admissão','Compressão','Descarga']:type.id==='pistao'||type.id==='membrana'||type.id==='pistoes-axiais'?['Reexpansão','Admissão','Compressão','Descarga']:type.id==='roots'?['Admissão','Aprisionamento','Transporte','Equalização e saída']:['Admissão','Aprisionamento','Compressão','Descarga'];
  function draw(){
   const s=cycleState(),dynamic=type.id==='axial'||type.id==='centrifugo';
-  $('screw3dLayer').style.display='none';
+  $('screw3dLayer').style.display='none';$('vane3dLayer').style.display='none';
   $('axialPiston3dLayer').style.display='none';$('roots3dLayer').style.display='none';
   $('scene').innerHTML=renderers[type.id](s);
   $('degrees').value=Math.round(phase*360)+'°';$('cycle').value=phase*360;
@@ -406,7 +415,7 @@
   }
   if(type.id==='pistao'||type.id==='membrana'||type.id==='pistoes-axiais'){
    $('meters').innerHTML=meter('Volume da câmara',Math.round(s.v/1.08*100)+'%',s.v/1.08)+meter('Pressão absoluta ideal',s.p.toFixed(2).replace('.',',')+' × p₁',s.p/4);
-  }else $('meters').innerHTML=`<p class="continuous">${dynamic?'As regiões trabalham simultaneamente. Os botões abaixo destacam a explicação de cada região.':type.id==='roots'?'Bolsas de volume quase constante. Observe a abertura para a saída.':'Várias câmaras podem estar em etapas diferentes ao mesmo tempo.'}</p>`;
+  }else if(type.id==='palhetas'&&window.VaneView){const v=window.VaneView.cell(phase).area,max=window.VaneView.cell(.5).area;$('meters').innerHTML=meter('Volume da célula em destaque',Math.round(v/max*100)+'% do máximo',v/max)+'<p>As demais células trabalham em outras etapas simultaneamente. Cor é indicação didática, sem cálculo de pressão.</p>';}else $('meters').innerHTML=`<p class="continuous">${dynamic?'As regiões trabalham simultaneamente. Os botões abaixo destacam a explicação de cada região.':type.id==='roots'?'Bolsas de volume quase constante. Observe a abertura para a saída.':'Várias câmaras podem estar em etapas diferentes ao mesmo tempo.'}</p>`;
   if(type.id==='pistoes-axiais'){
    const choice=Number($('axialCylinder').value),names=['Reexpansão','Admissão','Compressão','Descarga'];
    for(const b of $('axialSequence').querySelectorAll('[data-cylinder]')){const i=Number(b.dataset.cylinder),state=window.AxialPistonView.state(phase,i);b.setAttribute('aria-pressed',String(i===choice));b.querySelector('span').textContent=names[state.stage];b.style.borderBottomColor='#'+state.color.toString(16).padStart(6,'0');}
@@ -420,18 +429,18 @@
  function pause(){playing=false;sync();}
  function choosePart(){selected=Number($('part').value);$('partInfo').textContent=type.funcoes[selected]||'Selecione uma peça para destacá-la no corte e descobrir sua função.';draw();}
  function init(next,changeUrl=false){
-  stop();type=next;phase=0;lastStage=-1;selected=['pistao','membrana','parafuso','pistoes-axiais','roots'].includes(type.id)?-1:0;
+  stop();type=next;phase=0;lastStage=-1;selected=['pistao','membrana','parafuso','pistoes-axiais','roots','palhetas'].includes(type.id)?-1:0;
   if(changeUrl){const u=new URL(location.href);u.searchParams.set('tipo',type.id);history.replaceState(null,'',u);}
   document.title='Compressor · '+type.nome+' · SENAI';$('titulo').textContent='Compressor · '+type.nome;$('resumo').textContent=type.resumo;$('familia').textContent=type.familia;
   $('svgTitle').textContent='Compressor '+type.nome+' em corte';$('svgDesc').textContent=type.resumo+' Use os controles abaixo para pausar e avançar.';
   $('tipos').innerHTML=types.map(t=>`<button data-type="${t.id}" aria-pressed="${t.id===type.id}">${t.nome}</button>`).join('');
-  $('part').innerHTML=(['pistao','membrana','parafuso','pistoes-axiais','roots'].includes(type.id)?'<option value="-1">Selecione uma peça…</option>':'')+type.pecas.map((p,i)=>`<option value="${i}">${i+1}. ${p}</option>`).join('');$('partInfo').textContent=selected<0?'Selecione uma peça para destacá-la no corte e descobrir sua função.':type.funcoes[0];
+  $('part').innerHTML=(['pistao','membrana','parafuso','pistoes-axiais','roots','palhetas'].includes(type.id)?'<option value="-1">Selecione uma peça…</option>':'')+type.pecas.map((p,i)=>`<option value="${i}">${i+1}. ${p}</option>`).join('');$('partInfo').textContent=selected<0?'Selecione uma peça para destacá-la no corte e descobrir sua função.':type.funcoes[0];
   const dyn=type.id==='axial'||type.id==='centrifugo';
   const names=dyn?(type.id==='axial'?['Entrada','Rotor','Estator','Saída']:['Entrada','Impulsor','Difusor','Voluta']):phaseNames();
   $('phases').innerHTML=names.map((p,i)=>`<button data-stage="${i}" aria-pressed="false"><b>0${i+1}</b>${p}</button>`).join('');
   $('application').textContent=type.aplicacao;$('attention').textContent=type.atencao;
   $('modelNote').textContent=type.id==='membrana'?'Corte hidráulico inspirado na referência Howden. Deformação ampliada para ensino; óleo tratado como incompressível. Circuitos auxiliares de reposição, alívio e detecção de vazamento omitidos. Modelo ideal do gás: p₂/p₁ = 4 (pressões absolutas), expoente 1,3 e volume morto de 8%.':type.id==='pistao'?'Modelo ideal ilustrativo: p₂/p₁ = 4 (pressões absolutas), expoente politrópico 1,3 e volume morto de 8% do volume deslocado. As válvulas respondem à diferença de pressão. As barras não são medições de um equipamento real.':type.atencao;
-  $('liquidLegend').hidden=type.id!=='anel-liquido';$('oilLegend').hidden=type.id!=='membrana';$('screwControls').hidden=type.id!=='parafuso';
+  $('vaneControls').hidden=type.id!=='palhetas';$('liquidLegend').hidden=type.id!=='anel-liquido';$('oilLegend').hidden=type.id!=='membrana';$('screwControls').hidden=type.id!=='parafuso';
   $('axialPistonControls').hidden=type.id!=='pistoes-axiais';$('axialSequence').hidden=type.id!=='pistoes-axiais';$('rootsControls').hidden=type.id!=='roots';$('energyLegend').lastChild.textContent=type.id==='roots'?'Transporte de volume':'Compressão / energia';
   $('question').textContent=type.pergunta;$('answers').innerHTML=type.opcoes.map((x,i)=>`<button data-answer="${i}">${String.fromCharCode(65+i)}. ${x}</button>`).join('');$('feedback').textContent='Converse com a turma e escolha uma alternativa.';
   draw();sync();
@@ -440,6 +449,7 @@
  $('zoom').onclick=()=>{const on=document.querySelector('.drawing').classList.toggle('zoomed');$('zoom').setAttribute('aria-pressed',String(on));$('zoom').textContent=on?'− Ajustar à tela':'＋ Ampliar desenho';};
  $('screwFront').onclick=()=>{const front=$('screwFront').getAttribute('aria-pressed')!=='true';$('screwFront').setAttribute('aria-pressed',String(front));$('screwFront').textContent=front?'Voltar à perspectiva':'Ver engrenamento';draw();};
  $('screwShell').onchange=draw;
+ $('vaneView').onchange=draw;$('vaneShell').onchange=draw;$('vaneSprings').onchange=draw;
  $('rootsView').onchange=draw;$('rootsShell').onchange=draw;
  $('axialSide').onclick=()=>{const side=$('axialSide').getAttribute('aria-pressed')!=='true';$('axialSide').setAttribute('aria-pressed',String(side));$('axialSide').textContent=side?'Voltar à perspectiva':'Vista lateral';draw();};
  $('axialShell').onchange=draw;

@@ -82,11 +82,11 @@ window.LAB_AREAS = [
     "icon": "M6 28h7l3-9 5 18 6-18 5 18 3-9h7M9 44h30M9 11h30"
   },
   {
-    "id": "automacao",
-    "title": "Automação",
-    "subtitle": "Sistemas que medem e atuam",
-    "description": "Conecte teoria e movimento. Explore o Grupo Pneumática e descubra como o ar comprimido aciona as máquinas.",
-    "topics": "Pneumática · Compressores · Atuadores · Válvulas · Lógica",
+    "id": "pneumatica",
+    "title": "Pneumática",
+    "subtitle": "Do ar comprimido ao movimento",
+    "description": "Explore os compressores, os atuadores e as válvulas. Abra um grupo e escolha a experiência para demonstrar na lousa.",
+    "topics": "Compressores · Atuadores · Válvulas · Lógica pneumática",
     "modules": [
       "pneumatica",
       "valvulas",
@@ -110,18 +110,17 @@ window.LAB_AREAS = [
     ],
     "groups": [
       {
-        "id": "grupo-pneumatica",
-        "title": "Pneumática",
-        "description": "Explore como o ar é comprimido, distribuído e usado para movimentar os atuadores.",
+        "id": "grupo-compressores",
+        "title": "Compressores",
+        "description": "Descubra 11 mecanismos em corte: movimente as peças, acompanhe o gás e compare os princípios de compressão.",
+        "image": "assets/compressor-rolo-capa.svg",
+        "imageAlt": "Compressor rotativo em corte",
+        "tags": [
+          "11 mecanismos",
+          "Cortes animados",
+          "Aula passo a passo"
+        ],
         "modules": [
-          "pneumatica",
-          "valvulas",
-          "valvula-e",
-          "valvula-ou",
-          "retencao",
-          "retencao-pilotada",
-          "reguladora-fluxo",
-          "escape-rapido",
           "compressor-pistao",
           "compressor-membrana",
           "compressor-rolo",
@@ -133,36 +132,40 @@ window.LAB_AREAS = [
           "compressor-centrifugo",
           "compressor-axial",
           "compressor-pistoes-axiais"
-        ],
-        "groups": [
-          {
-            "id": "grupo-compressores",
-            "title": "Compressores",
-            "description": "Descubra 11 mecanismos em corte: movimente as peças, acompanhe o gás e compare os princípios de compressão.",
-            "image": "assets/compressor-rolo-capa.svg",
-            "imageAlt": "Compressor rotativo em corte",
-            "tags": [
-              "11 mecanismos",
-              "Cortes animados",
-              "Aula passo a passo"
-            ],
-            "modules": [
-              "compressor-pistao",
-              "compressor-membrana",
-              "compressor-rolo",
-              "compressor-palhetas",
-              "compressor-parafuso",
-              "compressor-scroll",
-              "compressor-roots",
-              "compressor-anel-liquido",
-              "compressor-centrifugo",
-              "compressor-axial",
-              "compressor-pistoes-axiais"
-            ]
-          }
+        ]
+      },
+      {
+        "id": "grupo-atuadores",
+        "title": "Atuadores pneumáticos",
+        "description": "Estude cilindros de simples e dupla ação, movimento, força e consumo de ar.",
+        "modules": [
+          "pneumatica"
+        ]
+      },
+      {
+        "id": "grupo-valvulas",
+        "title": "Válvulas pneumáticas",
+        "description": "Explore as válvulas direcionais, as funções lógicas e o controle do ar comprimido.",
+        "modules": [
+          "valvulas",
+          "valvula-e",
+          "valvula-ou",
+          "retencao",
+          "retencao-pilotada",
+          "reguladora-fluxo",
+          "escape-rapido"
         ]
       }
     ],
+    "icon": "M17 8h14v12H17zM5 36h14v12H5zM29 36h14v12H29zM24 20v8M12 36v-8h24v8M20 14h8"
+  },
+  {
+    "id": "automacao",
+    "title": "Automação",
+    "subtitle": "Sistemas que medem e atuam",
+    "description": "Uma área para estudar sensores, controle e integração de sistemas automatizados.",
+    "topics": "Sensores · Controle · Sistemas automatizados",
+    "modules": [],
     "icon": "M17 8h14v12H17zM5 36h14v12H5zM29 36h14v12H29zM24 20v8M12 36v-8h24v8M20 14h8"
   },
   {
