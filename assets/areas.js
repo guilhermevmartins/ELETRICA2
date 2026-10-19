@@ -24,7 +24,7 @@ window.LAB_AREAS = [
         "id": "grupo-interruptores",
         "title": "Tipos de interruptores",
         "description": "Escolha o circuito que deseja demonstrar. Acione os interruptores e acompanhe o caminho da corrente até as lâmpadas.",
-        "image": "assets/interruptores-grupo.png?v=2",
+        "image": "assets/images/interruptores-grupo.png?v=2",
         "imageAlt": "Interruptor de parede",
         "tags": [
           "7 atividades",
@@ -113,7 +113,7 @@ window.LAB_AREAS = [
         "id": "grupo-compressores",
         "title": "Compressores",
         "description": "Descubra 11 mecanismos em corte: movimente as peças, acompanhe o gás e compare os princípios de compressão.",
-        "image": "assets/compressor-rolo-capa.svg",
+        "image": "assets/images/compressor-rolo-capa.svg",
         "imageAlt": "Compressor rotativo em corte",
         "tags": [
           "11 mecanismos",

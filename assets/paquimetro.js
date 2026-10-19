@@ -45,7 +45,7 @@ function draw(){const svg=$('caliper'),v=value(),{n,base,pitch,span,whole,index}
  line(svg,36,281,1133,281,'#7b8b95',1);line(svg,110,286,110,491,'#192b37',1.7);
  path(svg,`M${innerX} 67V159H${innerX+7}V181H110V126Q108 87 ${innerX} 67Z`,'#71828d',{'stroke-width':.7});
  add(svg,'path',{d:'M81 432H109V490Q94 489 83 479Z',fill:'#71828d',opacity:.9});
- text(svg,74,240,'SENAI',11,'#4e626f',{'font-weight':750});text(svg,74,254,'JAÚ',8,'#6f7e88',{'letter-spacing':1.2});
+ text(svg,74,240,'SENAI',11,'#4e626f',{'font-weight':750});text(svg,74,254,'SÃO PAULO',8,'#6f7e88',{'letter-spacing':1.2});
  // Escala fixa: números em centímetros e um traço por milímetro.
  const fixed=add(svg,'g',{'data-scale':'fixed'});
  drawFixedScale(fixed);

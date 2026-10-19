@@ -7,7 +7,7 @@
  let selected='mechanism',parentActive=window.labActive,child=null;
  function sync(){window.labActive=parentActive&&selected==='mechanism';if(child)child.contentWindow.postMessage({type:'lab-visibility',active:parentActive&&selected==='curves'},'*');publishHeight()}
  function choose(id,focus=false){selected=id;mechanism.hidden=id!=='mechanism';curves.hidden=id!=='curves';buttons.forEach(b=>{const on=b.dataset.dinTab===id;b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1;if(on&&focus)b.focus()});badge.textContent=id==='curves'?'Comparação B · C · D · Iₙ ajustável':originalBadge;
-  if(id==='curves'&&!child){child=document.createElement('iframe');child.id='din-curves-frame';child.title='Curvas B, C e D do disjuntor monopolar';child.src='curvas.html';child.onload=sync;curves.append(child)}sync();
+  if(id==='curves'&&!child){child=document.createElement('iframe');child.id='din-curves-frame';child.title='Curvas B, C e D do disjuntor monopolar';child.src='curvas.php';child.onload=sync;curves.append(child)}sync();
  }
  buttons.forEach(b=>b.onclick=()=>choose(b.dataset.dinTab));
  document.querySelector('.din-tabs').onkeydown=e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();choose(e.key==='Home'?'mechanism':e.key==='End'?'curves':selected==='mechanism'?'curves':'mechanism',true)};
