@@ -31,9 +31,11 @@
  function label(x,y,px,py,name){return `<path class="leader" d="M${x} ${y+6}V${y+18}L${n(px)} ${n(py)}"/>`+text(x,y,name,'part-label');}
  function labels(list){$('labels').innerHTML=$('names').checked?list.map(a=>label(...a)).join(''):'';}
  function cycleState(){
+  if(type.id==='pistoes-axiais')return window.AxialPistonView.state(phase,Number($('axialCylinder').value));
   if(type.id==='pistao'||type.id==='membrana'){
-   const a=TAU*phase, top=462-75*Math.cos(a)-Math.sqrt(200**2-(75*Math.sin(a))**2)-25;
-   const v=.08+(top-162)/150, ratio=4,k=1.3,expandEnd=.08*Math.pow(ratio,1/k);
+   const a=TAU*phase, hydraulic=type.id==='membrana';
+   const top=hydraulic?diaphragmPose().top:462-75*Math.cos(a)-Math.sqrt(200**2-(75*Math.sin(a))**2)-25;
+   const v=.08+(hydraulic?(top-270)/104:(top-162)/150), ratio=4,k=1.3,expandEnd=.08*Math.pow(ratio,1/k);
    const p=phase<.5?Math.max(1,ratio*Math.pow(.08/v,k)):Math.min(ratio,Math.pow(1.08/v,k));
    const stage=phase<.5?(v<expandEnd?0:1):(p<ratio?2:3);
    return {stage,v,p,color:[C.compression,C.in,C.compression,C.out][stage]};
@@ -120,29 +122,88 @@
   labels([[113,223,...inSeat,'Válvula de admissão'],[636,113,...outSeat,'Válvula de descarga'],[126,370,...pist,'Pistão e anéis'],[775,283,...cyl,'Cilindro'],[775,400,...rodMid,'Biela'],[748,530,...shaft,'Virabrequim']]);
   return out;
  }
- function reciprocating(diaphragm,s){
-  const a=TAU*phase, crank=[450+75*Math.sin(a),462-75*Math.cos(a)],pin=[450,crank[1]-Math.sqrt(200**2-(crank[0]-450)**2)];
-  const py=pin[1]-25,admit=s.stage===1,discharge=s.stage===3,vc=s.color;
-  let out=ports([315,150],[585,150]);
-  out+=piece(0,rect(310,120,280,260,'url(#hatch)','stroke="#91acbe" stroke-width="4"')+rect(330,145,240,235,'#0a1a28'));
-  if(!diaphragm){
-   out+=rect(332,147,236,py-147,vc,'opacity=".5"');
-   out+=piece(1,rect(332,py,236,48,'url(#metal)','stroke="#c3d8e4" stroke-width="2"')+line([335,py+10],[565,py+10],'#1c3446',5)+line([335,py+20],[565,py+20],'#1c3446',5));
-   out+=piece(2,line(pin,crank,'#a6c2d5',15)+circle(...pin,9,'#20394b','stroke="#c3d8e4" stroke-width="3"'));
-  }else{
-   const dy=158+(s.v-.08)*150;
-   out+=`<path d="M330 150H570V158Q450 ${n(2*dy-158)} 330 158Z" fill="${vc}" opacity=".5"/>`;
-   out+=piece(1,`<path d="M330 158Q450 ${n(2*dy-158)} 570 158" fill="none" stroke="#4dd9aa" stroke-width="13"/>`);
-   out+=piece(2,line([450,dy],crank,'#a6c2d5',14));
+ function diaphragmPose(){
+  const a=TAU*phase,crank=[450+52*Math.sin(a),480-52*Math.cos(a)];
+  const pin=[450,crank[1]-Math.sqrt(130**2-(crank[0]-450)**2)],top=pin[1]-28;
+  const travel=(top-270)/104;
+  // Área do pistão × curso = área deslocada pela curva da membrana neste corte.
+  const flex=39,membrane=175+.08*flex+flex*travel;
+  return {a,crank,pin,top,travel,membrane};
+ }
+ function diaphragm(s){
+  const pose=diaphragmPose(),{a,crank,pin,top,travel,membrane}=pose;
+  const intake=s.stage===1,exhaust=s.stage===3,control=2*membrane-205;
+  const membranePath=`M290 205Q450 ${n(control)} 610 205`;
+  const gasPath=`M290 205Q450 145 610 205Q450 ${n(control)} 290 205Z`;
+  const oilPath=`${membranePath}V252H490V${n(top)}H410V252H290Z`;
+  let out=`<defs>
+   <linearGradient id="d-blue"><stop stop-color="#165c83"/><stop offset=".48" stop-color="#287da4"/><stop offset="1" stop-color="#104566"/></linearGradient>
+   <linearGradient id="d-side"><stop stop-color="#124663"/><stop offset="1" stop-color="#0a2d43"/></linearGradient>
+   <linearGradient id="d-metal"><stop stop-color="#849eac"/><stop offset=".25" stop-color="#e1eaef"/><stop offset=".6" stop-color="#b6cad5"/><stop offset="1" stop-color="#6f8a9b"/></linearGradient>
+   <linearGradient id="d-oil" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#e5b856"/><stop offset="1" stop-color="#9d641e"/></linearGradient>
+   <linearGradient id="d-gas" x1="0" y1="0" x2="0" y2="1"><stop stop-color="${s.color}"/><stop offset="1" stop-color="${s.color}" stop-opacity=".55"/></linearGradient>
+   <clipPath id="d-gas-clip"><path d="${gasPath}"/></clipPath>
+   <clipPath id="d-oil-clip"><path d="${oilPath}"/></clipPath>
+  </defs>`;
+  const pipe=(d,color)=>`<path d="${d}" stroke="#344f60" stroke-width="30" fill="none" stroke-linejoin="round" stroke-linecap="round"/><path d="${d}" stroke="#9bb6c5" stroke-width="24" fill="none" stroke-linejoin="round" stroke-linecap="round"/><path d="${d}" stroke="${color}" stroke-width="16" fill="none" stroke-linejoin="round" stroke-linecap="round"/>`;
+  out+=pipe('M100 80H326Q350 80 350 104V160',C.in)+pipe('M550 160V69Q550 45 574 45H800',C.out);
+  out+=text(100,47,'ENTRADA DO GÁS','caption','start')+text(800,83,'GÁS COMPRIMIDO','caption','end');
+  // Volume externo com faces laterais e uma janela de corte no acionamento.
+  out+=poly([[338,392],[361,377],[585,377],[562,392],[562,552],[585,537],[585,377]],'url(#d-side)','stroke="#337c9e" stroke-width="1.5"');
+  out+=rect(338,392,224,163,'url(#d-blue)','rx="13" stroke="#78a8c0" stroke-width="2"');
+  out+=rect(356,408,188,134,'#112b3c','rx="8" stroke="#a6c0cd" stroke-width="3"');
+  out+=poly([[382,252],[404,238],[538,238],[516,252],[516,429],[538,415],[538,238]],'url(#d-side)');
+  out+=rect(382,250,134,179,'url(#d-blue)','rx="5" stroke="#6f9cb3" stroke-width="2"')+rect(410,250,80,180,'#142e3e');
+  out+=rect(320,553,260,18,'url(#d-blue)','rx="4" stroke="#75a1b6" stroke-width="2"')+poly([[320,553],[340,541],[599,541],[580,553]],'#397f9f');
+  for(const [x,y] of [[347,403],[553,403],[347,540],[553,540],[335,562],[565,562]])out+=circle(x,y,4,'#1b425c','stroke="#94b2c4" stroke-width="1.5"');
+  // Cabeçote largo com tampa metálica arqueada, como no corte da referência.
+  out+=poly([[265,165],[286,150],[656,150],[635,165],[635,263],[656,248],[656,150]],'url(#d-side)','stroke="#4388a8" stroke-width="1.5"');
+  out+=piece(0,`<path d="M265 165Q450 105 635 165V263H265Z" fill="url(#d-blue)" stroke="#8aabba" stroke-width="2"/>`+
+   `<path d="M265 165Q450 105 635 165V194Q450 134 265 194Z" fill="url(#d-metal)" stroke="#c3d2da" stroke-width="1.5"/>`);
+  out+=`<path d="M290 205Q450 145 610 205V252H290Z" fill="#183747"/>`;
+  out+=piece(2,`<path class="hydraulic-oil" d="${oilPath}" fill="url(#d-oil)"/>`);
+  out+=`<path class="diaphragm-gas" d="${gasPath}" fill="url(#d-gas)"/>`;
+  if($('air').checked){
+   // O recorte mantém o gás acima da membrana em todo o ciclo.
+   out+='<g clip-path="url(#d-gas-clip)">';
+   for(let i=0;i<32;i++)out+=circle(305+(i%8)*41,180+Math.floor(i/8)*12,1.8,'#eaffff','opacity=".65"');
+   if(intake)out+=particlesPath([[350,185],[365,197],[425,membrane-3],[505,membrane-5]],'#d9fbff',6);
+   if(exhaust)out+=particlesPath([[400,membrane-3],[490,membrane-4],[550,186]],'#ffe0e6',6);
+   out+='</g>';
+   if(intake)out+=arrow([150,80],[220,80],'#e3faff')+particlesPath([[105,80],[350,80],[350,184]],'#e3faff',10);
+   if(exhaust)out+=arrow([710,45],[780,45],'#ffe7ec')+particlesPath([[550,185],[550,45],[795,45]],'#ffe7ec',12);
+   // O óleo transmite o deslocamento; o gás fica no circuito superior.
+   out+='<g clip-path="url(#d-oil-clip)">';
+   out+=phase<.5?arrow([450,244],[450,Math.min(top-5,295)],'#ffecad'):arrow([450,Math.min(top-5,290)],[450,240],'#ffecad');
+   out+='</g>';
   }
-  out+=piece(3,circle(450,462,83,'#1b3345','stroke="#7f9eb4" stroke-width="3"')+line([450,462],crank,'#f2be56',15)+circle(...crank,9,'#f6d894')+circle(450,462,12,'#7a9bb2'));
-  out+=piece(4,line([340,150],[395,150],admit?C.in:'#718c9e',8)+line([340,150],[395,admit?175:150],admit?C.in:'#c2d7e2',5));
-  out+=piece(5,line([505,150],[560,150],discharge?C.out:'#718c9e',8)+line([505,discharge?125:150],[560,150],discharge?C.out:'#c2d7e2',5));
-  if(admit)out+=arrow([240,150],[365,150],C.in)+particlesPath([[120,150],[365,150],[420,210]],C.in);
-  if(discharge)out+=arrow([550,150],[745,150],C.out)+particlesPath([[510,210],[540,150],[790,150]],C.out);
-  if($('air').checked)for(let i=0;i<24;i++){let h=(diaphragm?158+(s.v-.08)*100:py)-165;out+=circle(350+(i%6)*39,165+Math.floor(i/6)*Math.max(5,h/4),2.8,'#edfaff','opacity=".7"');}
-  labels([[205,80,355,150,'Admissão'],[695,80,545,150,'Descarga'],[200,340,335,diaphragm?158:py+20,diaphragm?'Membrana':'Pistão'],[690,430,480,450,diaphragm?'Acionamento':'Biela'],[450,585,450,530,'Excêntrico / manivela']]);
-  return out+text(450,102,admit?'ADMISSÃO ABERTA':discharge?'DESCARGA ABERTA':'VÁLVULAS FECHADAS','caption');
+  out+=piece(1,`<path class="diaphragm-surface" d="${membranePath}" data-center-y="${n(membrane)}" fill="none" stroke="#425e70" stroke-width="8"/><path d="${membranePath}" fill="none" stroke="#e5eff5" stroke-width="4"/>`);
+  // Serrage périphérique: la membrane ne peut se déplacer qu'au centre.
+  for(const x of [285,610])out+=rect(x,199,6,13,'#bdcdd7','rx="1"');
+  for(const x of [282,318,394,450,506,582,618]){
+   const y=176-27*(1-((x-450)/185)**2);
+   out+=circle(x,y,4.5,'#647f91','stroke="#e0e9ee" stroke-width="1.5"');
+  }
+  for(const [x,id,open,isIn] of [[350,5,intake,true],[550,6,exhaust,false]]){
+   const cy=173+(open?(isIn?4:-4):0);
+   out+=piece(id,rect(x-16,145,32,40,'url(#d-metal)','rx="4" stroke="#d0dfe7" stroke-width="1.5"')+
+    rect(x-8,145,16,42,isIn?C.in:C.out)+
+    line([x-10,isIn?169:177],[x-4,isIn?173:173],'#d3e0e8',3)+line([x+4,173],[x+10,isIn?169:177],'#d3e0e8',3)+
+    circle(x,cy,5,'#f3d386','stroke="#fff0bd" stroke-width="1"'));
+  }
+  // Acionamento biela-manivela e pistão hidráulico separados da câmara do gás.
+  let drive=circle(450,480,67,'#345365','stroke="#90aebf" stroke-width="2"');
+  for(let i=0;i<3;i++)drive+=circle(...point(450,480,42,a+i*TAU/3),12,'#122d3e','stroke="#7696aa" stroke-width="1.5"');
+  drive+=line([450,480],crank,'#adc6d3',18)+circle(450,480,15,'url(#d-metal)','stroke="#cfdee6" stroke-width="1.5"');
+  const dx=crank[0]-pin[0],dy=crank[1]-pin[1],len=Math.hypot(dx,dy),nx=-dy/len,ny=dx/len;
+  drive+=poly([[pin[0]+nx*7,pin[1]+ny*7],[crank[0]+nx*12,crank[1]+ny*12],[crank[0]-nx*12,crank[1]-ny*12],[pin[0]-nx*7,pin[1]-ny*7]],'url(#d-metal)','stroke="#86a6b8" stroke-width="1.5"');
+  drive+=circle(...crank,17,'url(#d-metal)','stroke="#cedde6" stroke-width="1.5"')+circle(...crank,8,'#24485e');
+  out+=piece(4,drive);
+  out+=piece(3,rect(411,top,78,54,'url(#d-metal)','rx="3" stroke="#d8e5ec" stroke-width="1.5"')+
+   line([412,top+9],[488,top+9],'#4b6d80',3)+line([412,top+16],[488,top+16],'#4b6d80',3)+
+   circle(...pin,8,'#456777','stroke="#d9e5ec" stroke-width="2"'));
+  labels([[139,149,350,173,'Admissão'],[757,133,550,173,'Descarga'],[139,300,321,205+4*(31/320)*(1-31/320)*(membrane-205),'Diafragma metálico'],[750,290,565,239,'Óleo hidráulico'],[744,379,485,top+28,'Pistão hidráulico'],[148,474,433,454,'Biela e virabrequim']]);
+  return `<g class="diaphragm-cut" data-piston-y="${n(top)}" data-travel="${n(travel)}">${out}</g>`;
  }
  function rolling(){
   const x=450,y=310,R=170,r=118,e=R-r,a=-Math.PI/2+TAU*phase,cx=x+e*Math.cos(a),cy=y+e*Math.sin(a),vy=cy-Math.sqrt(r*r-(x-cx)**2);
@@ -186,6 +247,16 @@
   return out+text(450,80,'Acompanhe a célula contornada em branco durante a volta.','caption');
  }
  function screw(){
+  const front=$('screwFront').getAttribute('aria-pressed')==='true';
+  const points=window.ScrewView?.render(phase,{selected,air:$('air').checked,showHousing:$('screwShell').checked,frontView:front});
+  $('screwControls').hidden=!points;
+  if(!points)return screwFallback();
+  $('screw3dLayer').style.display='block';
+  const mapping=front?[[150,140,...points.male,'Rotor macho'],[750,140,...points.female,'Rotor fêmea'],[750,475,...points.housing,'Carcaça em corte']]:[[170,115,...points.male,'Rotor macho'],[715,115,...points.female,'Rotor fêmea'],[170,425,...points.housing,'Carcaça em corte'],[740,370,...points.gas,'Bolsas em destaque'],[145,520,...points.input,'Admissão'],[765,520,...points.output,'Descarga']];
+  labels(mapping.filter(row=>(row.at(-1)!=='Carcaça em corte'||$('screwShell').checked)&&(row.at(-1)!=='Bolsas em destaque'||$('air').checked)));
+  return text(450,570,front?'Vista frontal • os perfis giram em sentidos opostos':'Gás avança ao longo dos eixos → bolsas diminuem → descarga','caption');
+ }
+ function screwFallback(){
   let out=ports([245,225],[655,385]);
   out+=piece(0,rect(225,150,450,320,'url(#hatch)','rx="70" stroke="#92adbf" stroke-width="4"')+rect(242,172,416,276,'#142c3d','rx="55"'));
   const axes=[255,365];
@@ -229,6 +300,16 @@
   return out+text(450,575,'A orientação do marcador não muda durante a órbita.','caption');
  }
  function roots(){
+  const view=$('rootsView').value;
+  const points=window.RootsView?.render(phase,{selected,air:$('air').checked,showHousing:$('rootsShell').checked,view});
+  if(!points)return rootsFallback();
+  $('roots3dLayer').style.display='block';
+  const map=view==='gears'?[[155,130,...points.gears,'Engrenagens de sincronização']]:[[155,125,...points.upper,'Rotor superior'],[750,445,...points.lower,'Rotor inferior'],[110,340,...points.input,'Admissão'],[800,285,...points.output,'Descarga']];
+  if($('rootsShell').checked)map.push([735,125,...points.body,'Carcaça em corte']);
+  labels(map);
+  return text(450,580,view==='gears'?'Engrenagens mantêm a fase dos rotores • sentidos opostos':'Gás pela periferia → volume quase constante → equalização na saída','caption');
+ }
+ function rootsFallback(){
   const outline=R=>{const pts=[];for(let x=385-R;x<=515+R;x+=2){const dx=Math.min(Math.abs(x-385),Math.abs(x-515));pts.push([x,310-Math.sqrt(Math.max(0,R*R-dx*dx))]);}return [...pts,...pts.map(([x,y])=>[x,620-y]).reverse()];};
   let out=line([450,65],[450,248],C.in,27)+arrow([450,75],[450,160],C.in)+text(560,100,'ENTRADA')+
    line([450,375],[450,535],C.out,27)+arrow([450,480],[450,530],C.out)+text(570,525,'SAÍDA');
@@ -288,10 +369,33 @@
   labels([[280,100,250,235,'Rotor: pás móveis'],[570,100,532,235,'Estator: pás fixas'],[450,565,450,310,'Eixo comum dos rotores']]);
   return out;
  }
- const renderers={pistao:piston,membrana:s=>reciprocating(true,s),rolo:rolling,palhetas:()=>vanes(false),parafuso:screw,scroll,roots,'anel-liquido':()=>vanes(true),centrifugo:centrifugal,axial};
- const phaseNames=()=>type.id==='rolo'?['Novo ciclo','Admissão','Compressão','Descarga']:type.id==='palhetas'?['Entrada','Expansão da célula','Compressão','Descarga']:type.id==='anel-liquido'?['Anel de vedação','Admissão','Compressão','Descarga']:type.id==='pistao'||type.id==='membrana'?['Reexpansão','Admissão','Compressão','Descarga']:type.id==='roots'?['Admissão','Aprisionamento','Transporte','Equalização e saída']:['Admissão','Aprisionamento','Compressão','Descarga'];
+ function axialPistons(s){
+  const cylinder=Number($('axialCylinder').value),side=$('axialSide').getAttribute('aria-pressed')==='true';
+  const points=window.AxialPistonView.render(phase,{selected,cylinder,air:$('air').checked,showHousing:$('axialShell').checked,sideView:side});
+  if(points){
+   $('axialPiston3dLayer').style.display='block';
+   const map=[[160,110,...points.piston,'Pistão P'+(cylinder+1)],[150,390,...points.rod,'Biela articulada'],[685,115,...points.plate,'Placa oscilante'],[755,390,...points.pulley,'Polia motora'],[145,520,...points.valves,'Admissão / descarga']];
+   if($('axialShell').checked)map.push([710,520,...points.housing,'Carcaça em corte']);
+   labels(map);
+   return text(450,575,'7 cilindros fixos • pistões paralelos ao eixo • placa em movimento oscilante','caption');
+  }
+  // Alternativa local sem WebGL: corte do cilindro escolhido e mecanismo equivalente.
+  const pinX=350+(s.face-window.AxialPistonView.head)*190,plateX=650+(s.attachment[0]-.95)*80;
+  let out=rect(320,190,230,160,'#25495f','rx="10" stroke="#9bb6c8" stroke-width="3"');
+  out+=rect(335,210,200,120,'#112d3e')+rect(335,210,pinX-335,120,s.color===0x35caf0?C.in:s.stage===3?C.out:C.compression,'opacity=".65"');
+  out+=piece(1,rect(pinX,212,40,116,'url(#metal)','stroke="#d6e7ef" stroke-width="2"'));
+  out+=piece(2,line([pinX+25,270],[plateX,270],'#bcd3df',14));
+  out+=piece(3,`<ellipse cx="650" cy="270" rx="24" ry="115" transform="rotate(${n(14*Math.cos(TAU*phase))} 650 270)" fill="#2777bd" stroke="#a3ccdf" stroke-width="4"/>`);
+  out+=piece(5,circle(760,270,70,'url(#metal)','stroke="#95b3c7" stroke-width="4"'))+line([760,270],point(760,270,52,TAU*phase),'#efc970',7);
+  labels([[220,150,350,220,'Câmara do gás'],[455,410,pinX+15,310,'Pistão P'+(cylinder+1)],[650,465,650,350,'Placa oscilante'],[770,150,760,220,'Polia']]);
+  return out+text(450,550,'Corte didático do cilindro escolhido • visualização vetorial','caption');
+ }
+ const renderers={pistao:piston,membrana:diaphragm,rolo:rolling,palhetas:()=>vanes(false),parafuso:screw,scroll,roots,'anel-liquido':()=>vanes(true),centrifugo:centrifugal,axial,'pistoes-axiais':axialPistons};
+ const phaseNames=()=>type.id==='rolo'?['Novo ciclo','Admissão','Compressão','Descarga']:type.id==='palhetas'?['Entrada','Expansão da célula','Compressão','Descarga']:type.id==='anel-liquido'?['Anel de vedação','Admissão','Compressão','Descarga']:type.id==='pistao'||type.id==='membrana'||type.id==='pistoes-axiais'?['Reexpansão','Admissão','Compressão','Descarga']:type.id==='roots'?['Admissão','Aprisionamento','Transporte','Equalização e saída']:['Admissão','Aprisionamento','Compressão','Descarga'];
  function draw(){
   const s=cycleState(),dynamic=type.id==='axial'||type.id==='centrifugo';
+  $('screw3dLayer').style.display='none';
+  $('axialPiston3dLayer').style.display='none';$('roots3dLayer').style.display='none';
   $('scene').innerHTML=renderers[type.id](s);
   $('degrees').value=Math.round(phase*360)+'°';$('cycle').value=phase*360;
   if(lastStage!==s.stage){
@@ -300,9 +404,13 @@
    $('faseTexto').textContent=type.passos[s.stage];
    [...$('phases').children].forEach((b,i)=>b.setAttribute('aria-pressed',String(i===s.stage)));
   }
-  if(type.id==='pistao'||type.id==='membrana'){
+  if(type.id==='pistao'||type.id==='membrana'||type.id==='pistoes-axiais'){
    $('meters').innerHTML=meter('Volume da câmara',Math.round(s.v/1.08*100)+'%',s.v/1.08)+meter('Pressão absoluta ideal',s.p.toFixed(2).replace('.',',')+' × p₁',s.p/4);
   }else $('meters').innerHTML=`<p class="continuous">${dynamic?'As regiões trabalham simultaneamente. Os botões abaixo destacam a explicação de cada região.':type.id==='roots'?'Bolsas de volume quase constante. Observe a abertura para a saída.':'Várias câmaras podem estar em etapas diferentes ao mesmo tempo.'}</p>`;
+  if(type.id==='pistoes-axiais'){
+   const choice=Number($('axialCylinder').value),names=['Reexpansão','Admissão','Compressão','Descarga'];
+   for(const b of $('axialSequence').querySelectorAll('[data-cylinder]')){const i=Number(b.dataset.cylinder),state=window.AxialPistonView.state(phase,i);b.setAttribute('aria-pressed',String(i===choice));b.querySelector('span').textContent=names[state.stage];b.style.borderBottomColor='#'+state.color.toString(16).padStart(6,'0');}
+  }
  }
  function meter(name,value,f){return `<div class="meter"><span>${name}<strong>${value}</strong></span><i><b style="width:${n(f*100)}%"></b></i></div>`;}
  function active(){return playing&&!document.hidden&&window.labActive!==false;}
@@ -312,23 +420,31 @@
  function pause(){playing=false;sync();}
  function choosePart(){selected=Number($('part').value);$('partInfo').textContent=type.funcoes[selected]||'Selecione uma peça para destacá-la no corte e descobrir sua função.';draw();}
  function init(next,changeUrl=false){
-  stop();type=next;phase=0;lastStage=-1;selected=type.id==='pistao'?-1:0;
+  stop();type=next;phase=0;lastStage=-1;selected=['pistao','membrana','parafuso','pistoes-axiais','roots'].includes(type.id)?-1:0;
   if(changeUrl){const u=new URL(location.href);u.searchParams.set('tipo',type.id);history.replaceState(null,'',u);}
   document.title='Compressor · '+type.nome+' · SENAI';$('titulo').textContent='Compressor · '+type.nome;$('resumo').textContent=type.resumo;$('familia').textContent=type.familia;
   $('svgTitle').textContent='Compressor '+type.nome+' em corte';$('svgDesc').textContent=type.resumo+' Use os controles abaixo para pausar e avançar.';
   $('tipos').innerHTML=types.map(t=>`<button data-type="${t.id}" aria-pressed="${t.id===type.id}">${t.nome}</button>`).join('');
-  $('part').innerHTML=(type.id==='pistao'?'<option value="-1">Selecione uma peça…</option>':'')+type.pecas.map((p,i)=>`<option value="${i}">${i+1}. ${p}</option>`).join('');$('partInfo').textContent=selected<0?'Selecione uma peça para destacá-la no corte e descobrir sua função.':type.funcoes[0];
+  $('part').innerHTML=(['pistao','membrana','parafuso','pistoes-axiais','roots'].includes(type.id)?'<option value="-1">Selecione uma peça…</option>':'')+type.pecas.map((p,i)=>`<option value="${i}">${i+1}. ${p}</option>`).join('');$('partInfo').textContent=selected<0?'Selecione uma peça para destacá-la no corte e descobrir sua função.':type.funcoes[0];
   const dyn=type.id==='axial'||type.id==='centrifugo';
   const names=dyn?(type.id==='axial'?['Entrada','Rotor','Estator','Saída']:['Entrada','Impulsor','Difusor','Voluta']):phaseNames();
   $('phases').innerHTML=names.map((p,i)=>`<button data-stage="${i}" aria-pressed="false"><b>0${i+1}</b>${p}</button>`).join('');
   $('application').textContent=type.aplicacao;$('attention').textContent=type.atencao;
-  $('modelNote').textContent=(type.id==='pistao'||type.id==='membrana')?'Modelo ideal ilustrativo: p₂/p₁ = 4 (pressões absolutas), expoente politrópico 1,3 e volume morto de 8% do volume deslocado. As válvulas respondem à diferença de pressão. As barras não são medições de um equipamento real.':type.atencao;
-  $('liquidLegend').hidden=type.id!=='anel-liquido';
+  $('modelNote').textContent=type.id==='membrana'?'Corte hidráulico inspirado na referência Howden. Deformação ampliada para ensino; óleo tratado como incompressível. Circuitos auxiliares de reposição, alívio e detecção de vazamento omitidos. Modelo ideal do gás: p₂/p₁ = 4 (pressões absolutas), expoente 1,3 e volume morto de 8%.':type.id==='pistao'?'Modelo ideal ilustrativo: p₂/p₁ = 4 (pressões absolutas), expoente politrópico 1,3 e volume morto de 8% do volume deslocado. As válvulas respondem à diferença de pressão. As barras não são medições de um equipamento real.':type.atencao;
+  $('liquidLegend').hidden=type.id!=='anel-liquido';$('oilLegend').hidden=type.id!=='membrana';$('screwControls').hidden=type.id!=='parafuso';
+  $('axialPistonControls').hidden=type.id!=='pistoes-axiais';$('axialSequence').hidden=type.id!=='pistoes-axiais';$('rootsControls').hidden=type.id!=='roots';$('energyLegend').lastChild.textContent=type.id==='roots'?'Transporte de volume':'Compressão / energia';
   $('question').textContent=type.pergunta;$('answers').innerHTML=type.opcoes.map((x,i)=>`<button data-answer="${i}">${String.fromCharCode(65+i)}. ${x}</button>`).join('');$('feedback').textContent='Converse com a turma e escolha uma alternativa.';
   draw();sync();
  }
  $('tipos').onclick=e=>{let b=e.target.closest('[data-type]');if(b)init(types.find(t=>t.id===b.dataset.type),true);};
  $('zoom').onclick=()=>{const on=document.querySelector('.drawing').classList.toggle('zoomed');$('zoom').setAttribute('aria-pressed',String(on));$('zoom').textContent=on?'− Ajustar à tela':'＋ Ampliar desenho';};
+ $('screwFront').onclick=()=>{const front=$('screwFront').getAttribute('aria-pressed')!=='true';$('screwFront').setAttribute('aria-pressed',String(front));$('screwFront').textContent=front?'Voltar à perspectiva':'Ver engrenamento';draw();};
+ $('screwShell').onchange=draw;
+ $('rootsView').onchange=draw;$('rootsShell').onchange=draw;
+ $('axialSide').onclick=()=>{const side=$('axialSide').getAttribute('aria-pressed')!=='true';$('axialSide').setAttribute('aria-pressed',String(side));$('axialSide').textContent=side?'Voltar à perspectiva':'Vista lateral';draw();};
+ $('axialShell').onchange=draw;
+ $('axialCylinder').onchange=()=>{lastStage=-1;draw();};
+ $('axialSequence').onclick=e=>{const b=e.target.closest('[data-cylinder]');if(b){$('axialCylinder').value=b.dataset.cylinder;lastStage=-1;draw();}};
  $('play').onclick=()=>{playing=!playing;sync();};
  $('step').onclick=()=>{pause();phase=(phase+1/24)%1;draw();};
  $('reset').onclick=()=>{pause();phase=0;draw();};
@@ -338,7 +454,9 @@
  $('phases').onclick=e=>{
   const b=e.target.closest('[data-stage]');if(!b)return;pause();const i=Number(b.dataset.stage);
   // Escolhe pontos interiores de cada fase do ciclo alternativo (inclui volume morto).
-  phase=(type.id==='pistao'||type.id==='membrana'?[.04,.3,.65,.94]:[.06,.31,.66,.94])[i];draw();
+  phase=(type.id==='pistao'||type.id==='membrana'||type.id==='pistoes-axiais'?[.04,.3,.65,.94]:[.06,.31,.66,.94])[i];
+  if(type.id==='pistoes-axiais')phase=(phase+Number($('axialCylinder').value)/7)%1;
+  draw();
  };
  $('answers').onclick=e=>{const b=e.target.closest('[data-answer]');if(!b)return;const correct=Number(b.dataset.answer)===type.correta;[...$('answers').children].forEach(x=>{x.className='';x.removeAttribute('aria-pressed');});b.className=correct?'correct':'wrong';b.setAttribute('aria-pressed','true');$('feedback').textContent=(correct?'Correto! ':'Vamos rever: ')+type.explica;};
  $('tela').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.querySelector('.bench').requestFullscreen();}catch{$('tela').textContent='Use a ampliação do navegador';}};

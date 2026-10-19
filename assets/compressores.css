@@ -3,3 +3,9 @@
 [hidden]{display:none!important}
 
 .drawing{overflow:auto}.drawing.zoomed svg{width:1100px;max-width:none;max-height:none}.drawing.zoomed .legend{min-width:1100px}.drawing.zoomed{max-height:750px}.readout .part-box select{max-width:100%}
+
+#screwControls{display:inline-flex;gap:12px;align-items:center;flex-wrap:wrap}
+
+#axialPistonControls{display:inline-flex;gap:12px;align-items:center;flex-wrap:wrap}#axialSequence{padding:0 26px 20px}#axialSequence>p{font-size:13px;color:var(--muted)}#axialSequence>div{display:grid;grid-template-columns:repeat(7,1fr);gap:7px}#axialSequence button{border-bottom:4px solid #7799aa;padding:8px;font-size:12px}#axialSequence b,#axialSequence span{display:block}#axialSequence button[aria-pressed=true]{background:#294b5d;color:#f2faff;border-top-color:#74cfe5;border-left-color:#74cfe5;border-right-color:#74cfe5}@media(max-width:760px){#axialSequence{padding:0 16px 20px}#axialSequence>div{grid-template-columns:repeat(4,1fr)}}
+
+#rootsControls{display:inline-flex;gap:12px;align-items:center;flex-wrap:wrap}

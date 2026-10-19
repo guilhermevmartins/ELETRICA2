@@ -103,7 +103,8 @@ window.LAB_AREAS = [
       "compressor-roots",
       "compressor-anel-liquido",
       "compressor-centrifugo",
-      "compressor-axial"
+      "compressor-axial",
+      "compressor-pistoes-axiais"
     ],
     "groups": [
       {
@@ -128,17 +129,18 @@ window.LAB_AREAS = [
           "compressor-roots",
           "compressor-anel-liquido",
           "compressor-centrifugo",
-          "compressor-axial"
+          "compressor-axial",
+          "compressor-pistoes-axiais"
         ],
         "groups": [
           {
             "id": "grupo-compressores",
             "title": "Compressores",
-            "description": "Descubra dez mecanismos em corte: movimente as peças, acompanhe o gás e compare os princípios de compressão.",
+            "description": "Descubra 11 mecanismos em corte: movimente as peças, acompanhe o gás e compare os princípios de compressão.",
             "image": "assets/compressor-rolo-capa.svg",
             "imageAlt": "Compressor rotativo em corte",
             "tags": [
-              "10 mecanismos",
+              "11 mecanismos",
               "Cortes animados",
               "Aula passo a passo"
             ],
@@ -152,7 +154,8 @@ window.LAB_AREAS = [
               "compressor-roots",
               "compressor-anel-liquido",
               "compressor-centrifugo",
-              "compressor-axial"
+              "compressor-axial",
+              "compressor-pistoes-axiais"
             ]
           }
         ]
