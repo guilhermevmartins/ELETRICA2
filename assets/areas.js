@@ -74,9 +74,11 @@ window.LAB_AREAS = [
     "id": "analogica",
     "title": "Eletrônica analógica",
     "subtitle": "Sinais, componentes e circuitos",
-    "description": "Uma área para estudar grandezas contínuas e o comportamento dos componentes eletrônicos.",
-    "topics": "Resistores · Diodos · Transistores",
-    "modules": [],
+    "description": "Investigue os materiais condutores: altere dimensões e temperatura, compare resultados e conecte a experiência às fórmulas.",
+    "topics": "Resistência · Resistividade · Condutividade · Coeficiente térmico",
+    "modules": [
+      "materiais-condutores"
+    ],
     "icon": "M6 28h7l3-9 5 18 6-18 5 18 3-9h7M9 44h30M9 11h30"
   },
   {

@@ -17,6 +17,8 @@ for(const area of areas)for(const {group} of groupsFor(area)){
  const card=document.createElement('article');card.className='module-card';card.dataset.group=group.id;card.hidden=true;
  card.innerHTML=`<div class="module-visual"><span class="module-number">GRUPO DE ESTUDO</span><img class="pneumatic" src="${group.image||'assets/pneumatica-capa.svg'}" alt="${group.imageAlt||'Pneumática: energia do ar comprimido'}"></div><div class="module-info"><div class="eyebrow">${area.title}</div><h3>${group.title}</h3><p>${group.description}</p><div class="tags">${(group.tags||['Atuadores','Válvulas','Lógica e controle']).map(tag=>`<span>${tag}</span>`).join('')}</div><button class="open-module" data-open="${group.id}">Explorar ${group.title} <span aria-hidden="true">↗</span></button></div>`;cards.append(card);
 }
+const compressorGroupCard=cards.querySelector('[data-group="grupo-compressores"]');
+if(compressorGroupCard)cards.prepend(compressorGroupCard);
 function selectModule(id,focus=false){
  const previous=active;
  let item=modules.find(m=>m.id===id),area=areas.find(a=>'area-'+a.id===id||groupsFor(a).some(x=>x.group.id===id))||areaFor(id);
