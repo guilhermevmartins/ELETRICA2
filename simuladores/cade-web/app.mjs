@@ -24,8 +24,21 @@ const allCommands=[...new Set(categories.flatMap(categoryCommands).filter(Boolea
 const searchText=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('pt-BR');
 function placement(type,p,rotation=0){const bounds=getSymbolBounds({type,rotation});return {x:clamp(snap(p.x),40-bounds.x,1160-bounds.x-bounds.width),y:clamp(snap(p.y),40-bounds.y,740-bounds.y-bounds.height)};}
 const storageKey='senai-cade-web-project-v1'+(new URLSearchParams(location.search).has('qa')?'-qa':'');
-let project=example(), selected=null, tool='select', placing=null, wireStart=null, wirePoints=[], pointer={x:0,y:0}, running=false, paused=false, sim={},inputs={},category='Todos',history=[],future=[],drag=null,clipboard=null,view={x:0,y:0,scale:1},gridVisible=true,elapsed=0,saveTimer,toastTimer,held=null;
-try{const saved=localStorage.getItem(storageKey);if(saved)project=validateProject(JSON.parse(saved));}catch{ /* invalid persisted projects are ignored */ }
+let project=example('blank'), selected=null, tool='select', placing=null, wireStart=null, wirePoints=[], pointer={x:0,y:0}, running=false, paused=false, sim={},inputs={},category='Todos',history=[],future=[],drag=null,clipboard=null,view={x:0,y:0,scale:1},gridVisible=true,elapsed=0,saveTimer,toastTimer,held=null;
+// Inicia com folha vazia; a recuperação do último projeto é uma escolha explícita.
+try {
+ const saved=localStorage.getItem(storageKey);
+ if(saved){
+  const previous=validateProject(JSON.parse(saved));
+  const recover=document.createElement('button');recover.type='button';recover.textContent='Recuperar último projeto';
+  document.querySelector('.lab-heading').append(recover);
+  recover.onclick=async()=>{
+   if(!await confirmReplace('Recuperar o último projeto salvo?'))return;
+   snapshot();project=validateProject(JSON.parse(JSON.stringify(previous)));selected=null;stop(false);
+   $('#project-name').value=project.name;changed();fit();recover.remove();
+  };
+ }
+}catch{ /* Projetos inválidos não impedem abrir a folha vazia. */ }
 const snap=n=>Math.round(n/20)*20;
 const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
 const uid=()=>crypto.randomUUID();
@@ -68,7 +81,7 @@ function addComponent(type,p,command=placingCommand){if(running)return;if(projec
 function pathPoints(w){const a=project.components.find(c=>c.id===w.from.id),b=project.components.find(c=>c.id===w.to.id);if(!a||!b)return[];const start=terminal(a,w.from.port),end=terminal(b,w.to.port);if(w.points?.length){const points=[start];for(const p of [...w.points,end]){const prev=points.at(-1);if(Math.abs(p.x-prev.x)>.1&&Math.abs(p.y-prev.y)>.1)points.push({x:prev.x,y:p.y});points.push(p);}return points;}if(Math.abs(start.x-end.x)<.1||Math.abs(start.y-end.y)<.1)return[start,end];const middle=snap((start.y+end.y)/2);return[start,{x:start.x,y:middle},{x:end.x,y:middle},end];}
 const pathString=points=>points.map((p,i)=>`${i?'L':'M'}${p.x} ${p.y}`).join(' ');
 function drawPaper(){
- $('#paper').innerHTML=`<rect x="40" y="40" width="1120" height="760" fill="none" stroke="#008000" stroke-width="1"/><path d="M40 745H1160 M760 745V800 M960 745V800" stroke="#008000" fill="none"/><text class="paper-text" x="62" y="769" font-size="9" letter-spacing="1.5">PROJETO</text><text class="paper-text" x="62" y="788" style="fill:#008000" font-size="13">${esc(project.name)}</text><text class="paper-text" x="780" y="769" font-size="9" letter-spacing="1.5">AMBIENTE</text><text class="paper-text" x="780" y="788" font-size="12">CADe_SIMU · Web</text><text class="paper-text" x="981" y="769" font-size="9" letter-spacing="1.5">FOLHA / REVISÃO</text><text class="paper-text" x="981" y="788" font-size="12">01 / 01</text>${project.annotations.map(a=>`<text class="paper-text" x="${a.x}" y="${a.y}" font-size="9" letter-spacing="1.2">${esc(a.text)}</text>`).join('')}`;
+ $('#paper').innerHTML=`<rect x="40" y="40" width="1120" height="760" fill="none" stroke="#008000" stroke-width="1"/><path d="M40 745H1160 M760 745V800 M960 745V800" stroke="#008000" fill="none"/><text class="paper-text" x="62" y="769" font-size="9" letter-spacing="1.5">PROJETO</text><text class="paper-text" x="62" y="788" style="fill:#008000" font-size="13">${esc(project.name)}</text><text class="paper-text" x="780" y="769" font-size="9" letter-spacing="1.5">AMBIENTE</text><text class="paper-text" x="780" y="788" font-size="12">CAD SENAI</text><text class="paper-text" x="981" y="769" font-size="9" letter-spacing="1.5">FOLHA / REVISÃO</text><text class="paper-text" x="981" y="788" font-size="12">01 / 01</text>${project.annotations.map(a=>`<text class="paper-text" x="${a.x}" y="${a.y}" font-size="9" letter-spacing="1.2">${esc(a.text)}</text>`).join('')}`;
 }
 function drawingSVG(d,preview=false){const color=d.color||'#000000',selectedShape=d.id===selected;const attrs='stroke="'+color+'" stroke-width="1.5" fill="'+(d.fill?color:'none')+'"';let body='';if(d.kind==='text')body='<text x="'+d.x+'" y="'+d.y+'" fill="'+color+'" font-family="Arial" font-size="'+(d.fontSize||16)+'">'+esc(d.text)+'</text>';else if(d.kind==='line')body='<path d="M'+d.x+' '+d.y+'L'+d.x2+' '+d.y2+'" '+attrs+'/>';else {const x=Math.min(d.x,d.x2),y=Math.min(d.y,d.y2),w=Math.abs(d.x2-d.x),h=Math.abs(d.y2-d.y);body=d.kind==='rect'?'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" '+attrs+'/>':'<ellipse cx="'+(x+w/2)+'" cy="'+(y+h/2)+'" rx="'+w/2+'" ry="'+h/2+'" '+attrs+'/>'; }return '<g data-drawing="'+d.id+'" '+(preview?'pointer-events="none" opacity=".6"':'class="drawing-object"')+'>'+body+(selectedShape&&!preview?'<rect x="'+(Math.min(d.x,d.x2??d.x)-4)+'" y="'+(Math.min(d.y,d.y2??d.y)-18)+'" width="'+Math.max(30,Math.abs((d.x2??d.x+80)-d.x)+8)+'" height="'+Math.max(24,Math.abs((d.y2??d.y)-d.y)+24)+'" class="selection-box"/>':'')+'</g>';}
 function draw(){
