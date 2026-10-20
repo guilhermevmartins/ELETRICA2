@@ -1,0 +1,7 @@
+:root { color-scheme: only light; }
+.lab-heading { display:flex; flex:none; align-items:center; justify-content:space-between; gap:12px; padding:12px 16px; background:#172534; color:#fff; border-top:4px solid #ed0016; font:14px/1.4 'Segoe UI',sans-serif; }
+.lab-heading strong {display:block;font-size:17px;}
+.lab-heading span {color:#d6e1ec;}
+.lab-heading button {background:#ed0016;color:white;border:0;border-radius:5px;padding:10px 14px;min-height:44px;}
+@media(max-width:700px){.lab-heading{padding:8px;}.lab-heading span{display:none;}}
+@media print{.lab-heading{display:none;}}

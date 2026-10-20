@@ -1,0 +1,3397 @@
+{
+  "toolbars": [
+    {
+      "index": 650,
+      "path": [
+        241,
+        128,
+        1033
+      ],
+      "offset": 40067752,
+      "size": 80,
+      "sha256": "a9442114d34a78fbd72d6017cdc8bbed31e2c91118f16e083cd15b882b615b8b",
+      "version": 1,
+      "width": 17,
+      "height": 15,
+      "commands": [
+        57600,
+        57601,
+        57603,
+        57607,
+        0,
+        57635,
+        57634,
+        57637,
+        0,
+        32773,
+        32778,
+        32775,
+        32776,
+        32771,
+        32777,
+        0,
+        57643,
+        57644,
+        0,
+        32904,
+        32905,
+        32908,
+        32907,
+        0,
+        32971,
+        32972,
+        32974,
+        32975,
+        33105,
+        33106,
+        0,
+        33361,
+        33359,
+        33360,
+        0,
+        57664
+      ]
+    },
+    {
+      "index": 653,
+      "path": [
+        241,
+        159,
+        1033
+      ],
+      "offset": 40067992,
+      "size": 26,
+      "sha256": "62c7f2db32ee669d7e9b149695d8eb638755245ada77b9092be68cf3f718198d",
+      "version": 1,
+      "width": 16,
+      "height": 15,
+      "commands": [
+        32785,
+        32786,
+        32787,
+        32788,
+        32789,
+        32790,
+        32791,
+        32792,
+        32793
+      ]
+    },
+    {
+      "index": 656,
+      "path": [
+        241,
+        167,
+        1033
+      ],
+      "offset": 40068076,
+      "size": 54,
+      "sha256": "b68155911bee398409995ab2d6970e3dbaabe2dfc41a088853b3d0f6b0c5fafc",
+      "version": 1,
+      "width": 16,
+      "height": 15,
+      "commands": [
+        32868,
+        32856,
+        32857,
+        32824,
+        32809,
+        33001,
+        0,
+        32825,
+        32931,
+        33030,
+        32826,
+        33265,
+        0,
+        33068,
+        33279,
+        33081,
+        33107,
+        33241,
+        0,
+        33310,
+        33309,
+        0,
+        32886
+      ]
+    },
+    {
+      "index": 659,
+      "path": [
+        241,
+        171,
+        1033
+      ],
+      "offset": 40068244,
+      "size": 46,
+      "sha256": "88dd84f415b7349d3d48fdbf4748cb7385163b73e727d3aeaa69301176b9d57e",
+      "version": 1,
+      "width": 16,
+      "height": 15,
+      "commands": [
+        32811,
+        32812,
+        32813,
+        32814,
+        32815,
+        32816,
+        0,
+        32817,
+        32818,
+        32819,
+        32820,
+        32821,
+        32822,
+        32823,
+        0,
+        33231,
+        33232,
+        33233,
+        33234
+      ]
+    },
+    {
+      "index": 662,
+      "path": [
+        241,
+        173,
+        1033
+      ],
+      "offset": 40068380,
+      "size": 46,
+      "sha256": "768b534c5992176577e021935d962a00f204b5f0b89794e61a248e14a316767f",
+      "version": 1,
+      "width": 21,
+      "height": 21,
+      "commands": [
+        32828,
+        32829,
+        0,
+        32830,
+        33103,
+        33237,
+        32831,
+        32994,
+        32832,
+        0,
+        32999,
+        33000,
+        0,
+        33295,
+        33296,
+        0,
+        33104,
+        0,
+        33257
+      ]
+    },
+    {
+      "index": 665,
+      "path": [
+        241,
+        175,
+        1033
+      ],
+      "offset": 40068524,
+      "size": 34,
+      "sha256": "ebd0352ba51a6a893f376c75715735fbe26dd18e0426e0bb9576ff2120d232ab",
+      "version": 1,
+      "width": 26,
+      "height": 21,
+      "commands": [
+        32899,
+        32834,
+        32833,
+        32835,
+        0,
+        33219,
+        0,
+        32900,
+        32836,
+        32837,
+        32838,
+        0,
+        33392
+      ]
+    },
+    {
+      "index": 668,
+      "path": [
+        241,
+        177,
+        1033
+      ],
+      "offset": 40068632,
+      "size": 30,
+      "sha256": "a78e511c1788872faf9f2245e8e9658f438d3699876479fee9d8c4f29305c6e8",
+      "version": 1,
+      "width": 32,
+      "height": 21,
+      "commands": [
+        32853,
+        32842,
+        32839,
+        32840,
+        32841,
+        0,
+        32854,
+        32843,
+        32844,
+        32845,
+        32848
+      ]
+    },
+    {
+      "index": 671,
+      "path": [
+        241,
+        179,
+        1033
+      ],
+      "offset": 40068728,
+      "size": 46,
+      "sha256": "64cd8ad86e8afbb34d843fd0ea1d52b55cd2cd131919edd17967ce2c2cd64712",
+      "version": 1,
+      "width": 37,
+      "height": 21,
+      "commands": [
+        32858,
+        32859,
+        32860,
+        32861,
+        32862,
+        0,
+        32863,
+        32864,
+        0,
+        32865,
+        0,
+        32898,
+        33050,
+        32866,
+        32867,
+        33052,
+        0,
+        33054,
+        33055
+      ]
+    },
+    {
+      "index": 674,
+      "path": [
+        241,
+        183,
+        1033
+      ],
+      "offset": 40068872,
+      "size": 68,
+      "sha256": "fbd105990febaf613247f1355fad6414c7e64ce7b940575acb1af69194ae74a6",
+      "version": 1,
+      "width": 31,
+      "height": 21,
+      "commands": [
+        32873,
+        32874,
+        32883,
+        0,
+        32872,
+        32906,
+        0,
+        32870,
+        32879,
+        0,
+        32869,
+        32882,
+        0,
+        32876,
+        0,
+        32877,
+        0,
+        32875,
+        0,
+        33042,
+        0,
+        32995,
+        33045,
+        33043,
+        32997,
+        32998,
+        33044,
+        33046,
+        0,
+        33263
+      ]
+    },
+    {
+      "index": 677,
+      "path": [
+        241,
+        187,
+        1033
+      ],
+      "offset": 40069076,
+      "size": 76,
+      "sha256": "2bd90103b8b9695b954c6f221d277ac29a2aab65faf710c0a1bfeff123cf8d5b",
+      "version": 1,
+      "width": 23,
+      "height": 21,
+      "commands": [
+        33348,
+        33349,
+        33350,
+        33351,
+        0,
+        32884,
+        32895,
+        32896,
+        0,
+        33035,
+        33037,
+        0,
+        33229,
+        0,
+        32889,
+        0,
+        32893,
+        32891,
+        0,
+        32894,
+        32892,
+        0,
+        32885,
+        32888,
+        32890,
+        0,
+        32968,
+        32969,
+        32991,
+        32992,
+        32993,
+        0,
+        32897,
+        32970
+      ]
+    },
+    {
+      "index": 680,
+      "path": [
+        241,
+        189,
+        1033
+      ],
+      "offset": 40069304,
+      "size": 66,
+      "sha256": "e1e739110ff07cc5e5b968a3c49ae5f59f50623c6a34e991c369019fd87bc9dd",
+      "version": 1,
+      "width": 16,
+      "height": 21,
+      "commands": [
+        33278,
+        0,
+        32909,
+        32910,
+        32912,
+        32913,
+        0,
+        32914,
+        32915,
+        32917,
+        32918,
+        0,
+        32919,
+        32920,
+        32921,
+        32922,
+        33047,
+        33048,
+        33049,
+        0,
+        32923,
+        32924,
+        32925,
+        32926,
+        0,
+        32927,
+        32928,
+        32929,
+        32930
+      ]
+    },
+    {
+      "index": 683,
+      "path": [
+        241,
+        191,
+        1033
+      ],
+      "offset": 40069508,
+      "size": 46,
+      "sha256": "ea7269723a6bcf08c06ec44c2f60266a4bef228248e24d4c5483bbcb749a128c",
+      "version": 1,
+      "width": 16,
+      "height": 21,
+      "commands": [
+        32937,
+        32938,
+        32939,
+        32940,
+        0,
+        32933,
+        32934,
+        32935,
+        32936,
+        0,
+        32941,
+        32942,
+        32943,
+        32944,
+        0,
+        32945,
+        32946,
+        32947,
+        32948
+      ]
+    },
+    {
+      "index": 686,
+      "path": [
+        241,
+        193,
+        1033
+      ],
+      "offset": 40069652,
+      "size": 52,
+      "sha256": "b12775ee845175e0d56556bd5f425874990c2f4229c541aeaf4b75e8ed372114",
+      "version": 1,
+      "width": 13,
+      "height": 21,
+      "commands": [
+        32949,
+        32956,
+        32964,
+        0,
+        32951,
+        0,
+        32952,
+        32953,
+        32954,
+        32955,
+        33223,
+        33098,
+        0,
+        33236,
+        0,
+        32957,
+        32958,
+        0,
+        32961,
+        32962,
+        32960,
+        32959
+      ]
+    },
+    {
+      "index": 689,
+      "path": [
+        241,
+        213,
+        1033
+      ],
+      "offset": 40069808,
+      "size": 48,
+      "sha256": "8d7907e8aac1fa3964ec1a1853f95ca2e8e964c99c35e0224531d256044b2f48",
+      "version": 1,
+      "width": 20,
+      "height": 21,
+      "commands": [
+        33002,
+        33003,
+        33004,
+        0,
+        33005,
+        33089,
+        0,
+        33006,
+        33007,
+        33011,
+        0,
+        33015,
+        33016,
+        33018,
+        33017,
+        33012,
+        0,
+        33297,
+        33298,
+        33299
+      ]
+    },
+    {
+      "index": 692,
+      "path": [
+        241,
+        215,
+        1033
+      ],
+      "offset": 40069956,
+      "size": 46,
+      "sha256": "e5268facb9319934a7b02c5c9650079aecde71299ce51d07957b871ffe5b9413",
+      "version": 1,
+      "width": 23,
+      "height": 21,
+      "commands": [
+        33032,
+        33020,
+        33021,
+        33022,
+        33023,
+        33024,
+        0,
+        33025,
+        33027,
+        33034,
+        33033,
+        0,
+        33253,
+        33254,
+        33255,
+        33256,
+        0,
+        33346,
+        33347
+      ]
+    },
+    {
+      "index": 695,
+      "path": [
+        241,
+        226,
+        1033
+      ],
+      "offset": 40070100,
+      "size": 74,
+      "sha256": "5cad788b5da90e0f6539e038b1dee67f14003ba3b01b99c28998a3ba6a88df65",
+      "version": 1,
+      "width": 16,
+      "height": 21,
+      "commands": [
+        33056,
+        33057,
+        33058,
+        33059,
+        33060,
+        33061,
+        0,
+        33100,
+        33111,
+        0,
+        33099,
+        33300,
+        33112,
+        33114,
+        33226,
+        33097,
+        33277,
+        0,
+        33292,
+        33293,
+        33301,
+        33302,
+        0,
+        33079,
+        33080,
+        0,
+        33294,
+        33115,
+        33116,
+        33117,
+        0,
+        33035,
+        32889
+      ]
+    },
+    {
+      "index": 698,
+      "path": [
+        241,
+        228,
+        1033
+      ],
+      "offset": 40070328,
+      "size": 44,
+      "sha256": "457c1b4ce558bb7dd5ad26e3bd6e625f2973c19b7d8ee643e83433c26f9dd5d6",
+      "version": 1,
+      "width": 17,
+      "height": 21,
+      "commands": [
+        33088,
+        33083,
+        33084,
+        33085,
+        0,
+        33101,
+        33094,
+        33095,
+        0,
+        33102,
+        33086,
+        33093,
+        0,
+        33092,
+        33090,
+        33091,
+        0,
+        33096
+      ]
+    },
+    {
+      "index": 701,
+      "path": [
+        241,
+        242,
+        1033
+      ],
+      "offset": 40070460,
+      "size": 54,
+      "sha256": "bf93cc3fa9d1505c150caddb41bf78068a78765275d6ad1137ca3367f5273d67",
+      "version": 1,
+      "width": 28,
+      "height": 21,
+      "commands": [
+        33108,
+        33109,
+        0,
+        33238,
+        33336,
+        0,
+        33240,
+        33337,
+        0,
+        33326,
+        33328,
+        0,
+        33334,
+        33334,
+        33335,
+        0,
+        33272,
+        33273,
+        33274,
+        33275,
+        33276,
+        0,
+        33324
+      ]
+    },
+    {
+      "index": 704,
+      "path": [
+        241,
+        269,
+        1033
+      ],
+      "offset": 40070628,
+      "size": 28,
+      "sha256": "54c1628eea1b36075e149852f2ed372fb35c1dcf5832bf12fd7cdd22a38739fd",
+      "version": 1,
+      "width": 20,
+      "height": 21,
+      "commands": [
+        33242,
+        33243,
+        33245,
+        33246,
+        33247,
+        33252,
+        33248,
+        33249,
+        33250,
+        33251
+      ]
+    },
+    {
+      "index": 707,
+      "path": [
+        241,
+        291,
+        1033
+      ],
+      "offset": 40070712,
+      "size": 38,
+      "sha256": "68fac5863054bafc3e55d07808563288cf165c5c949ba1f8369b84efdb4eb87c",
+      "version": 1,
+      "width": 37,
+      "height": 21,
+      "commands": [
+        33258,
+        33259,
+        33260,
+        33261,
+        0,
+        33266,
+        33267,
+        33271,
+        33269,
+        0,
+        33344,
+        33345,
+        0,
+        33372,
+        33373
+      ]
+    },
+    {
+      "index": 710,
+      "path": [
+        241,
+        292,
+        1033
+      ],
+      "offset": 40070828,
+      "size": 54,
+      "sha256": "a90285383b386954fc515c5c52dec19969f72e2c8c28db017b4b9a2ed19cfe47",
+      "version": 1,
+      "width": 16,
+      "height": 21,
+      "commands": [
+        33062,
+        33063,
+        33065,
+        33066,
+        33291,
+        0,
+        33067,
+        33069,
+        33070,
+        0,
+        33100,
+        33111,
+        33099,
+        33112,
+        33114,
+        33226,
+        33097,
+        33277,
+        0,
+        32876,
+        32877,
+        33035,
+        33037
+      ]
+    }
+  ],
+  "icons": [
+    {
+      "toolbar": 128,
+      "command": 57600,
+      "label": "Nova\nNova",
+      "icon": "command-57600.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 57601,
+      "label": "Abrir\nAbrir",
+      "icon": "command-57601.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 57603,
+      "label": "Salvar\nSalvar",
+      "icon": "command-57603.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 57607,
+      "label": "Imprimir\nImprimir",
+      "icon": "command-57607.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 57635,
+      "label": "Cortar\nCortar",
+      "icon": "command-57635.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 57634,
+      "label": "Copiar\nCopiar",
+      "icon": "command-57634.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 57637,
+      "label": "Pasta\nPasta",
+      "icon": "command-57637.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 32773,
+      "label": "Zoom +\nZoom +",
+      "icon": "command-32773.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 32778,
+      "label": "Zoom -\nZoom -",
+      "icon": "command-32778.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 32775,
+      "label": "Zoom Windows\nZoom Windows",
+      "icon": "command-32775.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 32776,
+      "label": "Zoom All\nZoom All",
+      "icon": "command-32776.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 32771,
+      "label": "Zoom anterior\nZoom anterior",
+      "icon": "command-32771.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 32777,
+      "label": "Grade\nGrade",
+      "icon": "command-32777.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 57643,
+      "label": "Desfazer\nDesfazer",
+      "icon": "command-57643.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 57644,
+      "label": "Refazer\nRefazer",
+      "icon": "command-57644.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 32904,
+      "label": "Girar esquerda\nGirar esquerda",
+      "icon": "command-32904.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 32905,
+      "label": "Girar direita\nGirar direita",
+      "icon": "command-32905.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 32908,
+      "label": "Espelhar vertical\nEspelhar vertical",
+      "icon": "command-32908.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 32907,
+      "label": "Espelhar horizontal\nEspelhar horizontal",
+      "icon": "command-32907.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 32971,
+      "label": "SimulaÃ§Ã£o\nSimulaÃ§Ã£o",
+      "icon": "command-32971.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 32972,
+      "label": "Parar\nParar",
+      "icon": "command-32972.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 32974,
+      "label": "Pausar\nPausar",
+      "icon": "command-32974.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 32975,
+      "label": "Passo a passo\nPasso a passo",
+      "icon": "command-32975.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 33105,
+      "label": "Simular documento\nSimular documento",
+      "icon": "command-33105.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 33106,
+      "label": "Simular todos os documentos\nSimular todos os documentos",
+      "icon": "command-33106.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 33361,
+      "label": "Exibir sÃ­mbolo de componente\nExibir sÃ­mbolo de componente",
+      "icon": "command-33361.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 33359,
+      "label": "Componentes em 2D\nComponentes em 2D",
+      "icon": "command-33359.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 33360,
+      "label": "Componentes em 3D\nComponentes em 3D",
+      "icon": "command-33360.png"
+    },
+    {
+      "toolbar": 128,
+      "command": 57664,
+      "label": "About CADe_SIMU 4.0\nAbout CADe_SIMU 4.0",
+      "icon": "command-57664.png"
+    },
+    {
+      "toolbar": 159,
+      "command": 32785,
+      "label": "Redesenhar\nRedesenhar",
+      "icon": "command-32785.png"
+    },
+    {
+      "toolbar": 159,
+      "command": 32786,
+      "label": "Linha\nLinha",
+      "icon": "command-32786.png"
+    },
+    {
+      "toolbar": 159,
+      "command": 32787,
+      "label": "RetÃ¢ngulo\nRetÃ¢ngulo",
+      "icon": "command-32787.png"
+    },
+    {
+      "toolbar": 159,
+      "command": 32788,
+      "label": "Elipse\nElipse",
+      "icon": "command-32788.png"
+    },
+    {
+      "toolbar": 159,
+      "command": 32789,
+      "label": "RetÃ¢ngulo colorido\nRetÃ¢ngulo colorido",
+      "icon": "command-32789.png"
+    },
+    {
+      "toolbar": 159,
+      "command": 32790,
+      "label": "Elipse colorido\nElipse colorido",
+      "icon": "command-32790.png"
+    },
+    {
+      "toolbar": 159,
+      "command": 32791,
+      "label": "Preencher com cor\nPreencher com cor",
+      "icon": "command-32791.png"
+    },
+    {
+      "toolbar": 159,
+      "command": 32792,
+      "label": "Cor\nCor",
+      "icon": "command-32792.png"
+    },
+    {
+      "toolbar": 159,
+      "command": 32793,
+      "label": "Texto\nTexto",
+      "icon": "command-32793.png"
+    },
+    {
+      "toolbar": 167,
+      "command": 32868,
+      "label": "AlimentaÃ§Ã£o\nAlimentaÃ§Ã£o",
+      "icon": "command-32868.png"
+    },
+    {
+      "toolbar": 167,
+      "command": 32856,
+      "label": "Fusiveis, Seccionadores\nFusiveis, Seccionadores",
+      "icon": "command-32856.png"
+    },
+    {
+      "toolbar": 167,
+      "command": 32857,
+      "label": "Automaticos, Disjuntores\nAutomaticos, Disjuntores",
+      "icon": "command-32857.png"
+    },
+    {
+      "toolbar": 167,
+      "command": 32824,
+      "label": "Contatores, Comutatores\nContatores, Comutatores",
+      "icon": "command-32824.png"
+    },
+    {
+      "toolbar": 167,
+      "command": 32809,
+      "label": "Motores\nMotores",
+      "icon": "command-32809.png"
+    },
+    {
+      "toolbar": 167,
+      "command": 33001,
+      "label": "Soft-starter e inversores\nSoft-starter e inversores",
+      "icon": "command-33001.png"
+    },
+    {
+      "toolbar": 167,
+      "command": 32825,
+      "label": "Contatos auxiliares, Contatos de timers\nContatos auxiliares, Contatos de timers",
+      "icon": "command-32825.png"
+    },
+    {
+      "toolbar": 167,
+      "command": 32931,
+      "label": "BotÃ£o de acionamento\nBotÃ£o de acionamento",
+      "icon": "command-32931.png"
+    },
+    {
+      "toolbar": 167,
+      "command": 33030,
+      "label": "Detectores\nDetectores",
+      "icon": "command-33030.png"
+    },
+    {
+      "toolbar": 167,
+      "command": 32826,
+      "label": "Bobinas e sinais\nBobinas e sinais",
+      "icon": "command-32826.png"
+    },
+    {
+      "toolbar": 167,
+      "command": 33265,
+      "label": "RelÃ©s electrÃ³nicos\nRelÃ©s electrÃ³nicos",
+      "icon": "command-33265.png"
+    },
+    {
+      "toolbar": 167,
+      "command": 33068,
+      "label": "Logic\nLogic",
+      "icon": "command-33068.png"
+    },
+    {
+      "toolbar": 167,
+      "command": 33279,
+      "label": "Ladder\nLadder",
+      "icon": "command-33279.png"
+    },
+    {
+      "toolbar": 167,
+      "command": 33081,
+      "label": "GRAFCET\nGRAFCET",
+      "icon": "command-33081.png"
+    },
+    {
+      "toolbar": 167,
+      "command": 33107,
+      "label": "Input / Output\nInput / Output",
+      "icon": "command-33107.png"
+    },
+    {
+      "toolbar": 167,
+      "command": 33241,
+      "label": "Atuadores pneumÃ¡ticos\nAtuadores pneumÃ¡ticos",
+      "icon": "command-33241.png"
+    },
+    {
+      "toolbar": 167,
+      "command": 33310,
+      "label": "Simbolos 2D\nSimbolos 2D",
+      "icon": "command-33310.png"
+    },
+    {
+      "toolbar": 167,
+      "command": 33309,
+      "label": "Simbolos 3D\nSimbolos 3D",
+      "icon": "command-33309.png"
+    },
+    {
+      "toolbar": 167,
+      "command": 32886,
+      "label": "Cabos e conexÃµes\nCabos e conexÃµes",
+      "icon": "command-32886.png"
+    },
+    {
+      "toolbar": 171,
+      "command": 32811,
+      "label": "Preto\nPreto",
+      "icon": "command-32811.png"
+    },
+    {
+      "toolbar": 171,
+      "command": 32812,
+      "label": "Branco\nBranco",
+      "icon": "command-32812.png"
+    },
+    {
+      "toolbar": 171,
+      "command": 32813,
+      "label": "Cinza\nCinza",
+      "icon": "command-32813.png"
+    },
+    {
+      "toolbar": 171,
+      "command": 32814,
+      "label": "Cinza claro\nCinza claro",
+      "icon": "command-32814.png"
+    },
+    {
+      "toolbar": 171,
+      "command": 32815,
+      "label": "Marrom\nMarrom",
+      "icon": "command-32815.png"
+    },
+    {
+      "toolbar": 171,
+      "command": 32816,
+      "label": "Vermelho\nVermelho",
+      "icon": "command-32816.png"
+    },
+    {
+      "toolbar": 171,
+      "command": 32817,
+      "label": "Marrom\nMarrom",
+      "icon": "command-32817.png"
+    },
+    {
+      "toolbar": 171,
+      "command": 32818,
+      "label": "Amarelo\nAmarelo",
+      "icon": "command-32818.png"
+    },
+    {
+      "toolbar": 171,
+      "command": 32819,
+      "label": "Verde\nVerde",
+      "icon": "command-32819.png"
+    },
+    {
+      "toolbar": 171,
+      "command": 32820,
+      "label": "Verde claro\nVerde claro",
+      "icon": "command-32820.png"
+    },
+    {
+      "toolbar": 171,
+      "command": 32821,
+      "label": "Azul-verde\nAzul-verde",
+      "icon": "command-32821.png"
+    },
+    {
+      "toolbar": 171,
+      "command": 32822,
+      "label": "Azul claro\nAzul claro",
+      "icon": "command-32822.png"
+    },
+    {
+      "toolbar": 171,
+      "command": 32823,
+      "label": "Cor\nCor",
+      "icon": "command-32823.png"
+    },
+    {
+      "toolbar": 171,
+      "command": 33231,
+      "label": "Espessura 1\nEspessura 1",
+      "icon": "command-33231.png"
+    },
+    {
+      "toolbar": 171,
+      "command": 33232,
+      "label": "Espessura 2\nEspessura 2",
+      "icon": "command-33232.png"
+    },
+    {
+      "toolbar": 171,
+      "command": 33233,
+      "label": "Espessura 3\nEspessura 3",
+      "icon": "command-33233.png"
+    },
+    {
+      "toolbar": 171,
+      "command": 33234,
+      "label": "Espessura 4\nEspessura 4",
+      "icon": "command-33234.png"
+    },
+    {
+      "toolbar": 173,
+      "command": 32828,
+      "label": "Motor trifÃ¡sico\nMotor trifÃ¡sico",
+      "icon": "command-32828.png"
+    },
+    {
+      "toolbar": 173,
+      "command": 32829,
+      "label": "Motor trifÃ¡sico [estrela-triÃ¢ngulo]\nMotor trifÃ¡sico [estrela-triÃ¢ngulo]",
+      "icon": "command-32829.png"
+    },
+    {
+      "toolbar": 173,
+      "command": 32830,
+      "label": "Motor monofÃ¡sico\nMotor monofÃ¡sico",
+      "icon": "command-32830.png"
+    },
+    {
+      "toolbar": 173,
+      "command": 33103,
+      "label": "Motor monofÃ¡sico\nMotor monofÃ¡sico",
+      "icon": "command-33103.png"
+    },
+    {
+      "toolbar": 173,
+      "command": 33237,
+      "label": "Motor trifÃ¡sico e monofÃ¡sico\nMotor trifÃ¡sico e monofÃ¡sico",
+      "icon": "command-33237.png"
+    },
+    {
+      "toolbar": 173,
+      "command": 32831,
+      "label": "Motor Dahalander\nMotor Dahalander",
+      "icon": "command-32831.png"
+    },
+    {
+      "toolbar": 173,
+      "command": 32994,
+      "label": "Motor de duas velocidade\nMotor de duas velocidade",
+      "icon": "command-32994.png"
+    },
+    {
+      "toolbar": 173,
+      "command": 32832,
+      "label": "Motor de induÃ§Ã£o de rotor enrolado\nMotor de induÃ§Ã£o de rotor enrolado",
+      "icon": "command-32832.png"
+    },
+    {
+      "toolbar": 173,
+      "command": 32999,
+      "label": "DC motor. Iman P.\nDC motor. Iman P.",
+      "icon": "command-32999.png"
+    },
+    {
+      "toolbar": 173,
+      "command": 33000,
+      "label": "DC motor. Indep.\nDC motor. Indep.",
+      "icon": "command-33000.png"
+    },
+    {
+      "toolbar": 173,
+      "command": 33295,
+      "label": "Unipolar stepper motor\nUnipolar stepper motor",
+      "icon": "command-33295.png"
+    },
+    {
+      "toolbar": 173,
+      "command": 33296,
+      "label": "Bipolar stepper motor\nBipolar stepper motor",
+      "icon": "command-33296.png"
+    },
+    {
+      "toolbar": 173,
+      "command": 33104,
+      "label": "Freio\nFreio",
+      "icon": "command-33104.png"
+    },
+    {
+      "toolbar": 173,
+      "command": 33257,
+      "label": "Atuador Linear ElÃ©trico\nAtuador Linear ElÃ©trico",
+      "icon": "command-33257.png"
+    },
+    {
+      "toolbar": 175,
+      "command": 32899,
+      "label": "Contator I\nContator I",
+      "icon": "command-32899.png"
+    },
+    {
+      "toolbar": 175,
+      "command": 32834,
+      "label": "Contator II\nContator II",
+      "icon": "command-32834.png"
+    },
+    {
+      "toolbar": 175,
+      "command": 32833,
+      "label": "Contator III\nContator III",
+      "icon": "command-32833.png"
+    },
+    {
+      "toolbar": 175,
+      "command": 32835,
+      "label": "Contator IIII\nContator IIII",
+      "icon": "command-32835.png"
+    },
+    {
+      "toolbar": 175,
+      "command": 33219,
+      "label": "Contator III\nContator III",
+      "icon": "command-33219.png"
+    },
+    {
+      "toolbar": 175,
+      "command": 32900,
+      "label": "Comutador I\nComutador I",
+      "icon": "command-32900.png"
+    },
+    {
+      "toolbar": 175,
+      "command": 32836,
+      "label": "Comutador II\nComutador II",
+      "icon": "command-32836.png"
+    },
+    {
+      "toolbar": 175,
+      "command": 32837,
+      "label": "Comutador III\nComutador III",
+      "icon": "command-32837.png"
+    },
+    {
+      "toolbar": 175,
+      "command": 32838,
+      "label": "Comutador IIII\nComutador IIII",
+      "icon": "command-32838.png"
+    },
+    {
+      "toolbar": 175,
+      "command": 33392,
+      "label": "Intertravamento\nIntertravamento",
+      "icon": "command-33392.png"
+    },
+    {
+      "toolbar": 177,
+      "command": 32853,
+      "label": "Fusivel I\nFusivel I",
+      "icon": "command-32853.png"
+    },
+    {
+      "toolbar": 177,
+      "command": 32842,
+      "label": "Fusivel IN\nFusivel IN",
+      "icon": "command-32842.png"
+    },
+    {
+      "toolbar": 177,
+      "command": 32839,
+      "label": "Fusivel II\nFusivel II",
+      "icon": "command-32839.png"
+    },
+    {
+      "toolbar": 177,
+      "command": 32840,
+      "label": "Fusivel III\nFusivel III",
+      "icon": "command-32840.png"
+    },
+    {
+      "toolbar": 177,
+      "command": 32841,
+      "label": "Fusivel IIIN\nFusivel IIIN",
+      "icon": "command-32841.png"
+    },
+    {
+      "toolbar": 177,
+      "command": 32854,
+      "label": "Fusivel seccionador I\nFusivel seccionador I",
+      "icon": "command-32854.png"
+    },
+    {
+      "toolbar": 177,
+      "command": 32843,
+      "label": "Fusivel seccionador IN\nFusivel seccionador IN",
+      "icon": "command-32843.png"
+    },
+    {
+      "toolbar": 177,
+      "command": 32844,
+      "label": "Fusivel seccionador II\nFusivel seccionador II",
+      "icon": "command-32844.png"
+    },
+    {
+      "toolbar": 177,
+      "command": 32845,
+      "label": "Fusivel seccionador III\nFusivel seccionador III",
+      "icon": "command-32845.png"
+    },
+    {
+      "toolbar": 177,
+      "command": 32848,
+      "label": "Fusivel seccionador IIIN\nFusivel seccionador IIIN",
+      "icon": "command-32848.png"
+    },
+    {
+      "toolbar": 179,
+      "command": 32858,
+      "label": "Interruptor seccionador I\nInterruptor seccionador I",
+      "icon": "command-32858.png"
+    },
+    {
+      "toolbar": 179,
+      "command": 32859,
+      "label": "Interruptor seccionador IN\nInterruptor seccionador IN",
+      "icon": "command-32859.png"
+    },
+    {
+      "toolbar": 179,
+      "command": 32860,
+      "label": "Interruptor seccionador II\nInterruptor seccionador II",
+      "icon": "command-32860.png"
+    },
+    {
+      "toolbar": 179,
+      "command": 32861,
+      "label": "Interruptor seccionador III\nInterruptor seccionador III",
+      "icon": "command-32861.png"
+    },
+    {
+      "toolbar": 179,
+      "command": 32862,
+      "label": "Interrupor seccionador IIIN\nInterruptor seccionador IIIN",
+      "icon": "command-32862.png"
+    },
+    {
+      "toolbar": 179,
+      "command": 32863,
+      "label": "Interruptor diferencial IN\nInterruptor diferencial IN",
+      "icon": "command-32863.png"
+    },
+    {
+      "toolbar": 179,
+      "command": 32864,
+      "label": "Interruptor diferencial IIIN\nInterruptor diferencial IIIN",
+      "icon": "command-32864.png"
+    },
+    {
+      "toolbar": 179,
+      "command": 32865,
+      "label": "RelÃ© termico\nRelÃ© termico",
+      "icon": "command-32865.png"
+    },
+    {
+      "toolbar": 179,
+      "command": 32898,
+      "label": "Disjuntor termomagnÃ©tico I\nDisjuntor termomagnÃ©tico I",
+      "icon": "command-32898.png"
+    },
+    {
+      "toolbar": 179,
+      "command": 33050,
+      "label": "Disjuntor termomagnÃ©tico IN\nDisjuntor termomagnÃ©tico IN",
+      "icon": "command-33050.png"
+    },
+    {
+      "toolbar": 179,
+      "command": 32866,
+      "label": "Disjuntor termomagnÃ©tico II\nDisjuntor termomagnÃ©tico II",
+      "icon": "command-32866.png"
+    },
+    {
+      "toolbar": 179,
+      "command": 32867,
+      "label": "Disjuntor termomagnÃ©tico III\nDisjuntor termomagnÃ©tico III",
+      "icon": "command-32867.png"
+    },
+    {
+      "toolbar": 179,
+      "command": 33052,
+      "label": "Disjuntor termomagnÃ©tico IIIN\nDisjuntor temomagnÃ©tico IIIN",
+      "icon": "command-33052.png"
+    },
+    {
+      "toolbar": 179,
+      "command": 33054,
+      "label": "Limitador sobretensÃ£o IN\nLimitador sobretensÃ£o IN",
+      "icon": "command-33054.png"
+    },
+    {
+      "toolbar": 179,
+      "command": 33055,
+      "label": "Limitador sobretensÃ£o IIIN\nLimitador sobretensÃ£o IIIN",
+      "icon": "command-33055.png"
+    },
+    {
+      "toolbar": 183,
+      "command": 32873,
+      "label": "AlimentaÃ§Ã£o fase\nAlimentaÃ§Ã£o fase",
+      "icon": "command-32873.png"
+    },
+    {
+      "toolbar": 183,
+      "command": 32874,
+      "label": "AlimentaÃ§Ã£o neutro\nAlimentaÃ§Ã£o neutro",
+      "icon": "command-32874.png"
+    },
+    {
+      "toolbar": 183,
+      "command": 32883,
+      "label": "Aterramento\nAterramento",
+      "icon": "command-32883.png"
+    },
+    {
+      "toolbar": 183,
+      "command": 32872,
+      "label": "AlimentaÃ§Ã£o Fase + Neutro\nAlimentaÃ§Ã£o Fase + Neutro",
+      "icon": "command-32872.png"
+    },
+    {
+      "toolbar": 183,
+      "command": 32906,
+      "label": "AlimentaÃ§Ã£o Fase + Neutro + ProteÃ§Ã£o\nAlimentaÃ§Ã£o Fase + Neutro + ProteÃ§Ã£o",
+      "icon": "command-32906.png"
+    },
+    {
+      "toolbar": 183,
+      "command": 32870,
+      "label": "AlimentaÃ§Ã£o  R + S + T\nAlimentaÃ§Ã£o  R + S + T",
+      "icon": "command-32870.png"
+    },
+    {
+      "toolbar": 183,
+      "command": 32879,
+      "label": "AlimentaÃ§Ã£o  L1 + L2 + L3 + PE\nAlimentaÃ§Ã£o  L1 + L2 + L3 + PE",
+      "icon": "command-32879.png"
+    },
+    {
+      "toolbar": 183,
+      "command": 32869,
+      "label": "AlimentaÃ§Ã£o  R + S + T + N\nAlimentaÃ§Ã£o  R + S + T + N",
+      "icon": "command-32869.png"
+    },
+    {
+      "toolbar": 183,
+      "command": 32882,
+      "label": "AlimentaÃ§Ã£o R + S + T + N + PE\nAlimentaÃ§Ã£o R + S + T + N + PE",
+      "icon": "command-32882.png"
+    },
+    {
+      "toolbar": 183,
+      "command": 32876,
+      "label": "AlimentaÃ§Ã£o positivo\nAlimentaÃ§Ã£o positivo",
+      "icon": "command-32876.png"
+    },
+    {
+      "toolbar": 183,
+      "command": 32877,
+      "label": "AlimentaÃ§Ã£o negativo\nAlimentaÃ§Ã£o negativo",
+      "icon": "command-32877.png"
+    },
+    {
+      "toolbar": 183,
+      "command": 32875,
+      "label": "AlimentaÃ§Ã£o + -\nAlimentaÃ§Ã£o + -",
+      "icon": "command-32875.png"
+    },
+    {
+      "toolbar": 183,
+      "command": 33042,
+      "label": "Aterramento\nAterramento",
+      "icon": "command-33042.png"
+    },
+    {
+      "toolbar": 183,
+      "command": 32995,
+      "label": "Transformador\nTransformador",
+      "icon": "command-32995.png"
+    },
+    {
+      "toolbar": 183,
+      "command": 33045,
+      "label": "Transformador III\nTransformador III",
+      "icon": "command-33045.png"
+    },
+    {
+      "toolbar": 183,
+      "command": 33043,
+      "label": "Diodo\nDiodo",
+      "icon": "command-33043.png"
+    },
+    {
+      "toolbar": 183,
+      "command": 32997,
+      "label": "Retificador\nRetificador",
+      "icon": "command-32997.png"
+    },
+    {
+      "toolbar": 183,
+      "command": 32998,
+      "label": "Fonte retificadora\nFonte retificadora",
+      "icon": "command-32998.png"
+    },
+    {
+      "toolbar": 183,
+      "command": 33044,
+      "label": "Fonte retificadora\nFonte retificadora",
+      "icon": "command-33044.png"
+    },
+    {
+      "toolbar": 183,
+      "command": 33046,
+      "label": "Bateria\nBateria",
+      "icon": "command-33046.png"
+    },
+    {
+      "toolbar": 183,
+      "command": 33263,
+      "label": "Tomada 2P+T\nTomada 2P+T",
+      "icon": "command-33263.png"
+    },
+    {
+      "toolbar": 187,
+      "command": 33348,
+      "label": "Largura 1\nLargura 1",
+      "icon": "command-33348.png"
+    },
+    {
+      "toolbar": 187,
+      "command": 33349,
+      "label": "Largura 2\nLargura 2",
+      "icon": "command-33349.png"
+    },
+    {
+      "toolbar": 187,
+      "command": 33350,
+      "label": "Largura 3\nLargura 3",
+      "icon": "command-33350.png"
+    },
+    {
+      "toolbar": 187,
+      "command": 33351,
+      "label": "Largura 4\nLargura 4",
+      "icon": "command-33351.png"
+    },
+    {
+      "toolbar": 187,
+      "command": 32884,
+      "label": "AlimentaÃ§Ã£o fase\nAlimentaÃ§Ã£o fase",
+      "icon": "command-32884.png"
+    },
+    {
+      "toolbar": 187,
+      "command": 32895,
+      "label": "Fio neutro\nFio neutro",
+      "icon": "command-32895.png"
+    },
+    {
+      "toolbar": 187,
+      "command": 32896,
+      "label": "Fio aterramento\nFio aterramento",
+      "icon": "command-32896.png"
+    },
+    {
+      "toolbar": 187,
+      "command": 33035,
+      "label": "Cabo positivo\nCabo positivo",
+      "icon": "command-33035.png"
+    },
+    {
+      "toolbar": 187,
+      "command": 33037,
+      "label": "Cabo negativo\nCabo negativo",
+      "icon": "command-33037.png"
+    },
+    {
+      "toolbar": 187,
+      "command": 33229,
+      "label": "Fio colorido\nFio colorido",
+      "icon": "command-33229.png"
+    },
+    {
+      "toolbar": 187,
+      "command": 32889,
+      "label": "ConexÃ£o\nConexÃ£o",
+      "icon": "command-32889.png"
+    },
+    {
+      "toolbar": 187,
+      "command": 32893,
+      "label": "Fios vertical III\nFios vertical III",
+      "icon": "command-32893.png"
+    },
+    {
+      "toolbar": 187,
+      "command": 32891,
+      "label": "Fios vertical IIIl\nFios vertical III",
+      "icon": "command-32891.png"
+    },
+    {
+      "toolbar": 187,
+      "command": 32894,
+      "label": "Fios horizontal III\nFios horizontal III",
+      "icon": "command-32894.png"
+    },
+    {
+      "toolbar": 187,
+      "command": 32892,
+      "label": "Fios horizontal IIIl\nFios horizontal III",
+      "icon": "command-32892.png"
+    },
+    {
+      "toolbar": 187,
+      "command": 32885,
+      "label": "TubulaÃ§Ã£o\nTubulaÃ§Ã£o",
+      "icon": "command-32885.png"
+    },
+    {
+      "toolbar": 187,
+      "command": 32888,
+      "label": "Entrada tubulaÃ§Ã£o\nEntrada tubulaÃ§Ã£o",
+      "icon": "command-32888.png"
+    },
+    {
+      "toolbar": 187,
+      "command": 32890,
+      "label": "Entrada tubulaÃ§Ã£o\nEntrada tubulaÃ§Ã£o",
+      "icon": "command-32890.png"
+    },
+    {
+      "toolbar": 187,
+      "command": 32968,
+      "label": "Borne quadrado\nBorne quadrado",
+      "icon": "command-32968.png"
+    },
+    {
+      "toolbar": 187,
+      "command": 32969,
+      "label": "Borne redondo\nBorne rodondo",
+      "icon": "command-32969.png"
+    },
+    {
+      "toolbar": 187,
+      "command": 32991,
+      "label": "2 Borne redondo\n2 Borne redondo",
+      "icon": "command-32991.png"
+    },
+    {
+      "toolbar": 187,
+      "command": 32992,
+      "label": "3 Bornes redondos\n3 Bornes redondos",
+      "icon": "command-32992.png"
+    },
+    {
+      "toolbar": 187,
+      "command": 32993,
+      "label": "4 Bornes redondos\n4 Bornes redondos",
+      "icon": "command-32993.png"
+    },
+    {
+      "toolbar": 187,
+      "command": 32897,
+      "label": "Output conexÃ£o\nOutput conexÃ£o",
+      "icon": "command-32897.png"
+    },
+    {
+      "toolbar": 187,
+      "command": 32970,
+      "label": "Input Connection\nInput Connection",
+      "icon": "command-32970.png"
+    },
+    {
+      "toolbar": 189,
+      "command": 33278,
+      "label": "BotÃ³n pulsador\nBotÃ³n pulsador",
+      "icon": "command-33278.png"
+    },
+    {
+      "toolbar": 189,
+      "command": 32909,
+      "label": "Botoeira NA\nBotoeira NA",
+      "icon": "command-32909.png"
+    },
+    {
+      "toolbar": 189,
+      "command": 32910,
+      "label": "Botoeira NF\nBotoeira NF",
+      "icon": "command-32910.png"
+    },
+    {
+      "toolbar": 189,
+      "command": 32912,
+      "label": "Botoeira NF-NA\nBotoeira NF-NA",
+      "icon": "command-32912.png"
+    },
+    {
+      "toolbar": 189,
+      "command": 32913,
+      "label": "Comutador CON\nComutador CON",
+      "icon": "command-32913.png"
+    },
+    {
+      "toolbar": 189,
+      "command": 32914,
+      "label": "Botoeira tipo cogumelo NA\nBotoeira tipo cogumelo NA",
+      "icon": "command-32914.png"
+    },
+    {
+      "toolbar": 189,
+      "command": 32915,
+      "label": "Botoeira tipo cogumelo NF\nBotoeira tipo cogumelo NF",
+      "icon": "command-32915.png"
+    },
+    {
+      "toolbar": 189,
+      "command": 32917,
+      "label": "Botoeira tipo cogumelo NA-NF\nBotoeira tipo cogumelo NA-NF",
+      "icon": "command-32917.png"
+    },
+    {
+      "toolbar": 189,
+      "command": 32918,
+      "label": "Botoeira tipo cogumelo CON\nBotoeira tipo cogumelo CON",
+      "icon": "command-32918.png"
+    },
+    {
+      "toolbar": 189,
+      "command": 32919,
+      "label": "Botoeira NA\nBotoeira NA",
+      "icon": "command-32919.png"
+    },
+    {
+      "toolbar": 189,
+      "command": 32920,
+      "label": "Botoeira NF\nBotoeira NF",
+      "icon": "command-32920.png"
+    },
+    {
+      "toolbar": 189,
+      "command": 32921,
+      "label": "Botoeira NA-NF\nBotoeira NA-NF",
+      "icon": "command-32921.png"
+    },
+    {
+      "toolbar": 189,
+      "command": 32922,
+      "label": "Botoeira COM\nBotoeira COM",
+      "icon": "command-32922.png"
+    },
+    {
+      "toolbar": 189,
+      "command": 33047,
+      "label": " I-0-II interruptor\nI-0-II interruptor",
+      "icon": "command-33047.png"
+    },
+    {
+      "toolbar": 189,
+      "command": 33048,
+      "label": "I-II-III interruptor\nI-II-III interruptor",
+      "icon": "command-33048.png"
+    },
+    {
+      "toolbar": 189,
+      "command": 33049,
+      "label": "Interruptor crossover\nInterruptor crossover",
+      "icon": "command-33049.png"
+    },
+    {
+      "toolbar": 189,
+      "command": 32923,
+      "label": "Fim de curso NA\nFim de curso NA",
+      "icon": "command-32923.png"
+    },
+    {
+      "toolbar": 189,
+      "command": 32924,
+      "label": "Fim de curso NF\nFim de curso NF",
+      "icon": "command-32924.png"
+    },
+    {
+      "toolbar": 189,
+      "command": 32925,
+      "label": "Fim de curso NA-NF\nFim de curso NA-NF",
+      "icon": "command-32925.png"
+    },
+    {
+      "toolbar": 189,
+      "command": 32926,
+      "label": "Fim de curso CON\nFim de curso CON",
+      "icon": "command-32926.png"
+    },
+    {
+      "toolbar": 189,
+      "command": 32927,
+      "label": "Contato NA relÃ© termico\nContato NA relÃ© termico",
+      "icon": "command-32927.png"
+    },
+    {
+      "toolbar": 189,
+      "command": 32928,
+      "label": "Contato NF relÃ© termico\nContato NF relÃ© termico",
+      "icon": "command-32928.png"
+    },
+    {
+      "toolbar": 189,
+      "command": 32929,
+      "label": "Contato NA-NF relÃ© termico\nContato NA-NF relÃ© termico",
+      "icon": "command-32929.png"
+    },
+    {
+      "toolbar": 189,
+      "command": 32930,
+      "label": "Contato COM relÃ© termico\nContato COM relÃ© termico",
+      "icon": "command-32930.png"
+    },
+    {
+      "toolbar": 191,
+      "command": 32937,
+      "label": "Contato NA\nContato NA",
+      "icon": "command-32937.png"
+    },
+    {
+      "toolbar": 191,
+      "command": 32938,
+      "label": "Contato NF\nNC Contato NF",
+      "icon": "command-32938.png"
+    },
+    {
+      "toolbar": 191,
+      "command": 32939,
+      "label": "Contato NA+NF\nContato NA+NF",
+      "icon": "command-32939.png"
+    },
+    {
+      "toolbar": 191,
+      "command": 32940,
+      "label": "Contato CON\nContato CON",
+      "icon": "command-32940.png"
+    },
+    {
+      "toolbar": 191,
+      "command": 32933,
+      "label": "Contato temporizado na conexÃ£o NA\nContato temporizado na conexÃ£o NA",
+      "icon": "command-32933.png"
+    },
+    {
+      "toolbar": 191,
+      "command": 32934,
+      "label": "Contato temporizado na conexÃ£o NF\nContato temporizado na conexÃ£o NF",
+      "icon": "command-32934.png"
+    },
+    {
+      "toolbar": 191,
+      "command": 32935,
+      "label": "Contato temporizado na conexÃ£o NA+NF\nContato temporizado na conexÃ£o NA+NF",
+      "icon": "command-32935.png"
+    },
+    {
+      "toolbar": 191,
+      "command": 32936,
+      "label": "Contato temporizado na conexÃ£o CON\nContato temporizado na conexÃ£o CON",
+      "icon": "command-32936.png"
+    },
+    {
+      "toolbar": 191,
+      "command": 32941,
+      "label": "Contato temporizado na desconexÃ£o NA\nContato temporizado na desconexÃ£o NA",
+      "icon": "command-32941.png"
+    },
+    {
+      "toolbar": 191,
+      "command": 32942,
+      "label": "Contato temporizado na desconexÃ£o NF\nContato temporizado na desconexÃ£o NF",
+      "icon": "command-32942.png"
+    },
+    {
+      "toolbar": 191,
+      "command": 32943,
+      "label": "Contato temporizado na desconexÃ£o NF+NA\nContato temporizado na desconexÃ£o NF+NA",
+      "icon": "command-32943.png"
+    },
+    {
+      "toolbar": 191,
+      "command": 32944,
+      "label": "Contato temporizado na desconexÃ£o CON\nContato temporizado na desconexÃ£o CON",
+      "icon": "command-32944.png"
+    },
+    {
+      "toolbar": 191,
+      "command": 32945,
+      "label": "Contato temporizado na conexÃ£o e disconexÃ£o NA\nContato temporizado na conexÃ£o e disconexÃ£o NA",
+      "icon": "command-32945.png"
+    },
+    {
+      "toolbar": 191,
+      "command": 32946,
+      "label": "Contato temporizado na conexÃ£o e disconexÃ£o NF\nContato temporizado na conexÃ£o e disconexÃ£o NF",
+      "icon": "command-32946.png"
+    },
+    {
+      "toolbar": 191,
+      "command": 32947,
+      "label": "Contato temporizado na conexÃ£o e disconexÃ£o NF+NA\nContato temporizado na conexÃ£o e disconexÃ£o NF+NA",
+      "icon": "command-32947.png"
+    },
+    {
+      "toolbar": 191,
+      "command": 32948,
+      "label": "Contato temporizado na conexÃ£o e disconexÃ£o CON\nContato temporizado na conexÃ£o e disconexÃ£o CON",
+      "icon": "command-32948.png"
+    },
+    {
+      "toolbar": 193,
+      "command": 32949,
+      "label": "Bobinas contatores, relÃ©s\nBobinas contatores, relÃ©s",
+      "icon": "command-32949.png"
+    },
+    {
+      "toolbar": 193,
+      "command": 32956,
+      "label": "Temporizador gerador de pulsos\nTemporizador gerador de pulsos",
+      "icon": "command-32956.png"
+    },
+    {
+      "toolbar": 193,
+      "command": 32964,
+      "label": "Step relay\nStep relay",
+      "icon": "command-32964.png"
+    },
+    {
+      "toolbar": 193,
+      "command": 32951,
+      "label": "Bobina solenoide\nBobina solenoide",
+      "icon": "command-32951.png"
+    },
+    {
+      "toolbar": 193,
+      "command": 32952,
+      "label": "Temporizador conexÃ£o\nTemporizador conexÃ£o",
+      "icon": "command-32952.png"
+    },
+    {
+      "toolbar": 193,
+      "command": 32953,
+      "label": "Temporizador desconexÃ£o\nTemporizador desconexÃ£o",
+      "icon": "command-32953.png"
+    },
+    {
+      "toolbar": 193,
+      "command": 32954,
+      "label": "Temporizador conexÃ£o-desconexÃ£o\nTemporizador conexÃ£o-desconexÃ£o",
+      "icon": "command-32954.png"
+    },
+    {
+      "toolbar": 193,
+      "command": 32955,
+      "label": "RelÃ© intermitente\nRelÃ© intermitente",
+      "icon": "command-32955.png"
+    },
+    {
+      "toolbar": 193,
+      "command": 33223,
+      "label": "Gerador de pulso\nGerador de pulso",
+      "icon": "command-33223.png"
+    },
+    {
+      "toolbar": 193,
+      "command": 33098,
+      "label": "Time switch\nTime switch",
+      "icon": "command-33098.png"
+    },
+    {
+      "toolbar": 193,
+      "command": 33236,
+      "label": "Contador de pulsos\nContador de pulsos",
+      "icon": "command-33236.png"
+    },
+    {
+      "toolbar": 193,
+      "command": 32957,
+      "label": "SinalizaÃ§Ã£o visual\nSinalizaÃ§Ã£o visual",
+      "icon": "command-32957.png"
+    },
+    {
+      "toolbar": 193,
+      "command": 32958,
+      "label": "SinalizaÃ§Ã£o intermitente\nSinalizaÃ§Ã£o intermitente",
+      "icon": "command-32958.png"
+    },
+    {
+      "toolbar": 193,
+      "command": 32961,
+      "label": "Timbre\nTimbre",
+      "icon": "command-32961.png"
+    },
+    {
+      "toolbar": 193,
+      "command": 32962,
+      "label": "Buzina\nBuzina",
+      "icon": "command-32962.png"
+    },
+    {
+      "toolbar": 193,
+      "command": 32960,
+      "label": "Sirene\nSirene",
+      "icon": "command-32960.png"
+    },
+    {
+      "toolbar": 193,
+      "command": 32959,
+      "label": "Buzina\nBuzina",
+      "icon": "command-32959.png"
+    },
+    {
+      "toolbar": 213,
+      "command": 33002,
+      "label": "ResistÃªncia I\nResistÃªncia I",
+      "icon": "command-33002.png"
+    },
+    {
+      "toolbar": 213,
+      "command": 33003,
+      "label": "ResistÃªncia III\nResistÃªncia III",
+      "icon": "command-33003.png"
+    },
+    {
+      "toolbar": 213,
+      "command": 33004,
+      "label": "Autotransformador III\nAutotransformador III",
+      "icon": "command-33004.png"
+    },
+    {
+      "toolbar": 213,
+      "command": 33005,
+      "label": "Soft-starter a.c.\nSoft-starter a.c.",
+      "icon": "command-33005.png"
+    },
+    {
+      "toolbar": 213,
+      "command": 33089,
+      "label": "Controlador do soft-starter a.c.\nControlador do soft-starter a.c.",
+      "icon": "command-33089.png"
+    },
+    {
+      "toolbar": 213,
+      "command": 33006,
+      "label": "Inversor de frequÃªncia c.a. II\nInversor de frequÃªncia a.c. II",
+      "icon": "command-33006.png"
+    },
+    {
+      "toolbar": 213,
+      "command": 33007,
+      "label": "Inversor de frequÃªncia a.c. III\nInversor de frequÃªncia a.c. III",
+      "icon": "command-33007.png"
+    },
+    {
+      "toolbar": 213,
+      "command": 33011,
+      "label": "Controlador do inversor de frequencia a.c\nControlador do inversor de frequencia a.c",
+      "icon": "command-33011.png"
+    },
+    {
+      "toolbar": 213,
+      "command": 33015,
+      "label": "Variador velocidade d.c. II\nVariador velocidade d.c. II",
+      "icon": "command-33015.png"
+    },
+    {
+      "toolbar": 213,
+      "command": 33016,
+      "label": "Variador velocidade d.c. II\nVariador velocidade d.c. II",
+      "icon": "command-33016.png"
+    },
+    {
+      "toolbar": 213,
+      "command": 33018,
+      "label": "Variador velocidade d.c. III\nVariador velocidade d.c. III",
+      "icon": "command-33018.png"
+    },
+    {
+      "toolbar": 213,
+      "command": 33017,
+      "label": "Variador velocidade d.c. III\nVariador velocidade d.c. III",
+      "icon": "command-33017.png"
+    },
+    {
+      "toolbar": 213,
+      "command": 33012,
+      "label": "Controlador do inversor de frequencia d.c.\nControlador do inversor de frequencia d.c.",
+      "icon": "command-33012.png"
+    },
+    {
+      "toolbar": 213,
+      "command": 33297,
+      "label": "Stepper motor driver\nStepper motor driver",
+      "icon": "command-33297.png"
+    },
+    {
+      "toolbar": 213,
+      "command": 33298,
+      "label": "Stepper motor driver 2 CLK\nStepper motor driver 2 CLK",
+      "icon": "command-33298.png"
+    },
+    {
+      "toolbar": 213,
+      "command": 33299,
+      "label": "Stepper motor driver CLK/DIR\nStepper motor driver CLK/DIR",
+      "icon": "command-33299.png"
+    },
+    {
+      "toolbar": 215,
+      "command": 33032,
+      "label": "Detector indutivo NA\nDetectores indutivo NA",
+      "icon": "command-33032.png"
+    },
+    {
+      "toolbar": 215,
+      "command": 33020,
+      "label": "Detector indutivo NF\nDetector indutivo NF",
+      "icon": "command-33020.png"
+    },
+    {
+      "toolbar": 215,
+      "command": 33021,
+      "label": "Detector capacitivo NA\nDetector capacitivo NA",
+      "icon": "command-33021.png"
+    },
+    {
+      "toolbar": 215,
+      "command": 33022,
+      "label": "Detector capacitivo NF\nDetector capacitivo NF",
+      "icon": "command-33022.png"
+    },
+    {
+      "toolbar": 215,
+      "command": 33023,
+      "label": "Detector magnÃ©tico NA\nDetector magnÃ©tico NA",
+      "icon": "command-33023.png"
+    },
+    {
+      "toolbar": 215,
+      "command": 33024,
+      "label": "Detector magnÃ©tico\nNC Detector magnÃ©tico",
+      "icon": "command-33024.png"
+    },
+    {
+      "toolbar": 215,
+      "command": 33025,
+      "label": "Barreira fotocelula \nBarreira fotocelula",
+      "icon": "command-33025.png"
+    },
+    {
+      "toolbar": 215,
+      "command": 33027,
+      "label": "Barreira emissores\nBarreira emissores",
+      "icon": "command-33027.png"
+    },
+    {
+      "toolbar": 215,
+      "command": 33034,
+      "label": "Barreira detector NA\nBarreira detector NA",
+      "icon": "command-33034.png"
+    },
+    {
+      "toolbar": 215,
+      "command": 33033,
+      "label": "Barreira detector NF\nBarreira detector NF",
+      "icon": "command-33033.png"
+    },
+    {
+      "toolbar": 215,
+      "command": 33253,
+      "label": "Interruptor de pressÃ£o NA\nInterruptor de pressÃ£o NA",
+      "icon": "command-33253.png"
+    },
+    {
+      "toolbar": 215,
+      "command": 33254,
+      "label": "Interruptor de pressÃ£o NF\nInterruptor de pressÃ£o NF",
+      "icon": "command-33254.png"
+    },
+    {
+      "toolbar": 215,
+      "command": 33255,
+      "label": "PressÃ£o vazia NA\nPressÃ£o vazia NA",
+      "icon": "command-33255.png"
+    },
+    {
+      "toolbar": 215,
+      "command": 33256,
+      "label": "PressÃ£o vazia NF\nPressÃ£o vazia NF",
+      "icon": "command-33256.png"
+    },
+    {
+      "toolbar": 215,
+      "command": 33346,
+      "label": "Termostato NA\nTermostato NA",
+      "icon": "command-33346.png"
+    },
+    {
+      "toolbar": 215,
+      "command": 33347,
+      "label": "Termostato NF\nTermostato NF",
+      "icon": "command-33347.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 33056,
+      "label": "AND\nAND",
+      "icon": "command-33056.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 33057,
+      "label": "OR\nOR",
+      "icon": "command-33057.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 33058,
+      "label": "INV\nINV",
+      "icon": "command-33058.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 33059,
+      "label": "EXOR\nEXOR",
+      "icon": "command-33059.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 33060,
+      "label": "NAND\nNAND",
+      "icon": "command-33060.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 33061,
+      "label": "NOR\nNOR",
+      "icon": "command-33061.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 33100,
+      "label": "Biestable\nBiestable",
+      "icon": "command-33100.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 33111,
+      "label": "Binary divider\nBinary divider",
+      "icon": "command-33111.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 33099,
+      "label": "Connection timer\nConnection timer",
+      "icon": "command-33099.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 33300,
+      "label": "Pulse connection timer\nPulse connection timer",
+      "icon": "command-33300.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 33112,
+      "label": "timer off\ntimer off",
+      "icon": "command-33112.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 33114,
+      "label": "Intermittent timer\nIntermittent timer",
+      "icon": "command-33114.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 33226,
+      "label": "Gerador de pulso\nGerador de pulso",
+      "icon": "command-33226.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 33097,
+      "label": "Counter\nCounter",
+      "icon": "command-33097.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 33277,
+      "label": "Contador ascendente-descendente\nContador ascendente-descendente",
+      "icon": "command-33277.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 33292,
+      "label": "Counter 4 bits\nCounter 4 bits",
+      "icon": "command-33292.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 33293,
+      "label": "Counter 4 bits\nCounter 4 bits",
+      "icon": "command-33293.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 33301,
+      "label": "Counter 4 bits ASC/DES\nCounter 4 bits ASC/DES",
+      "icon": "command-33301.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 33302,
+      "label": "Counter 4 bits decades\nCounter 4 bits decades",
+      "icon": "command-33302.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 33079,
+      "label": "Test\nTest",
+      "icon": "command-33079.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 33080,
+      "label": "Visualize\nVisualize",
+      "icon": "command-33080.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 33294,
+      "label": "Decoder BCD 7 Seg\nDecoder BCD 7 Seg",
+      "icon": "command-33294.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 33115,
+      "label": "Display BCD\nDisplay BCD",
+      "icon": "command-33115.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 33116,
+      "label": "Display 7 Seg.\nDisplay 7 Seg.",
+      "icon": "command-33116.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 33117,
+      "label": "Preselector\nPreselector",
+      "icon": "command-33117.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 33035,
+      "label": "Cabo positivo\nCabo positivo",
+      "icon": "command-33035.png"
+    },
+    {
+      "toolbar": 226,
+      "command": 32889,
+      "label": "ConexÃ£o\nConexÃ£o",
+      "icon": "command-32889.png"
+    },
+    {
+      "toolbar": 228,
+      "command": 33088,
+      "label": "Initial stage\nInitial stage",
+      "icon": "command-33088.png"
+    },
+    {
+      "toolbar": 228,
+      "command": 33083,
+      "label": "Stage\nStage",
+      "icon": "command-33083.png"
+    },
+    {
+      "toolbar": 228,
+      "command": 33084,
+      "label": "Transition\nTransition",
+      "icon": "command-33084.png"
+    },
+    {
+      "toolbar": 228,
+      "command": 33085,
+      "label": "Action\nAction",
+      "icon": "command-33085.png"
+    },
+    {
+      "toolbar": 228,
+      "command": 33101,
+      "label": "\"0\"\n\"0\"",
+      "icon": "command-33101.png"
+    },
+    {
+      "toolbar": 228,
+      "command": 33094,
+      "label": "Divergence in \"O\"\nDivergence in \"O\"",
+      "icon": "command-33094.png"
+    },
+    {
+      "toolbar": 228,
+      "command": 33095,
+      "label": "Convergence in \"O\"\nConvergence in \"O\"",
+      "icon": "command-33095.png"
+    },
+    {
+      "toolbar": 228,
+      "command": 33102,
+      "label": "\"Y\"\n\"Y\"",
+      "icon": "command-33102.png"
+    },
+    {
+      "toolbar": 228,
+      "command": 33086,
+      "label": "Divergence in \"Y\"\nDivergence in \"Y\"",
+      "icon": "command-33086.png"
+    },
+    {
+      "toolbar": 228,
+      "command": 33093,
+      "label": "Convergencia en \"Y\"\nConvergence in \"Y\"",
+      "icon": "command-33093.png"
+    },
+    {
+      "toolbar": 228,
+      "command": 33092,
+      "label": "Line link\nLine link",
+      "icon": "command-33092.png"
+    },
+    {
+      "toolbar": 228,
+      "command": 33090,
+      "label": "Input Link\nInput Link",
+      "icon": "command-33090.png"
+    },
+    {
+      "toolbar": 228,
+      "command": 33091,
+      "label": "Output link\nOutput link",
+      "icon": "command-33091.png"
+    },
+    {
+      "toolbar": 228,
+      "command": 33096,
+      "label": "Macro stage\nMacro stage",
+      "icon": "command-33096.png"
+    },
+    {
+      "toolbar": 242,
+      "command": 33108,
+      "label": "Exchange PC_SIMU entries\nExchange PC_SIMU entries",
+      "icon": "command-33108.png"
+    },
+    {
+      "toolbar": 242,
+      "command": 33109,
+      "label": "Exchanging departures PC_SIMU\nExchanging departures PC_SIMU",
+      "icon": "command-33109.png"
+    },
+    {
+      "toolbar": 242,
+      "command": 33238,
+      "label": "MÃ³dulo lÃ³gico\nMÃ³dulo lÃ³gico",
+      "icon": "command-33238.png"
+    },
+    {
+      "toolbar": 242,
+      "command": 33336,
+      "label": "LOGO  4DI/4DO\nLOGO 4DI/4DO",
+      "icon": "command-33336.png"
+    },
+    {
+      "toolbar": 242,
+      "command": 33240,
+      "label": "PLC S7-1200\nPLC S7-1200",
+      "icon": "command-33240.png"
+    },
+    {
+      "toolbar": 242,
+      "command": 33337,
+      "label": "S7-1200 8DI/8DO\nS7-1200 8DI/8DO",
+      "icon": "command-33337.png"
+    },
+    {
+      "toolbar": 242,
+      "command": 33326,
+      "label": "PLC CPU S7-1500\nPLC CPU S7-1500",
+      "icon": "command-33326.png"
+    },
+    {
+      "toolbar": 242,
+      "command": 33328,
+      "label": "S7-1500 DI/DO\nS7-1500 DI/DO",
+      "icon": "command-33328.png"
+    },
+    {
+      "toolbar": 242,
+      "command": 33334,
+      "label": "ET-200 8DI\nET-200 8DI",
+      "icon": "command-33334.png"
+    },
+    {
+      "toolbar": 242,
+      "command": 33334,
+      "label": "ET-200 8DI\nET-200 8DI",
+      "icon": "command-33334.png"
+    },
+    {
+      "toolbar": 242,
+      "command": 33335,
+      "label": "ET-200 8DO\nET-200 8DO",
+      "icon": "command-33335.png"
+    },
+    {
+      "toolbar": 242,
+      "command": 33272,
+      "label": "Entrada digital PLC\nEntrada digital PLC",
+      "icon": "command-33272.png"
+    },
+    {
+      "toolbar": 242,
+      "command": 33273,
+      "label": "Salida digital PLC\nSalida digital PLC",
+      "icon": "command-33273.png"
+    },
+    {
+      "toolbar": 242,
+      "command": 33274,
+      "label": "CPU PLC\nCPU PLC",
+      "icon": "command-33274.png"
+    },
+    {
+      "toolbar": 242,
+      "command": 33275,
+      "label": "AlimentaciÃ³n I/O digital PLC\nAlimentaciÃ³n I/O digital PLC",
+      "icon": "command-33275.png"
+    },
+    {
+      "toolbar": 242,
+      "command": 33276,
+      "label": "AlimentaciÃ³n I/O digital PLC\nAlimentaciÃ³n I/O digital PLC",
+      "icon": "command-33276.png"
+    },
+    {
+      "toolbar": 242,
+      "command": 33324,
+      "label": "Arduino one \nArduino one",
+      "icon": "command-33324.png"
+    },
+    {
+      "toolbar": 269,
+      "command": 33242,
+      "label": "Single acting actuator\nSingle acting actuator",
+      "icon": "command-33242.png"
+    },
+    {
+      "toolbar": 269,
+      "command": 33243,
+      "label": "Double acting actuator\nDouble acting actuator",
+      "icon": "command-33243.png"
+    },
+    {
+      "toolbar": 269,
+      "command": 33245,
+      "label": "Stemless actuator\nStemless actuator",
+      "icon": "command-33245.png"
+    },
+    {
+      "toolbar": 269,
+      "command": 33246,
+      "label": "Actuator without magnetic stem\nActuator without magnetic stem",
+      "icon": "command-33246.png"
+    },
+    {
+      "toolbar": 269,
+      "command": 33247,
+      "label": "Rotating actuator\nRotating actuator",
+      "icon": "command-33247.png"
+    },
+    {
+      "toolbar": 269,
+      "command": 33252,
+      "label": "Efeito de grampo simples\nEfeito de grampo simples",
+      "icon": "command-33252.png"
+    },
+    {
+      "toolbar": 269,
+      "command": 33248,
+      "label": "BraÃ§adeira dupla\nBraÃ§adeira dupla",
+      "icon": "command-33248.png"
+    },
+    {
+      "toolbar": 269,
+      "command": 33249,
+      "label": "Ventosa\nVentosa",
+      "icon": "command-33249.png"
+    },
+    {
+      "toolbar": 269,
+      "command": 33250,
+      "label": "Motor pneumatico\nMotor pneumatico",
+      "icon": "command-33250.png"
+    },
+    {
+      "toolbar": 269,
+      "command": 33251,
+      "label": "Motor pneumÃ¡tico reversÃ­vel\nMotor pneumÃ¡tico reversÃ­vel",
+      "icon": "command-33251.png"
+    },
+    {
+      "toolbar": 291,
+      "command": 33258,
+      "label": "Solid State Relay SSR DC\nSolid State Relay SSR DC",
+      "icon": "command-33258.png"
+    },
+    {
+      "toolbar": 291,
+      "command": 33259,
+      "label": "Solid State Relay SSR AC\nSolid State Relay SSRAC",
+      "icon": "command-33259.png"
+    },
+    {
+      "toolbar": 291,
+      "command": 33260,
+      "label": "Solid state contactor\nSolid state contactor",
+      "icon": "command-33260.png"
+    },
+    {
+      "toolbar": 291,
+      "command": 33261,
+      "label": "Solid state inverter contactor\nSolid state inverter contactor",
+      "icon": "command-33261.png"
+    },
+    {
+      "toolbar": 291,
+      "command": 33266,
+      "label": "RelÃ© de falta de fase + N\nRelÃ© de falta de fase + N",
+      "icon": "command-33266.png"
+    },
+    {
+      "toolbar": 291,
+      "command": 33267,
+      "label": "RelÃ© de falta de fase\nRelÃ© de falta de fase",
+      "icon": "command-33267.png"
+    },
+    {
+      "toolbar": 291,
+      "command": 33271,
+      "label": "RelÃ© de secuencia de fase + N\nRelÃ© de secuencia de fase + N",
+      "icon": "command-33271.png"
+    },
+    {
+      "toolbar": 291,
+      "command": 33269,
+      "label": "RelÃ© de secuencia de fase\nRelÃ© de secuencia de fase",
+      "icon": "command-33269.png"
+    },
+    {
+      "toolbar": 291,
+      "command": 33344,
+      "label": "ProteÃ§Ã£o contra sobretensÃµes permanentes\nProteÃ§Ã£o contra sobretensÃµes permanentes",
+      "icon": "command-33344.png"
+    },
+    {
+      "toolbar": 291,
+      "command": 33345,
+      "label": "ProteÃ§Ã£o contra sobretensÃµes permanentes\nProteÃ§Ã£o contra sobretensÃµes permanentes",
+      "icon": "command-33345.png"
+    },
+    {
+      "toolbar": 291,
+      "command": 33372,
+      "label": "RelÃ© SPST\nRelÃ© SPST",
+      "icon": "command-33372.png"
+    },
+    {
+      "toolbar": 291,
+      "command": 33373,
+      "label": "RelÃ© SPDT\nRelÃ© SPDT",
+      "icon": "command-33373.png"
+    },
+    {
+      "toolbar": 292,
+      "command": 33062,
+      "label": "NO\nNO",
+      "icon": "command-33062.png"
+    },
+    {
+      "toolbar": 292,
+      "command": 33063,
+      "label": "NC\nNC",
+      "icon": "command-33063.png"
+    },
+    {
+      "toolbar": 292,
+      "command": 33065,
+      "label": "Positive edge\nPositive edge",
+      "icon": "command-33065.png"
+    },
+    {
+      "toolbar": 292,
+      "command": 33066,
+      "label": "Negative edge\nNegative edge",
+      "icon": "command-33066.png"
+    },
+    {
+      "toolbar": 292,
+      "command": 33291,
+      "label": "First Scan\nFirst Scan",
+      "icon": "command-33291.png"
+    },
+    {
+      "toolbar": 292,
+      "command": 33067,
+      "label": "Assignr\nAssign",
+      "icon": "command-33067.png"
+    },
+    {
+      "toolbar": 292,
+      "command": 33069,
+      "label": "Set\nSet",
+      "icon": "command-33069.png"
+    },
+    {
+      "toolbar": 292,
+      "command": 33070,
+      "label": "Reset\nReset",
+      "icon": "command-33070.png"
+    },
+    {
+      "toolbar": 292,
+      "command": 33100,
+      "label": "Biestable\nBiestable",
+      "icon": "command-33100.png"
+    },
+    {
+      "toolbar": 292,
+      "command": 33111,
+      "label": "Binary divider\nBinary divider",
+      "icon": "command-33111.png"
+    },
+    {
+      "toolbar": 292,
+      "command": 33099,
+      "label": "Connection timer\nConnection timer",
+      "icon": "command-33099.png"
+    },
+    {
+      "toolbar": 292,
+      "command": 33112,
+      "label": "timer off\ntimer off",
+      "icon": "command-33112.png"
+    },
+    {
+      "toolbar": 292,
+      "command": 33114,
+      "label": "Intermittent timer\nIntermittent timer",
+      "icon": "command-33114.png"
+    },
+    {
+      "toolbar": 292,
+      "command": 33226,
+      "label": "Gerador de pulso\nGerador de pulso",
+      "icon": "command-33226.png"
+    },
+    {
+      "toolbar": 292,
+      "command": 33097,
+      "label": "Counter\nCounter",
+      "icon": "command-33097.png"
+    },
+    {
+      "toolbar": 292,
+      "command": 33277,
+      "label": "Contador ascendente-descendente\nContador ascendente-descendente",
+      "icon": "command-33277.png"
+    },
+    {
+      "toolbar": 292,
+      "command": 32876,
+      "label": "AlimentaÃ§Ã£o positivo\nAlimentaÃ§Ã£o positivo",
+      "icon": "command-32876.png"
+    },
+    {
+      "toolbar": 292,
+      "command": 32877,
+      "label": "AlimentaÃ§Ã£o negativo\nAlimentaÃ§Ã£o negativo",
+      "icon": "command-32877.png"
+    },
+    {
+      "toolbar": 292,
+      "command": 33035,
+      "label": "Cabo positivo\nCabo positivo",
+      "icon": "command-33035.png"
+    },
+    {
+      "toolbar": 292,
+      "command": 33037,
+      "label": "Cabo negativo\nCabo negativo",
+      "icon": "command-33037.png"
+    }
+  ],
+  "menus": [
+    {
+      "flags": 16,
+      "command": null,
+      "text": "Arquivo",
+      "children": [
+        {
+          "flags": 0,
+          "command": 57600,
+          "text": "Novo"
+        },
+        {
+          "flags": 0,
+          "command": 57601,
+          "text": "&Abrir...\tCtrl+A"
+        },
+        {
+          "flags": 0,
+          "command": 57602,
+          "text": "Fechar"
+        },
+        {
+          "flags": 0,
+          "command": 57603,
+          "text": "Salvar"
+        },
+        {
+          "flags": 0,
+          "command": 57604,
+          "text": "Salvar como"
+        },
+        {
+          "flags": 2048,
+          "command": 0,
+          "text": ""
+        },
+        {
+          "flags": 0,
+          "command": 33040,
+          "text": "Importar imagem"
+        },
+        {
+          "flags": 0,
+          "command": 33041,
+          "text": "Exportar imagem"
+        },
+        {
+          "flags": 2048,
+          "command": 0,
+          "text": ""
+        },
+        {
+          "flags": 0,
+          "command": 57607,
+          "text": "&Imprimir...\tCtrl+I"
+        },
+        {
+          "flags": 0,
+          "command": 57609,
+          "text": "Visualizar impressão"
+        },
+        {
+          "flags": 0,
+          "command": 57606,
+          "text": "Configurar impressora..."
+        },
+        {
+          "flags": 2048,
+          "command": 0,
+          "text": ""
+        },
+        {
+          "flags": 0,
+          "command": 32784,
+          "text": "Configuração"
+        },
+        {
+          "flags": 2048,
+          "command": 0,
+          "text": ""
+        },
+        {
+          "flags": 1,
+          "command": 57616,
+          "text": "Arquivo recente"
+        },
+        {
+          "flags": 2048,
+          "command": 0,
+          "text": ""
+        },
+        {
+          "flags": 128,
+          "command": 57665,
+          "text": "Sair"
+        }
+      ]
+    },
+    {
+      "flags": 16,
+      "command": null,
+      "text": "&Editar",
+      "children": [
+        {
+          "flags": 0,
+          "command": 57643,
+          "text": "Desfazer"
+        },
+        {
+          "flags": 0,
+          "command": 57644,
+          "text": "Refazer"
+        },
+        {
+          "flags": 2048,
+          "command": 0,
+          "text": ""
+        },
+        {
+          "flags": 0,
+          "command": 57635,
+          "text": "Cor&tar\tCtrl+X"
+        },
+        {
+          "flags": 0,
+          "command": 57634,
+          "text": "&Copiar\tCtrl+C"
+        },
+        {
+          "flags": 0,
+          "command": 57637,
+          "text": "Colar"
+        },
+        {
+          "flags": 2048,
+          "command": 0,
+          "text": ""
+        },
+        {
+          "flags": 0,
+          "command": 32973,
+          "text": "Selecionar tudo"
+        },
+        {
+          "flags": 2048,
+          "command": 0,
+          "text": ""
+        },
+        {
+          "flags": 128,
+          "command": 32989,
+          "text": "Inserir legenda do projeto"
+        }
+      ]
+    },
+    {
+      "flags": 16,
+      "command": null,
+      "text": "Desenhar",
+      "children": [
+        {
+          "flags": 0,
+          "command": 32785,
+          "text": "Redesenhar"
+        },
+        {
+          "flags": 0,
+          "command": 32786,
+          "text": "Linha"
+        },
+        {
+          "flags": 0,
+          "command": 32787,
+          "text": "Rectangulo"
+        },
+        {
+          "flags": 0,
+          "command": 32788,
+          "text": "&Elipse"
+        },
+        {
+          "flags": 0,
+          "command": 32789,
+          "text": "Rectángulo colorido"
+        },
+        {
+          "flags": 0,
+          "command": 32790,
+          "text": "Elipse colorido"
+        },
+        {
+          "flags": 0,
+          "command": 32791,
+          "text": "Preencher con cor"
+        },
+        {
+          "flags": 0,
+          "command": 32792,
+          "text": "Cor"
+        },
+        {
+          "flags": 0,
+          "command": 32793,
+          "text": "Texto"
+        },
+        {
+          "flags": 2048,
+          "command": 0,
+          "text": ""
+        },
+        {
+          "flags": 128,
+          "command": 32794,
+          "text": "Biblioteca"
+        }
+      ]
+    },
+    {
+      "flags": 16,
+      "command": null,
+      "text": "&Modo",
+      "children": [
+        {
+          "flags": 0,
+          "command": 32972,
+          "text": "Parar"
+        },
+        {
+          "flags": 0,
+          "command": 32971,
+          "text": "Simular"
+        },
+        {
+          "flags": 0,
+          "command": 32974,
+          "text": "Pausar"
+        },
+        {
+          "flags": 0,
+          "command": 32975,
+          "text": "Passo a Passo"
+        },
+        {
+          "flags": 0,
+          "command": 33105,
+          "text": "Simulação de documento"
+        },
+        {
+          "flags": 0,
+          "command": 33106,
+          "text": "Simulaçãode todos documentos"
+        },
+        {
+          "flags": 2048,
+          "command": 0,
+          "text": ""
+        },
+        {
+          "flags": 128,
+          "command": 32799,
+          "text": "Troca E/S (PLC)"
+        }
+      ]
+    },
+    {
+      "flags": 16,
+      "command": null,
+      "text": "&Ver",
+      "children": [
+        {
+          "flags": 0,
+          "command": 32771,
+          "text": "Zoom Anterior"
+        },
+        {
+          "flags": 0,
+          "command": 32772,
+          "text": "Zoom Normal"
+        },
+        {
+          "flags": 0,
+          "command": 32773,
+          "text": "Zoom &+"
+        },
+        {
+          "flags": 0,
+          "command": 32778,
+          "text": "Zoom &-"
+        },
+        {
+          "flags": 0,
+          "command": 32775,
+          "text": "Zoom Janela"
+        },
+        {
+          "flags": 0,
+          "command": 32776,
+          "text": "Zoom Todo"
+        },
+        {
+          "flags": 2048,
+          "command": 0,
+          "text": ""
+        },
+        {
+          "flags": 128,
+          "command": 32777,
+          "text": "Grade"
+        }
+      ]
+    },
+    {
+      "flags": 16,
+      "command": null,
+      "text": "&Barras",
+      "children": [
+        {
+          "flags": 0,
+          "command": 59392,
+          "text": "Barra Ferramentas"
+        },
+        {
+          "flags": 0,
+          "command": 59393,
+          "text": "Barra Status"
+        },
+        {
+          "flags": 2048,
+          "command": 0,
+          "text": ""
+        },
+        {
+          "flags": 0,
+          "command": 32977,
+          "text": "Barra Alimentação"
+        },
+        {
+          "flags": 0,
+          "command": 32978,
+          "text": "Barra Fusiveis"
+        },
+        {
+          "flags": 0,
+          "command": 32979,
+          "text": "Barra Automáticos..."
+        },
+        {
+          "flags": 0,
+          "command": 32980,
+          "text": "Barra Contactores"
+        },
+        {
+          "flags": 0,
+          "command": 32981,
+          "text": "Barra Motores"
+        },
+        {
+          "flags": 0,
+          "command": 33010,
+          "text": "Barra Potencia"
+        },
+        {
+          "flags": 0,
+          "command": 32985,
+          "text": "Barra Contatos"
+        },
+        {
+          "flags": 0,
+          "command": 32983,
+          "text": "Barra de Accionadores"
+        },
+        {
+          "flags": 0,
+          "command": 33029,
+          "text": "Barra Detectores"
+        },
+        {
+          "flags": 0,
+          "command": 32984,
+          "text": "Barra de Bobinas"
+        },
+        {
+          "flags": 0,
+          "command": 33265,
+          "text": "Barra Relés Electrónicos"
+        },
+        {
+          "flags": 0,
+          "command": 33071,
+          "text": "Barra Lógica"
+        },
+        {
+          "flags": 0,
+          "command": 33280,
+          "text": "Barra Ladder"
+        },
+        {
+          "flags": 0,
+          "command": 33087,
+          "text": "Barra Grafcet"
+        },
+        {
+          "flags": 0,
+          "command": 33110,
+          "text": "Barra In/Out"
+        },
+        {
+          "flags": 0,
+          "command": 33244,
+          "text": "Barra Actuadores pneumáticos"
+        },
+        {
+          "flags": 128,
+          "command": 32986,
+          "text": "Barra Conexões"
+        }
+      ]
+    },
+    {
+      "flags": 16,
+      "command": null,
+      "text": "Jamela",
+      "children": [
+        {
+          "flags": 0,
+          "command": 57648,
+          "text": "Nova janela"
+        },
+        {
+          "flags": 0,
+          "command": 57650,
+          "text": "Cascata"
+        },
+        {
+          "flags": 0,
+          "command": 57651,
+          "text": "Mosaico horizontal"
+        },
+        {
+          "flags": 0,
+          "command": 57652,
+          "text": "Mosaico vertical"
+        },
+        {
+          "flags": 128,
+          "command": 57649,
+          "text": "Organizar ícones"
+        }
+      ]
+    },
+    {
+      "flags": 144,
+      "command": null,
+      "text": "Ajuda",
+      "children": [
+        {
+          "flags": 128,
+          "command": 57664,
+          "text": "Sobre CADe_SIMU......."
+        }
+      ]
+    }
+  ]
+}

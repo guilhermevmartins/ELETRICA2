@@ -51,6 +51,7 @@ window.LAB_AREAS = [
     "description": "Explore o motor trifásico por dentro, identifique os dados da placa e calcule suas grandezas. Estude campos, bobinas, fechamentos e proteção.",
     "topics": "Motor trifásico · Placa de identificação · Cálculos · Fechamentos · Proteção",
     "modules": [
+      "cade-web",
       "motor-vistas",
       "trifasico",
       "placa-motor",
