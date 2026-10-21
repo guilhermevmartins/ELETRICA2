@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sensores de proximidade · SENAI</title>
+<script src="../assets/tema-interface.js"></script>
+<link rel="stylesheet" href="../assets/base.css"><link rel="stylesheet" href="../assets/senai.css"><link rel="stylesheet" href="../assets/sensores.css">
+<script defer src="../assets/modulo.js"></script><script defer src="../assets/senai.js"></script><script defer src="../assets/sensores-modelo.js?v=<?= filemtime(__DIR__ . '/../assets/sensores-modelo.js') ?>"></script><script defer src="../assets/sensores.js?v=<?= filemtime(__DIR__ . '/../assets/sensores.js') ?>"></script>
+</head>
+<body>
+<header><div><span class="eyebrow">AUTOMAÇÃO / SENSORES DE PROXIMIDADE</span><h1>Detectar, comutar, sinalizar.</h1><p>Indutivo ou capacitivo? PNP ou NPN? Experimente cada escolha.</p></div><span class="badge">24 V CC · 3 FIOS</span></header>
+<main class="sensor-main">
+<section class="sensor-intro"><strong>São três escolhas diferentes.</strong> O princípio determina <b>o que detectar</b>. PNP/NPN determina <b>como a saída conduz corrente</b>. NA/NF determina <b>quando a saída conduz</b>.</section>
+<div class="sensor-grid">
+<section class="card controls" aria-labelledby="controlsTitle"><h2 id="controlsTitle">01 · Prepare o experimento</h2>
+<label for="kind">Princípio de detecção</label><select id="kind"><option value="indutivo">Indutivo · metais</option><option value="capacitivo">Capacitivo · metais e não metais</option></select>
+<label for="material">Objeto diante do sensor</label><select id="material"><option value="aco">Aço</option><option value="aluminio">Alumínio</option><option value="plastico">Plástico</option><option value="madeira">Madeira</option><option value="agua">Água (alvo líquido)</option></select>
+<label for="distance">Distância do objeto <output id="distanceValue"></output></label><input id="distance" type="range" min="0" max="20" step="0.5" value="12"><div class="sensor-actions"><button id="near" type="button">Aproximar</button><button id="far" type="button">Afastar</button></div>
+<div id="sensitivityControl"><label for="sensitivity">Sensibilidade <output id="sensitivityValue"></output></label><input id="sensitivity" type="range" min="30" max="100" value="70"></div>
+<label for="outputType">Tipo de saída</label><select id="outputType"><option value="PNP">PNP · fornece corrente</option><option value="NPN">NPN · drena corrente</option></select>
+<label for="contact">Função da saída</label><select id="contact"><option value="NA">NA · normalmente aberta</option><option value="NF">NF · normalmente fechada</option></select>
+<button id="reset" type="button">Reiniciar bancada</button>
+</section>
+<div class="sensor-experiment">
+<section class="card"><div class="sensor-heading"><h2>02 · Observe a detecção</h2><span id="detectedBadge" class="sensor-badge"></span></div>
+<svg id="detection" viewBox="0 0 760 240" role="img" aria-labelledby="detectionTitle"><title id="detectionTitle">Sensor e objeto</title><defs><pattern id="threads" width="9" height="9" patternUnits="userSpaceOnUse"><path d="M0 9L9 0" stroke="#71899a" stroke-width="3"/></pattern></defs><path d="M35 125H100" stroke="#8394a5" stroke-width="12"/><rect x="100" y="83" width="185" height="84" rx="12" fill="#344a60"/><rect x="120" y="83" width="145" height="84" fill="url(#threads)"/><rect x="270" y="78" width="20" height="94" rx="5" fill="#32bac7"/><g id="field" fill="none" stroke="#4ad7ea" stroke-width="2"><path d="M300 100Q330 125 300 150"/><path d="M312 80Q375 125 312 170"/><path d="M325 60Q420 125 325 190"/></g><circle id="sensorLed" cx="110" cy="100" r="7" fill="#71899a"/><text x="100" y="55">Sensor · face ativa →</text><g id="target"><rect x="0" y="76" width="88" height="100" rx="10" fill="#8496aa"/><text id="targetLabel" x="44" y="132" text-anchor="middle" fill="#091522">Aço</text></g><text id="gapLabel" x="300" y="220">Distância</text></svg>
+<p id="principle"></p><p id="detectionReason" class="sensor-callout"></p><small>Escala visual ilustrativa. Os alcances deste modelo são exemplos, não especificações de um sensor comercial. Material, tamanho do alvo, montagem e ajuste alteram o alcance real.</small>
+</section>
+<section class="card"><div class="sensor-heading"><h2>03 · Siga a corrente pela carga</h2><span id="loadBadge" class="sensor-badge"></span></div>
+<div class="sensor-diagram-scroll"><svg id="wiring" viewBox="0 0 760 350" role="img" aria-labelledby="wiringTitle"></svg></div>
+<div class="sensor-readouts"><div><span>Detecção</span><strong id="detectedValue"></strong></div><div><span>Transistor de saída</span><strong id="switchValue"></strong></div><div><span>Preto → 0 V</span><strong id="voltageValue"></strong></div><div><span>Carga</span><strong id="loadValue"></strong></div></div>
+<p id="currentExplanation" class="sensor-callout" aria-live="polite"></p><small>A carga fica entre a saída e 0 V no PNP, ou entre +24 V e a saída no NPN. A ligação muda automaticamente com o tipo de saída. Tensões idealizadas com a carga conectada; desligado, o transistor fica em alta impedância.</small>
+</section>
+</div></div>
+<section class="card sensor-summary"><h2>04 · Compare e explique para a turma</h2><div class="sensor-table-scroll"><table><caption>Detecção, função e saída são independentes. Carga ligada conforme o tipo de saída.</caption><thead><tr><th>Objeto detectado?</th><th>Função</th><th>Transistor</th><th>Preto em PNP</th><th>Preto em NPN</th><th>Carga</th></tr></thead><tbody id="truth"></tbody></table></div>
+<div class="sensor-lessons"><article><h3>Indutivo: campo magnético</h3><p>A bobina gera um campo alternado. Um metal próximo cria correntes induzidas, alterando o oscilador. A eletrônica reconhece essa alteração. Aço e alumínio podem ter alcances diferentes.</p></article><article><h3>Capacitivo: campo elétrico</h3><p>O alvo altera a capacitância na face sensora. Pode detectar metais, plástico, madeira e líquidos. Sensibilidade, umidade e instalação influenciam a resposta; um ajuste excessivo pode detectar o próprio recipiente.</p></article><article><h3>PNP e NPN: ligação elétrica</h3><p><b>PNP:</b> saída ativa próxima de +24 V; carga entre saída e 0 V. <b>NPN:</b> saída ativa próxima de 0 V; carga entre +24 V e saída. Um nível de 0 V no fio preto de um NPN pode representar carga <b>ligada</b>!</p></article><article><h3>NA e NF: lógica de atuação</h3><p>NA conduz quando detecta. NF conduz quando não detecta. “Normal” significa sensor alimentado, sem alvo detectado. Ambos os princípios podem ter versões PNP ou NPN, NA ou NF.</p></article></div>
+</section>
+<section class="card"><h2>05 · Experimente com a turma</h2><div class="sensor-challenges"><button type="button" data-challenge="plastic">1. O indutivo detecta plástico?</button><button type="button" data-challenge="npn">2. NPN em 0 V pode ligar a carga?</button><button type="button" data-challenge="nf">3. Sem alvo, NF conduz?</button></div><p id="challengeQuestion">Escolha uma experiência, faça sua previsão e observe a bancada.</p><button id="reveal" type="button" hidden>Mostrar explicação</button><p id="challengeAnswer" hidden></p></section>
+<details class="card"><summary>Ligação, limites do modelo e referências</summary><p>Convenção usual em sensores CC de 3 fios: marrom (BN) = positivo; azul (BU) = 0 V; preto (BK) = saída. Confira a identificação e o diagrama do fabricante. O desenho representa uma carga resistiva ideal; não simula quedas de tensão, corrente de fuga, histerese nem atrasos.</p><p>Sensores reais podem ter 2 ou 4 fios, saídas complementares ou configuráveis. O ajuste de sensibilidade aqui pertence ao modelo capacitivo; não é um recurso universal.</p><p>Referências: <a href="https://www.se.com/uk/en/faqs/FA142566/" target="_blank" rel="noopener noreferrer">Schneider Electric · Saídas PNP/NPN</a> · <a href="https://www.ifm.com/binaries/content/assets/us/pdfs/sensor_catalog_2018.pdf" target="_blank" rel="noopener noreferrer">ifm · princípios e aplicações de sensores</a>.</p></details>
+</main><footer class="foot">SENAI · Laboratório de Lousa Digital · Sensores / Experimentos exclusivamente virtuais</footer>
+</body></html>
