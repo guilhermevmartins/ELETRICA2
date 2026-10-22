@@ -3,7 +3,9 @@ import {nativeSymbol} from './symbol-library.mjs';
 export function topology(c){
  const type=c.type;
  if(type==='junction')return {kind:'junction',ports:[{x:0,y:0}],pairs:[]};
- const graphic=nativeSymbol(type);if(graphic)return {kind:'drawing-only',ports:graphic.ports,pairs:[]};
+ const graphic=nativeSymbol(type);
+ if(['native32998','native33044'].includes(type))return {kind:'dcSupply',ports:graphic.ports,pairs:[],inputs:type==='native32998'?[0,1]:[0,1,2],outputs:type==='native32998'?[2,3]:[3,4]};
+ if(graphic)return {kind:'drawing-only',ports:graphic.ports,pairs:[]};
  const sources={phase:['L1'],neutral:['N'],earth:['PE'],phaseN:['L1','N'],phase3:['L1','L2','L3'],phase3N:['L1','L2','L3','N']};
  if(sources[type]){const rails=sources[type];return {kind:'source',rails,ports:rails.map((_,i)=>({x:(i-(rails.length-1)/2)*20,y:0})),pairs:[]};}
  if(type==='motor3')return {kind:'motor3',ports:[{x:-20,y:-40},{x:0,y:-40},{x:20,y:-40}],pairs:[]};

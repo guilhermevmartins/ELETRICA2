@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {simulate} from './engine.mjs';
+const wire=(a,p,b,q)=>({from:{id:a,port:p},to:{id:b,port:q}});
+const circuit={components:[{id:'ac',type:'phase3'},{id:'q',type:'breaker2'},{id:'s',type:'native32998'},{id:'k',type:'coil',tag:'KM1'},{id:'c',type:'contactNO',ref:'KM1'},{id:'h',type:'lamp'}],wires:[wire('ac',0,'q',0),wire('ac',1,'q',1),wire('q',2,'s',0),wire('q',3,'s',1),wire('s',2,'k',0),wire('s',3,'k',1),wire('s',2,'c',0),wire('c',1,'h',0),wire('s',3,'h',1)]};
+let r=simulate(circuit);assert.equal(r.active.k,true);assert.equal(r.active.h,true);assert.equal(r.shortCircuit,false);assert(r.energized.includes('s:2'));assert(r.neutral.includes('s:3'));
+r=simulate(circuit,r,{q:false});assert.equal(r.active.k,false);assert.equal(r.active.s,false);assert.equal(r.active.h,false);
+const missing=structuredClone(circuit);missing.wires.splice(1,1);assert.equal(simulate(missing).active.k,false);
+const same=structuredClone(circuit);same.wires[1].from.port=0;assert.equal(simulate(same).active.k,false);
+const short=structuredClone(circuit);short.wires.push(wire('s',2,'s',3));r=simulate(short);assert.equal(r.shortCircuit,true);assert.equal(r.active.k,false);
+const mixed=structuredClone(circuit);mixed.wires[5]=wire('ac',2,'k',1);assert.equal(simulate(mixed).active.k,false);
+const three=structuredClone(circuit);three.components.find(c=>c.id==='s').type='native33044';for(const w of three.wires)if(w.from.id==='s'&&w.from.port>=2)w.from.port++;three.wires.push(wire('ac',2,'s',2));assert.equal(simulate(three).active.k,true);three.wires.pop();assert.equal(simulate(three).active.k,false);
+console.log('OK: alimentação, comando e selo, desligamento, entrada incompleta, mesma fase, curto DC, isolamento e fonte trifásica.');

@@ -71,7 +71,7 @@ export function symbol(type,active=false,color='#20ad86',input=false,variant=nul
  }
  if([32933,32934,32941,32942].includes(variant))shape+=`<path d="M-29 -5h14 m-10 -5l-5 5 5 5 M-29 -12v14"/>`;
  break;}
- case 'coil':shape=stem+'<rect x="-30" y="-16" width="60" height="32" fill="'+(active?'#d8f6e9':'white')+'"/>';break;
+ case 'coil':shape='<path d="M0 -40V-12 M0 12V40"/><rect x="-20" y="-12" width="40" height="24" fill="'+(active?'#d8f6e9':'white')+'"/>';break;
  case 'lamp':shape=stem+`<circle r="16" fill="${active?color:'white'}"/><path d="M-11 -11L11 11 M-11 11L11 -11"/>`;break;
  case 'motor':shape=stem+`<circle r="19" fill="${active?'#def5eb':'white'}"/><path d="M-8 8V-8L0 2L8 -8V8"/>`+(active?'<path d="M-25 -5A26 26 0 0 1 15 -21 M15 -21h-7 M15 -21v7" stroke="#18a481"/>':'');break;
  case 'motor3':shape=`<path d="M-20 -40V-22 M0 -40V-29 M20 -40V-22"/><circle r="29" fill="${active?'#fee':'white'}"/><text y="2" text-anchor="middle" font-size="22" fill="currentColor" stroke="none">M</text><text y="20" text-anchor="middle" font-size="13" fill="currentColor" stroke="none">3~</text>`;break;
@@ -85,7 +85,7 @@ export function symbol(type,active=false,color='#20ad86',input=false,variant=nul
  return `<g class="symbol-line">${shape}</g>`;
 }
 export const symbolSVG=(type)=>{const b=getSymbolBounds({type});return `<svg viewBox="${b.x-3} ${b.y-3} ${b.width+6} ${b.height+6}" aria-hidden="true">${symbol(type,['fuse','breaker','contactNC','buttonNC'].includes(type))}</svg>`;};
-export function terminalLabel(c,p){if(c.terminalNames?.[p]!==undefined)return c.terminalNames[p];const t=topology(c);if(t.kind==='source')return '';if(c.type==='motor3')return ['U1','V1','W1'][p];if(['coil','timerOn','timerOff','timerPulse','relayLatch','counter'].includes(c.type))return ['A1','A2'][p];if(c.type.endsWith('Change'))return ['11','12','14'][p];if(t.ports.length>2){const n=t.ports.length/2;return p<n?String(p*2+1):String((p-n)*2+2);}if(c.type.endsWith('NC'))return ['21','22'][p];if(/^(contact|button|switch)/.test(c.type))return ['13','14'][p];return ['1','2'][p];}
+export function terminalLabel(c,p){if(c.terminalNames?.[p]!==undefined)return c.terminalNames[p];const t=topology(c);if(t.kind==='dcSupply')return t.ports[p].label;if(t.kind==='source')return '';if(c.type==='motor3')return ['U1','V1','W1'][p];if(['coil','timerOn','timerOff','timerPulse','relayLatch','counter'].includes(c.type))return ['A1','A2'][p];if(c.type.endsWith('Change'))return ['11','12','14'][p];if(t.ports.length>2){const n=t.ports.length/2;return p<n?String(p*2+1):String((p-n)*2+2);}if(c.type.endsWith('NC'))return ['21','22'][p];if(/^(contact|button|switch)/.test(c.type))return ['13','14'][p];return ['1','2'][p];}
 function c(id,type,x,y,tag,label,extra={}){return {id,type,x,y,tag,label,ref:'',rotation:0,delay:3,preset:3,color:'#27bd90',...extra};}
 function w(id,a,ap,b,bp,points=[]){return {id,from:{id:a,port:ap},to:{id:b,port:bp},points};}
 export function example(name='starter'){
