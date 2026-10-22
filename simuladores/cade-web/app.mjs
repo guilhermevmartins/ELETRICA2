@@ -1,3 +1,4 @@
+import {initCommandLibrary} from './command-library.mjs';
 import {wireRoute} from './wire-route.mjs';
 import {nearestTerminal} from './wire-target.mjs';
 import {simulate} from './engine.mjs';
@@ -105,7 +106,7 @@ function drawOverlay(){
  $('#overlay').innerHTML=html;
 }
 function renderProperties(){
- const c=current(),wire=getWire(),drawing=getDrawing();$('.inspector').classList.toggle('has-selection',!!selected);
+ const c=current(),wire=getWire(),drawing=getDrawing();if(selected)showSidebar('properties');$('.inspector').classList.toggle('has-selection',!!selected);
  if(drawing){$('#properties').innerHTML='<strong>'+esc(drawing.kind==='text'?'Texto':'Desenho')+'</strong><p class="monitor-note">Arraste para mover. Use a paleta à direita para mudar a cor.</p><button class="property-action" id="property-delete">Excluir desenho</button>';return;}if(!c&&!wire){$('#properties').innerHTML='<div class="empty-selection"><div>↖</div><strong>Nenhum componente selecionado</strong><p>Clique em um componente na folha<br>para visualizar suas propriedades.</p></div>';return;}
  if(wire){$('#properties').innerHTML=`<div class="selection-title"><span style="font-size:25px;color:#488aaa">⌁</span><div><strong>Conexão elétrica</strong><small>Fio ortogonal</small></div></div><p class="monitor-note">${esc(project.components.find(c=>c.id===wire.from.id)?.tag)} → ${esc(project.components.find(c=>c.id===wire.to.id)?.tag)}</p><button class="property-action" id="wire-reset">Redesenhar trajeto automático</button><button class="property-action" id="property-delete">Excluir conexão</button>`;return;}
  const d=definition(c.type);const disabled=running?'disabled':'';
@@ -172,13 +173,13 @@ $('#canvas').addEventListener('pointerdown',e=>{
  if(!placing&&(wireStart||tool==='wire')){const hit=wireHit();if(hit){branchWire(hit);return;}}
  if(wireStart){wirePoints.push({x:snap(pointer.x),y:snap(pointer.y)});drawOverlay();return;}
  if(tool==='wire'){notify('Clique próximo de um terminal para iniciar o cabo.');return;}
- if(item){selected=item.dataset.id;const now=performance.now();if(lastPick.id===selected&&now-lastPick.time<450){drag=null;renderProperties();$('#properties-dialog').showModal();$('#properties [data-field="tag"]')?.focus();lastPick={id:null,time:0};return;}lastPick={id:selected,time:now};const c=current();drag={kind:'component',start:{...pointer},original:{x:c.x,y:c.y},saved:false,id:c.id};$('#canvas').setPointerCapture(e.pointerId);draw();renderProperties();updateControls();return;}
+ if(item){selected=item.dataset.id;const now=performance.now();if(lastPick.id===selected&&now-lastPick.time<450){drag=null;renderProperties();showSidebar('properties');$('#properties [data-field="tag"]')?.focus();lastPick={id:null,time:0};return;}lastPick={id:selected,time:now};const c=current();drag={kind:'component',start:{...pointer},original:{x:c.x,y:c.y},saved:false,id:c.id};$('#canvas').setPointerCapture(e.pointerId);draw();renderProperties();updateControls();return;}
  if(wire){selected=wire.dataset.wire;draw();renderProperties();updateControls();return;}
  selected=null;draw();renderProperties();updateControls();
 });
 $('#canvas').addEventListener('pointermove',e=>{pointer=position(e);$('#coordinates').textContent=`X: ${Math.round(pointer.x)}   Y: ${Math.round(pointer.y)}`;if(drag?.kind==='pan'){view.x=drag.view.x+e.clientX-drag.startX;view.y=drag.view.y+e.clientY-drag.startY;applyView();return;}if(drag?.kind==='draw'){drag.drawing.x2=clamp(snap(pointer.x),0,1200);drag.drawing.y2=clamp(snap(pointer.y),0,840);drawOverlay();return;}if(drag?.kind==='moveDrawing'){const d=getDrawing(),dx=snap(pointer.x-drag.start.x),dy=snap(pointer.y-drag.start.y);if(d&&(dx||dy)){if(!drag.saved){snapshot();drag.saved=true;}d.x=clamp(drag.original.x+dx,0,1200);d.y=clamp(drag.original.y+dy,0,840);if(d.x2!==undefined){d.x2=clamp(drag.original.x2+dx,0,1200);d.y2=clamp(drag.original.y2+dy,0,840);}draw();}return;}if(drag?.kind==='component'){const c=project.components.find(c=>c.id===drag.id);if(!c)return;const {x,y}=placement(c.type,{x:drag.original.x+pointer.x-drag.start.x,y:drag.original.y+pointer.y-drag.start.y},c.rotation);if(c&&(x!==c.x||y!==c.y)){if(!drag.saved){snapshot();drag.saved=true;}c.x=x;c.y=y;draw();}return;}if(wireStart||placing||tool==='wire')drawOverlay();});
 window.addEventListener('pointerup',e=>{if(wireGesture){const moved=Math.hypot(e.clientX-wireGesture.x,e.clientY-wireGesture.y)>5;wireGesture=null;if(moved&&wireStart&&!running){pointer=position(e);const target=wireTarget();if(target&&(target.id!==wireStart.id||target.port!==wireStart.port))connect(target.id,target.port);else if(!target){const hit=wireHit();if(hit)branchWire(hit);}}}release();if(drag?.kind==='draw'){const d=drag.drawing;if(d.x!==d.x2||d.y!==d.y2){snapshot();(project.drawings??=[]).push(d);selected=d.id;}drag=null;changed();}if(['component','moveDrawing'].includes(drag?.kind)&&drag.saved)changed();drag=null;});window.addEventListener('pointercancel',()=>{release();drag=null;wireGesture=null;});window.addEventListener('blur',release);
-$('#canvas').addEventListener('dblclick',e=>{const item=e.target.closest('[data-id]');if(item&&!running){selected=item.dataset.id;renderProperties();$('#properties-dialog').showModal();$('#properties [data-field="tag"]')?.focus();}});
+$('#canvas').addEventListener('dblclick',e=>{const item=e.target.closest('[data-id]');if(item&&!running){selected=item.dataset.id;renderProperties();showSidebar('properties');$('#properties [data-field="tag"]')?.focus();}});
 $('#canvas').addEventListener('wheel',e=>{e.preventDefault();if(e.ctrlKey||e.metaKey)zoom(Math.exp(-e.deltaY*.005),{x:e.clientX,y:e.clientY});else{view.x-=e.deltaX;view.y-=e.deltaY;applyView();}},{passive:false});
 $('#canvas').addEventListener('contextmenu',e=>{e.preventDefault();wireStart=null;wirePoints=[];placing=null;renderCatalog();drawOverlay();updateControls();});
 $('#properties').addEventListener('change',e=>{const c=current(),field=e.target.dataset.field;if(c&&e.target.dataset.terminal!==undefined&&!running){snapshot();c.terminalNames??=Array.from({length:portCount(c)},(_,p)=>terminalLabel(c,p));c.terminalNames[Number(e.target.dataset.terminal)]=e.target.value.slice(0,10);changed();return;}if(!c||!field||running)return;let value=e.target.value;if(['x','y','rotation','delay','preset'].includes(field)){value=Number(value);if(!Number.isFinite(value))return;if(field==='x')value=clamp(snap(value),60,1100);if(field==='y')value=clamp(snap(value),80,700);if(field==='delay')value=clamp(value,0,3600);if(field==='preset')value=clamp(Math.round(value),1,99999);}else value=value.trim();if(field==='tag'&&!value)return renderProperties();snapshot();const old=c.tag;c[field]=value;if(field==='tag'&&!c.type.startsWith('contact'))for(const contact of project.components){if(contact.type.startsWith('contact')&&contact.ref===old){contact.ref=value;if(contact.tag===old)contact.tag=value;}}if(field==='ref')c.tag=value;if(field==='tag'&&c.type.startsWith('contact'))c.ref=value;if(['x','y','rotation'].includes(field))Object.assign(c,placement(c.type,c,c.rotation));changed();});
@@ -201,7 +202,7 @@ function pasteSelection(){if(!clipboard||running)return;snapshot();const c={...c
 $('#copy').onclick=copySelection;$('#cut').onclick=()=>{copySelection();deleteSelected();};$('#paste').onclick=pasteSelection;
 $('#pause').onclick=()=>{if(running){paused=true;release();updateControls();renderMonitor();}};
 $('#single-step').onclick=()=>{if(!running)run();paused=true;step(.1);};
-$$('.property-close').forEach(b=>b.onclick=()=>$('#properties-dialog').close());
+$$('.property-close').forEach(b=>b.onclick=()=>showSidebar('library'));
 $('#monitor-toggle').onclick=()=>$('#monitor-dialog').show();$('#monitor-close').onclick=()=>$('#monitor-dialog').close();
 const commands={57600:()=>loadExample('blank'),57601:()=>$('#file-input').click(),57603:exportJSON,57604:exportJSON,57607:()=>window.print(),33041:exportSVG,57643:undo,57644:redo,57634:copySelection,57635:()=>{copySelection();deleteSelected();},57637:pasteSelection,32773:()=>zoom(1.2),32778:()=>zoom(1/1.2),32776:fit,32772:()=>{view.scale=1;view.x=10;view.y=10;applyView();},32777:()=>$('#grid-toggle').click(),32971:()=>$('#run').click(),32972:()=>stop(),32974:()=>$('#pause').click(),32975:()=>$('#single-step').click(),57664:help,32785:draw};
 const barCommands={32977:32868,32978:32856,32979:32857,32980:32824,32981:32809,33010:33001,32985:32825,32983:32931,33029:33030,32984:32826,33265:33265,33071:33068,33280:33279,33087:33081,33110:33107,33244:33241};
@@ -223,3 +224,21 @@ $('#text-cancel').onclick=()=>$('#text-dialog').close();$('#text-form').onsubmit
 let last=performance.now();setInterval(()=>{const now=performance.now(),dt=Math.min((now-last)/1000,.25);last=now;if(running&&!paused&&window.labActive!==false&&!document.hidden)step(dt);},100);
 new ResizeObserver(()=>fit()).observe($('#viewport'));
 $('#project-name').value=project.name;renderCatalog();draw();renderProperties();renderMonitor();updateControls();requestAnimationFrame(fit);
+
+function showSidebar(tab){
+ $('#properties-dialog').hidden=tab!=='properties';$('#command-library').hidden=tab!=='library';
+ $('#tab-properties').setAttribute('aria-pressed',String(tab==='properties'));$('#tab-library').setAttribute('aria-pressed',String(tab==='library'));
+}
+$('#tab-properties').onclick=()=>showSidebar('properties');$('#tab-library').onclick=()=>showSidebar('library');
+$('#toggle-sidebar').onclick=()=>{
+ const collapsed=!$('#command-sidebar').hidden;
+ $('#command-sidebar').hidden=collapsed;
+ $('.workspace').classList.toggle('sidebar-collapsed',collapsed);
+ $('#toggle-sidebar').setAttribute('aria-expanded',String(!collapsed));
+ $('#toggle-sidebar').textContent=collapsed?'« Mostrar lateral':'Minimizar lateral »';
+ $('#toggle-sidebar').title=collapsed?'Mostrar propriedades e biblioteca':'Minimizar lateral';
+};
+initCommandLibrary({storageKey:storageKey+'-library',getProject:()=>project,validateProject,notify,openProject:async data=>{
+ if(!await confirmReplace('Abrir comando da biblioteca e substituir a folha?'))return false;
+ snapshot();project=data;selected=null;placing=null;wireStart=null;wirePoints=[];stop(false);pickTool('select');$('#project-name').value=project.name;changed();fit();return true;
+}});

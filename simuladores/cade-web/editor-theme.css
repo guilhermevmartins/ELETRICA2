@@ -1,0 +1,33 @@
+/* Barras do editor: cinza neutro, superfícies planas e seleção contrastante. */
+:root{--bar-bg:#e3e3e3;--bar-border:#bcbcbc;--bar-text:#292929;--bar-hover:#f5f5f5;--bar-selected:#c5c5c5}
+.lab-heading{background:#363636}.lab-heading span{color:#dedede}
+.menu-bar{background:#484848;color:#f5f5f5;border-bottom:1px solid #333}
+.menu-bar details[open]>summary,.menu-bar summary:hover{background:#666;color:#fff}
+.toolbar,.category-row,.symbols-row,.drawing-tools,.color-palette,.document-tab,.drawing-status,.app-footer{background:var(--bar-bg);color:var(--bar-text);border-color:var(--bar-border);box-shadow:none}
+.toolbar,.category-row,.symbols-row{border-top:0;border-bottom:1px solid var(--bar-border)}
+.symbols-row,.drawing-status,.app-footer{background:#d5d5d5}
+.toolbar button,.category-row button,.symbols-row button,.drawing-tools button,.app-footer button,.app-footer summary{background:transparent;border:1px solid transparent;border-radius:4px;box-shadow:none}
+.toolbar button:hover:not(:disabled),.category-row button:hover:not(:disabled),.symbols-row button:hover:not(:disabled),.drawing-tools button:hover:not(:disabled),.app-footer button:hover,.app-footer summary:hover{background:var(--bar-hover);border-color:#aaa}
+.toolbar button.active,.toolbar button.selected,.category-row button.active,.symbols-row button.active,.drawing-tools button.selected,.drawing-tools button.active{background:var(--bar-selected);border-color:#777;box-shadow:inset 0 -2px #555}
+.grip,.separator{border-left:1px solid #aaa;border-right:0}
+.dropdown{background:#f0f0f0;color:var(--bar-text);border:1px solid #aaa;border-radius:5px;box-shadow:0 5px 16px #0003}
+.dropdown button{background:transparent;border-radius:3px}
+.dropdown button:hover:not(:disabled){background:#555;color:white}
+.dropdown hr{border-top:1px solid #ccc;border-bottom:0}
+.document-tab{background:#ededed;border:0;border-bottom:1px solid var(--bar-border)}
+.drawing-status>span{box-shadow:none;border-right:1px solid #b8b8b8}
+.canvas-viewport{background:#929292;border:1px solid #aaa}
+.command-sidebar{background:#ededed;color:#292929;border-color:var(--bar-border)}
+.sidebar-tabs{background:#484848}
+.sidebar-tabs button{color:#eee}
+.sidebar-tabs button[aria-pressed=true]{background:#ededed;color:#292929}
+.command-sidebar .dialog-title{background:#d7d7d7;color:#292929}
+.document-tab #toggle-sidebar{background:#dedede;color:#292929;border-color:#aaa;border-radius:3px}
+#command-library p,.library-entry small{color:#595959}
+.library-actions #library-save{background:#505050;border-color:#505050}
+.library-entry{background:#fafafa;border-color:#bbb}
+.library-entry[data-selected=true]{border-color:#666}
+.library-actions button,.library-entry button{border-color:#aaa}
+.library-group{border-color:#bbb}
+::-webkit-scrollbar-track{background:#e4e4e4}
+::-webkit-scrollbar-thumb{background:#aaa;border:3px solid #e4e4e4;border-radius:7px}
