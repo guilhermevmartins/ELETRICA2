@@ -165,8 +165,8 @@ window.LAB_AREAS = [
     "title": "Automação",
     "subtitle": "Sistemas que medem e atuam",
     "description": "Uma área para estudar sensores, controle e integração de sistemas automatizados.",
-    "topics": "Sensores · Controle · Sistemas automatizados",
-    "modules": ["sensores"],
+    "topics": "Sensores · Redes e protocolos · Controle · Sistemas automatizados",
+    "modules": ["sensores", "protocolos"],
     "icon": "M17 8h14v12H17zM5 36h14v12H5zM29 36h14v12H29zM24 20v8M12 36v-8h24v8M20 14h8"
   },
   {
