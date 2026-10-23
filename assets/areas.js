@@ -89,6 +89,7 @@ window.LAB_AREAS = [
     "description": "Explore os compressores, os atuadores e as válvulas. Abra um grupo e escolha a experiência para demonstrar na lousa.",
     "topics": "Compressores · Atuadores · Válvulas · Lógica pneumática",
     "modules": [
+      "ciclo-ar",
       "pneumatica",
       "valvulas",
       "valvula-e",
@@ -110,6 +111,12 @@ window.LAB_AREAS = [
       "compressor-pistoes-axiais"
     ],
     "groups": [
+      {
+        "id": "grupo-tratamento-ar",
+        "title": "Produção e tratamento do ar",
+        "description": "Percorra a central 3D: compressor, reservatório, secador, filtros e ponto de uso.",
+        "modules": ["ciclo-ar"]
+      },
       {
         "id": "grupo-compressores",
         "title": "Compressores",
