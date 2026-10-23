@@ -31,3 +31,5 @@
 .library-group{border-color:#bbb}
 ::-webkit-scrollbar-track{background:#e4e4e4}
 ::-webkit-scrollbar-thumb{background:#aaa;border:3px solid #e4e4e4;border-radius:7px}
+
+.shared-examples{max-height:65vh;overflow:auto;max-width:90vw}.shared-examples button{white-space:normal}.library-auth{padding:10px;border:1px solid #aaa;border-radius:5px}.library-auth button{margin-top:8px}.menu-bar{overflow:visible;flex-wrap:wrap;height:auto;min-height:25px}

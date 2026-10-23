@@ -1,5 +1,5 @@
 import {topology} from './topology.mjs';
-import {initCommandLibrary} from './command-library.mjs';
+import {initCommandLibrary} from './command-library.mjs?v=shared1';
 import {wireRoute} from './wire-route.mjs';
 import {nearestTerminal} from './wire-target.mjs';
 import {simulate} from './engine.mjs';
