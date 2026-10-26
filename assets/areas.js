@@ -65,9 +65,10 @@ window.LAB_AREAS = [
     "title": "Eletrônica digital",
     "subtitle": "Da lógica aos circuitos",
     "description": "Comece pelos bits e avance até circuitos que calculam, guardam informações e controlam sequências. Experimente cada etapa.",
-    "topics": "Portas lógicas · Somadores · Flip-flops · Contadores",
+    "topics": "Portas lógicas · Somadores · Flip-flops · Contadores · Programação Arduino",
     "modules": [
-      "digital"
+      "digital",
+      "arduino-estruturas"
     ],
     "icon": "M17 15h14v26H17zM10 20h7M10 28h7M10 36h7M31 20h7M31 28h7M31 36h7M22 9v6M27 9v6M22 41v6M27 41v6"
   },

@@ -42,14 +42,15 @@ if not defined PHP_EXE (
 if errorlevel 1 goto install_failed
 
 :php_found
-echo Iniciando index.php em http://127.0.0.1:8000/index.php
-echo Para encerrar o servidor, pressione Ctrl+C nesta janela.
-timeout /t 2 /nobreak >nul
-start "" "http://127.0.0.1:8000/index.php"
-"%PHP_EXE%" -S 127.0.0.1:8000 -t "%~dp0"
-
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0iniciar-servidor-local.ps1" -PhpExe "%PHP_EXE%"
+if errorlevel 1 (
+    echo.
+    echo O servidor nao iniciou. Confira a mensagem acima.
+    pause
+    exit /b 1
+)
 endlocal
-exit /b
+exit /b 0
 
 :install_failed
 echo.
