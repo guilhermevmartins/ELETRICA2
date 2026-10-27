@@ -1,11 +1,19 @@
 <?php
+// Revalida a página e identifica os arquivos pela versão do seu conteúdo.
+header('Cache-Control: no-cache, must-revalidate');
+function labAsset(string $path): string
+{
+    $file = __DIR__ . '/' . $path;
+    $version = is_file($file) ? substr(hash_file('sha256', $file), 0, 16) : 'missing';
+    return htmlspecialchars($path . '?v=' . $version, ENT_QUOTES, 'UTF-8');
+}
 require_once __DIR__ . '/includes/database.php';
 $brandCaption = appSetting('brand_caption', 'SENAI SÃO PAULO · ELÉTRICA E AUTOMAÇÃO');
 $boardTopline = appSetting('board_topline', 'SENAI SÃO PAULO / LOUSA DIGITAL');
 ?>
 <!doctype html>
 <html lang="pt-BR">
-<head><meta charset="utf-8"><script src="assets/tema-interface.js"></script><meta name="viewport" content="width=device-width,initial-scale=1"><title>Laboratório de Lousa Digital do SENAI</title><link rel="icon" type="image/png" href="assets/images/SENAI_S%C3%A3o_Paulo_logo.png"><link rel="apple-touch-icon" href="assets/images/SENAI_S%C3%A3o_Paulo_logo.png"><meta name="description" content="Laboratório de Lousa Digital do SENAI: simuladores interativos para aulas de elétrica, eletrônica e automação."><link rel="stylesheet" href="assets/portal.css"><link rel="stylesheet" href="assets/areas.css"><link rel="stylesheet" href="assets/senai.css"><link rel="stylesheet" href="assets/portal-lista.css"><script defer src="assets/catalogo.js"></script><script defer src="assets/areas.js"></script><script defer src="assets/portal.js"></script></head>
+<head><meta charset="utf-8"><script src="<?= labAsset('assets/tema-interface.js') ?>"></script><meta name="viewport" content="width=device-width,initial-scale=1"><title>Laboratório de Lousa Digital do SENAI</title><link rel="icon" type="image/png" href="assets/images/SENAI_S%C3%A3o_Paulo_logo.png"><link rel="apple-touch-icon" href="assets/images/SENAI_S%C3%A3o_Paulo_logo.png"><meta name="description" content="Laboratório de Lousa Digital do SENAI: simuladores interativos para aulas de elétrica, eletrônica e automação."><link rel="stylesheet" href="<?= labAsset('assets/portal.css') ?>"><link rel="stylesheet" href="<?= labAsset('assets/areas.css') ?>"><link rel="stylesheet" href="<?= labAsset('assets/senai.css') ?>"><link rel="stylesheet" href="<?= labAsset('assets/portal-lista.css') ?>"><script defer src="<?= labAsset('assets/catalogo.js') ?>"></script><script defer src="<?= labAsset('assets/areas.js') ?>"></script><script defer src="<?= labAsset('assets/portal.js') ?>"></script></head>
 <body class="senai-portal">
 <header class="appbar"><div class="appbar-inner"><button class="brand" id="brandHome" aria-label="Voltar às áreas de estudo"><img class="senai-logo" src="assets/images/SENAI_S%C3%A3o_Paulo_logo.png" alt="SENAI São Paulo" width="176" height="45"><span class="brand-copy"><span class="brand-name">Laboratório de Lousa Digital</span><span class="brand-caption"><?= htmlspecialchars($brandCaption, ENT_QUOTES, 'UTF-8') ?></span><span class="brand-credit">Desenvolvido por: <strong>Guilherme Vicente Martins</strong></span></span></button><div class="local"><i></i>Para lousas digitais e computadores<br>Aprendizagem interativa · Funciona offline</div><div class="appbar-tools"><button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Ativar tema claro">☀ Tema claro</button><button id="backAreas" class="area-back" hidden>← Áreas de estudo</button></div></div><nav id="tabs" class="tabs" role="tablist" aria-label="Itens didáticos" hidden><button id="tab-inicio" class="tab" role="tab" aria-selected="true" aria-controls="home" data-module="inicio"><span>⌂</span>Selecionar equipamento</button></nav></header>
 <main>

@@ -1,0 +1,7 @@
+# Arquivos de interface devem ser conferidos no servidor antes de reutilizar
+# uma cópia em cache. Respostas 304 evitam baixar novamente arquivos iguais.
+<IfModule mod_headers.c>
+    <FilesMatch "\.(php|html|css|js|mjs|json)$">
+        Header set Cache-Control "no-cache, must-revalidate"
+    </FilesMatch>
+</IfModule>
