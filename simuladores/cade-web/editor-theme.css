@@ -33,3 +33,24 @@
 ::-webkit-scrollbar-thumb{background:#aaa;border:3px solid #e4e4e4;border-radius:7px}
 
 .shared-examples{max-height:65vh;overflow:auto;max-width:90vw}.shared-examples button{white-space:normal}.library-auth{padding:10px;border:1px solid #aaa;border-radius:5px}.library-auth button{margin-top:8px}.menu-bar{overflow:visible;flex-wrap:wrap;height:auto;min-height:25px}
+
+/* Biblioteca legível: categorias nomeadas e desenhos vetoriais proporcionais. */
+.category-row{align-items:flex-start;gap:8px;padding:4px 8px}
+.catalog .grip{display:none}
+#categories{flex:1;min-width:0;flex-wrap:nowrap;gap:3px;max-height:38px;overflow:auto}
+.category-row .category-button{width:auto;height:auto;min-height:26px;padding:3px 7px;font-size:11px;line-height:18px;white-space:nowrap}
+.category-row .search{flex:none;padding:0;margin:0}
+.category-row .search input{width:180px;height:26px;border-radius:4px;font-size:12px}
+.symbols-row{height:auto;display:flex;flex-direction:column;align-items:stretch;gap:3px;padding:4px 8px;background:#eee;overflow:hidden}
+#category-name{display:none}
+#catalog-list{display:grid;grid-auto-flow:column;grid-auto-columns:38px;grid-template-rows:34px;align-items:stretch;gap:3px;max-height:52px;overflow-x:auto;overflow-y:hidden;padding:2px 2px 4px}
+.symbols-row .symbol-button{width:100%;height:34px;min-height:0;flex-direction:column;gap:3px;padding:4px;background:#fff;border:1px solid #ccc;border-radius:5px;color:#222}
+.symbol-preview{display:flex;align-items:center;justify-content:center;width:100%;height:24px;flex:none}
+.symbol-preview svg{display:block;width:100%;height:100%;max-width:28px;overflow:visible}
+.symbol-preview .symbol-line{stroke-width:1.7}
+.symbols-row .symbol-preview img{height:auto;max-height:24px;width:auto;max-width:28px;image-rendering:auto}
+.symbol-name{display:none}
+.symbols-row button.active{background:#e2edf9;border-color:#356da4;box-shadow:inset 0 0 0 1px #356da4}
+.catalog button:focus-visible{outline:2px solid #245e98;outline-offset:-2px}
+.symbol-button.graphic-symbol::after{right:2px;top:2px;bottom:auto;width:3px;height:3px;border-radius:50%}
+@media(max-width:700px){.category-row{overflow:hidden;flex-wrap:wrap}.category-row .search{display:block;width:100%}.category-row .search input{width:100%}#categories{flex-basis:100%;max-height:38px}}

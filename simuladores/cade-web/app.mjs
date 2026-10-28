@@ -71,12 +71,23 @@ function updateControls(){
  $('#counts').textContent=`${project.components.length} componentes · ${project.wires.length} conexões`;
  $('#component-count').textContent=allCommands.filter(id=>commandTypes[id]).length;
 }
+function catalogPreview(id){
+ const type=commandTypes[id]||libraryByCommand.get(Number(id))?.type;
+ if(!type)return icon(id);
+ const b=getSymbolBounds({type});
+ return `<svg class="component-preview" viewBox="${b.x-6} ${b.y-6} ${b.width+12} ${b.height+12}" aria-hidden="true"><g>${symbol(type,['fuse','breaker','contactNC','buttonNC'].includes(type),'#222',false,id)}</g></svg>`;
+}
 function renderCatalog(){
- $('#categories').innerHTML=categories.map(c=>'<button class="category-button '+(c.id===nativeCategory?'active':'')+'" data-native-category="'+c.id+'" title="'+esc(c.name)+'" aria-label="'+esc(c.name)+'">'+icon(c.id)+'</button>').join('');
+ $('#categories').innerHTML=categories.map(c=>'<button class="category-button '+(c.id===nativeCategory?'active':'')+'" data-native-category="'+c.id+'" aria-pressed="'+(c.id===nativeCategory)+'" title="'+esc(c.name)+'" aria-label="'+esc(c.name)+'">'+esc(c.name)+'</button>').join('');
  const group=categories.find(c=>c.id===nativeCategory),query=searchText($('#search').value.trim());
  const ids=query?allCommands.filter(id=>searchText(labelFor(id)+' '+categories.filter(c=>categoryCommands(c).includes(id)).map(c=>c.name).join(' ')).includes(query)):categoryCommands(group);
- $('#catalog-list').innerHTML=ids.map(id=>{if(!id)return '<i class="separator"></i>';const type=commandTypes[id],wire=wireCommands.includes(id),label=labelFor(id),supported=type||wire,graphic=type&&isGraphic(type),note=graphic?' — '+graphicNote:supported?'':' — ainda não implementado';return '<button class="symbol-button '+(graphic?'graphic-symbol ':'')+(placing===type&&placingCommand===id?'active':'')+'" '+(supported?'':'disabled')+' data-command="'+id+'" '+(type?'data-component="'+type+'" draggable="true"':'')+' title="'+esc(label+note)+'" aria-label="'+esc(label+note)+'">'+icon(id)+'</button>';}).join('')||'<span class="empty-result">'+(query?'Nenhum símbolo encontrado.':'Nenhum símbolo disponível nesta categoria.')+'</span>';
- $('#category-name').textContent=query?`${ids.length} resultados`:group.name;
+ $('#catalog-list').innerHTML=ids.filter(Boolean).map(id=>{const type=commandTypes[id],wire=wireCommands.includes(id),label=labelFor(id),supported=type||wire,graphic=type&&isGraphic(type),note=graphic?' — '+graphicNote:supported?'':' — ainda não implementado';return '<button class="symbol-button '+(graphic?'graphic-symbol ':'')+(placing===type&&placingCommand===id?'active':'')+'" '+(supported?'':'disabled')+' data-command="'+id+'" '+(type?'data-component="'+type+'" draggable="true"':'')+' title="'+esc(label+note)+'" aria-label="'+esc(label+note)+'" aria-pressed="'+(placing===type&&placingCommand===id)+'"><span class="symbol-preview">'+catalogPreview(id)+'</span><span class="symbol-name">'+esc(label)+'</span></button>';}).join('')||'<span class="empty-result">'+(query?'Nenhum símbolo encontrado.':'Nenhum símbolo disponível nesta categoria.')+'</span>';
+ // Fit the actual geometry, including command variants, without stretching it.
+ $$('#catalog-list .component-preview').forEach(svg=>{
+  const b=svg.firstElementChild.getBBox();
+  if(b.width||b.height)svg.setAttribute('viewBox',`${b.x-6} ${b.y-6} ${Math.max(b.width,12)+12} ${Math.max(b.height,12)+12}`);
+ });
+ $('#category-name').textContent=query?`${ids.filter(Boolean).length} resultados`:group.name;
 }
 function nextTag(type){const prefix=definition(type).prefix;let i=1;while(project.components.some(c=>c.tag===prefix+i))i++;return prefix+i;}
 function addComponent(type,p,command=placingCommand){if(running)return;if(project.components.length>=500)return notify('Limite de 500 componentes atingido.');snapshot();const c={id:uid(),type,tag:nextTag(type),label:definition(type).short,...placement(type,p),rotation:0,ref:type.startsWith('contact')?(project.components.find(c=>c.type==='coil')?.tag||'KM1'):'',delay:3,preset:3,color:drawColor,nativeCommand:command};if(command){c.label=labelFor(command);}if(type.startsWith('contact'))c.tag=c.ref;project.components.push(c);selected=c.id;changed();if(isGraphic(c))notify(graphicNote+' — disponível para desenhar e conectar.');}

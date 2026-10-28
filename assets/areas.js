@@ -76,10 +76,11 @@ window.LAB_AREAS = [
     "id": "analogica",
     "title": "Eletrônica analógica",
     "subtitle": "Sinais, componentes e circuitos",
-    "description": "Investigue os materiais condutores: altere dimensões e temperatura, compare resultados e conecte a experiência às fórmulas.",
-    "topics": "Resistência · Resistividade · Condutividade · Coeficiente térmico",
+    "description": "Dos materiais aos semicondutores: investigue resistência e temperatura, entre na junção P–N e experimente os diodos em circuitos interativos.",
+    "topics": "Resistividade · Temperatura · Diodos · Camada de depleção · LED · Zener",
     "modules": [
-      "materiais-condutores"
+      "materiais-condutores",
+      "diodos"
     ],
     "icon": "M6 28h7l3-9 5 18 6-18 5 18 3-9h7M9 44h30M9 11h30"
   },
