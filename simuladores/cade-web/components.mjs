@@ -27,7 +27,7 @@ export const catalog = [
  ['motor3','Motor trifásico','Saídas','M'],['buzzer','Sinalizador sonoro','Saídas','H'],['resistor','Resistência','Saídas','R'],['timerPulse','Relé intermitente','Temporização','KT'],['relayLatch','Relé de impulso','Saídas','K']
  ].map(([type,name,group,prefix])=>({type,name,short:name,group,prefix,code:prefix})),
 ];
-catalog.push(...nativeSymbols.map(s=>({...s,short:s.name,prefix:'X',code:String(s.command)})));
+catalog.push(...nativeSymbols.map(s=>({...s,short:s.name,prefix:s.command===32865?'F':'X',code:String(s.command)})));
 export const definition = type => catalog.find(c=>c.type===type);
 export function getSymbolBounds(c){
  const s=nativeSymbol(c.type),ports=topology(c).ports;
@@ -38,7 +38,7 @@ export function getSymbolBounds(c){
  return {x,y,width:Math.max(...rotated.map(p=>p.x))-x,height:Math.max(...rotated.map(p=>p.y))-y};
 }
 export const isSource = sourceType;
-export const isInteractive = c => /^(switch|breaker|fuse|button)/.test(c.type);
+export const isInteractive = c => c.type==='native32865'||/^(switch|breaker|fuse|button)/.test(c.type);
 export const isLoad = c => ['coil','lamp','motor','motor3','buzzer','resistor','timerOn','timerOff','timerPulse','relayLatch','counter'].includes(c.type);
 export const escapeHTML = s => String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function terminal(c,p){const q=topology(c).ports[p];if(!q)return {x:c.x,y:c.y};const rad=(c.rotation||0)*Math.PI/180;return {x:c.x+q.x*Math.cos(rad)-q.y*Math.sin(rad),y:c.y+q.x*Math.sin(rad)+q.y*Math.cos(rad)};}
@@ -85,7 +85,7 @@ export function symbol(type,active=false,color='#20ad86',input=false,variant=nul
  return `<g class="symbol-line">${shape}</g>`;
 }
 export const symbolSVG=(type)=>{const b=getSymbolBounds({type});return `<svg viewBox="${b.x-3} ${b.y-3} ${b.width+6} ${b.height+6}" aria-hidden="true">${symbol(type,['fuse','breaker','contactNC','buttonNC'].includes(type))}</svg>`;};
-export function terminalLabel(c,p){if(c.terminalNames?.[p]!==undefined)return c.terminalNames[p];const t=topology(c);if(t.kind==='dcSupply')return t.ports[p].label;if(t.kind==='source')return '';if(c.type==='motor3')return ['U1','V1','W1'][p];if(['coil','timerOn','timerOff','timerPulse','relayLatch','counter'].includes(c.type))return ['A1','A2'][p];if(c.type.endsWith('Change'))return ['11','12','14'][p];if(t.ports.length>2){const n=t.ports.length/2;return p<n?String(p*2+1):String((p-n)*2+2);}if(c.type.endsWith('NC'))return ['21','22'][p];if(/^(contact|button|switch)/.test(c.type))return ['13','14'][p];return ['1','2'][p];}
+export function terminalLabel(c,p){if(c.terminalNames?.[p]!==undefined)return c.terminalNames[p];if(c.nativeCommand===32928)return ['95','96'][p];if(c.nativeCommand===32927)return ['97','98'][p];const t=topology(c);if(t.kind==='dcSupply')return t.ports[p].label;if(t.kind==='source')return '';if(c.type==='motor3')return ['U1','V1','W1'][p];if(['coil','timerOn','timerOff','timerPulse','relayLatch','counter'].includes(c.type))return ['A1','A2'][p];if(c.type.endsWith('Change'))return ['11','12','14'][p];if(t.ports.length>2){const n=t.ports.length/2;return p<n?String(p*2+1):String((p-n)*2+2);}if(c.type.endsWith('NC'))return ['21','22'][p];if(/^(contact|button|switch)/.test(c.type))return ['13','14'][p];return ['1','2'][p];}
 function c(id,type,x,y,tag,label,extra={}){return {id,type,x,y,tag,label,ref:'',rotation:0,delay:3,preset:3,color:'#27bd90',...extra};}
 function w(id,a,ap,b,bp,points=[]){return {id,from:{id:a,port:ap},to:{id:b,port:bp},points};}
 export function example(name='starter'){

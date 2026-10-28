@@ -1,6 +1,9 @@
 import {topology,portCount,sourceType} from './topology.mjs';
 /** Digital continuity/relay simulator with distinct phase rails. No analog calculations. */
 export function simulate(circuit, previousState = {}, inputs = {}, dt = 0.05) {
+  // Uma falha não pode desaparecer ao recalcular e abrir os próprios contatores.
+  // Parar/reiniciar a simulação fornece um estado novo e libera o diagnóstico.
+  if (previousState.shortCircuit) return previousState;
   const components = circuit.components || [];
   const byId = new Map(components.map(c => [c.id, c]));
   const errors = [];
@@ -30,6 +33,8 @@ export function simulate(circuit, previousState = {}, inputs = {}, dt = 0.05) {
       let closed;
       const model=topology(c);
       switch (model.kind) {
+        // O térmico conduz nas três fases; o disparo atua nos contatos auxiliares.
+        case 'thermal': closed = true; break;
         case 'fuse': case 'breaker': closed = inputs[c.id] === undefined ? true : !!inputs[c.id]; break;
         case 'switch': case 'switchChange': case 'buttonNO': case 'buttonChange': closed = !!inputs[c.id]; break;
         case 'switchNC': closed = inputs[c.id] === undefined ? true : !!inputs[c.id]; break;
@@ -41,18 +46,27 @@ export function simulate(circuit, previousState = {}, inputs = {}, dt = 0.05) {
     }
     const rails=new Map();
     for(const c of components.filter(source)){const model=topology(c);model.rails.forEach((rail,p)=>{const root=find(key(c.id,p));if(!rails.has(root))rails.set(root,new Set());rails.get(root).add(rail);});}
-    // Isolated ideal DC supplies: input AC rails never join the secondary.
-    const acShort=[...rails.values()].some(r=>r.size>1);
-    for(const c of components){
-      const model=topology(c);if(model.kind!=='dcSupply')continue;
-      const input=model.inputs.map(p=>[...(rails.get(find(key(c.id,p)))||[])][0]);
-      const powered=!acShort&&input.every(r=>/^L[123]$|^N$/.test(r||''))&&new Set(input).size===input.length&&(input.length===2||input.every(r=>r.startsWith('L')));
-      active[c.id]=powered;
-      if(powered)model.outputs.forEach((p,i)=>{const root=find(key(c.id,p));if(!rails.has(root))rails.set(root,new Set());rails.get(root).add('DC:'+c.id+':'+(i===0?'+':'-'));});
+    // Conversores ideais: secundários isolados, inclusive em cascata.
+    const acInfo=r=>/^L[123]$|^N$/.test(r||'')?{domain:'grid',phase:r}:r?.startsWith('AC:')?{domain:r.slice(0,r.lastIndexOf(':')),phase:r.slice(r.lastIndexOf(':')+1)}:null;
+    const converters=components.filter(c=>['dcSupply','transformer'].includes(topology(c).kind));
+    for(const c of converters)active[c.id]=false;
+    for(let pass=0;pass<converters.length;pass++){
+      let progress=false;
+      for(const c of converters){
+        if(active[c.id])continue;
+        const model=topology(c),input=model.inputs.map(p=>{const r=rails.get(find(key(c.id,p)));return r?.size===1?acInfo([...r][0]):null;});
+        const powered=input.every(Boolean)&&input.every(r=>r.domain===input[0].domain)&&new Set(input.map(r=>r.phase)).size===input.length&&(input.length===2||input.every(r=>r.phase.startsWith('L')));
+        if(!powered)continue;
+        active[c.id]=true;progress=true;
+        model.outputs.forEach((p,i)=>{const root=find(key(c.id,p));if(!rails.has(root))rails.set(root,new Set());const rail=model.kind==='dcSupply'?'DC:'+c.id+':'+(i===0?'+':'-'):'AC:'+c.id+':'+(model.outputs.length===2?(i===0?'L1':'N'):input[i].phase);rails.get(root).add(rail);});
+      }
+      if(!progress)break;
     }
-    const phaseRoots = new Set([...rails].filter(([,r])=>[...r].some(x=>(x.startsWith('L')||x.endsWith(':+')))).map(([root])=>root));
-    const neutralRoots = new Set([...rails].filter(([,r])=>(r.has('N')||[...r].some(x=>x.endsWith(':-')))).map(([root])=>root));
+    const phaseRoots = new Set([...rails].filter(([,r])=>[...r].some(x=>acInfo(x)?.phase.startsWith('L')||x.endsWith(':+'))).map(([root])=>root));
+    const neutralRoots = new Set([...rails].filter(([,r])=>[...r].some(x=>acInfo(x)?.phase==='N'||x.endsWith(':-'))).map(([root])=>root));
     const shortCircuit = [...rails.values()].some(r=>r.size>1);
+    const faultRails = [...rails.values()].filter(r=>r.size>1).map(r=>[...r]);
+    const shortBetweenPhases = faultRails.some(group=>group.filter(r=>acInfo(r)?.phase.startsWith('L')).length>1);
     const energized = [...parent.keys()].filter(k => phaseRoots.has(find(k)));
     const neutral = [...parent.keys()].filter(k => neutralRoots.has(find(k)));
     const nextRelays = {}, timers = {}, counters = {}, motorDirections = {};
@@ -60,6 +74,7 @@ export function simulate(circuit, previousState = {}, inputs = {}, dt = 0.05) {
       if (source(c)) { active[c.id] = true; continue; }
       if (['drawing-only','junction'].includes(topology(c).kind)) { active[c.id]=false; continue; }
       if (active[c.id] !== undefined) {
+        if (topology(c).kind === 'thermal') nextRelays[tag(c)] = !!inputs[c.id];
         // Auxiliary contacts follow the device's mechanical state even without supply.
         if (/^(breaker|fuse|switch)/.test(c.type)) nextRelays[tag(c)] = !!nextRelays[tag(c)] || active[c.id];
         continue;
@@ -68,7 +83,8 @@ export function simulate(circuit, previousState = {}, inputs = {}, dt = 0.05) {
       const ar=rails.get(a),br=rails.get(b);
       let powered = !shortCircuit && !!ar && !!br && !ar.has('PE')&&!br.has('PE')&&[...ar][0]!==[...br][0];
       if(powered){const av=[...ar][0],bv=[...br][0];if(av.startsWith('DC:')||bv.startsWith('DC:'))powered=av.startsWith('DC:')&&bv.startsWith('DC:')&&av.slice(0,-1)===bv.slice(0,-1);}
-      if(c.type==='motor3'){const motorRails=[0,1,2].map(p=>[...(rails.get(find(key(c.id,p)))||[])][0]);powered=!shortCircuit&&motorRails.every(r=>r?.startsWith('L'))&&new Set(motorRails).size===3;if(powered){const sequence=motorRails.map(r=>Number(r.slice(1)));let inversions=0;for(let i=0;i<3;i++)for(let j=i+1;j<3;j++)if(sequence[i]>sequence[j])inversions++;motorDirections[c.id]=inversions%2?-1:1;}}
+      if(powered){const av=acInfo([...ar][0]),bv=acInfo([...br][0]);if(av||bv)powered=!!av&&!!bv&&av.domain===bv.domain;}
+      if(c.type==='motor3'){const motorRails=[0,1,2].map(p=>[...(rails.get(find(key(c.id,p)))||[])][0]);const phases=motorRails.map(acInfo);powered=!shortCircuit&&phases.every(r=>r?.phase.startsWith('L'))&&phases.every(r=>r.domain===phases[0].domain)&&new Set(motorRails).size===3;if(powered){const sequence=phases.map(r=>Number(r.phase.slice(1)));let inversions=0;for(let i=0;i<3;i++)for(let j=i+1;j<3;j++)if(sequence[i]>sequence[j])inversions++;motorDirections[c.id]=inversions%2?-1:1;}}
       active[c.id] = powered;
       if (c.type === 'coil') nextRelays[tag(c)] = !!nextRelays[tag(c)] || powered;
       if (c.type === 'timerOn' || c.type === 'timerOff' || c.type === 'timerPulse') {
@@ -97,6 +113,15 @@ export function simulate(circuit, previousState = {}, inputs = {}, dt = 0.05) {
     }
     const latches=Object.fromEntries(components.filter(c=>c.type==='relayLatch').map(c=>[c.id,{input:active[c.id],output:!!nextRelays[tag(c)]}]));
     result = { active, relays: nextRelays, energized, neutral, shortCircuit, unstable: false, timers, counters, latches, motorDirections, errors };
+    if(shortCircuit){
+      // Preserva o instante do fechamento que provocou o curto, antes da próxima iteração.
+      result.relays={...relays};
+      for(const c of components)if(c.type==='coil')result.active[c.id]=!!relays[tag(c)];
+      result.faultRails=faultRails;
+      result.shortBetweenPhases=shortBetweenPhases;
+      result.faultMessage=shortBetweenPhases?'Curto entre fases':'Curto-circuito entre potenciais diferentes';
+      return result;
+    }
     const next = signature(nextRelays);
     if (next === signature(relays)) return result;
     if (seen.has(next)) { result.unstable = true; errors.push('Realimentação oscilante: o circuito não atingiu um estado estável.'); return result; }

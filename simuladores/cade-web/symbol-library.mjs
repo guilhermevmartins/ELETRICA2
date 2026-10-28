@@ -12,7 +12,7 @@ const pt=(x,y,label)=>({x,y,label:String(label)});
 const xs=(n,step=24)=>Array.from({length:n},(_,i)=>(i-(n-1)/2)*step);
 const result=(svg,ports=[],width=100,height=100)=>({svg,ports,width,height});
 function poles(n=1,kind='contact',opts={}){
- const xx=xs(n),ports=[...xx.map((x,i)=>pt(x,-40,2*i+1)),...xx.map((x,i)=>pt(x,40,2*i+2))];
+ const xx=xs(n,kind==='thermal'?20:24),ports=[...xx.map((x,i)=>pt(x,-40,2*i+1)),...xx.map((x,i)=>pt(x,40,2*i+2))];
  let svg=xx.map((x,i)=>{let s=path(`M${x} -40V-15 M${x} 15V40`);
  if(kind==='fuse')s+=rect(x-6,-15,12,30)+path(`M${x} -15V15`);
  else if(kind==='resistor')s+=rect(x-7,-15,14,30);
