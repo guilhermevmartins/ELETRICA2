@@ -31,10 +31,11 @@ export const catalog = [
 ];
 catalog.push(...nativeSymbols.map(s=>({...s,short:s.name,prefix:s.command===32865?'F':'X',code:String(s.command)})));
 export const definition = type => catalog.find(c=>c.type===type);
+export const isMotor = c => /\bmotor\b/i.test(definition(typeof c==='string'?c:c.type)?.name||'')&&!/driver/i.test(definition(typeof c==='string'?c:c.type)?.name||'');
+export const motorRPM = c => typeof c.rpm==='number'&&Number.isFinite(c.rpm)&&c.rpm>=1&&c.rpm<=100000?Math.round(c.rpm):null;
 export function getSymbolBounds(c){
- if(c.type==='ssw05')return {x:-110,y:-110,width:220,height:220};
  const s=nativeSymbol(c.type),ports=topology(c).ports;
- const width=s?.width||(/^(fuse|breaker|contactor)[234]$/.test(c.type)?90:70),height=s?.height||90;
+ const width=(c.type==='ssw05'?300:0)||s?.width||(/^(fuse|breaker|contactor)[234]$/.test(c.type)?90:70),height=(c.type==='ssw05'?220:0)||s?.height||90;
  const points=[{x:-width/2,y:-height/2},{x:width/2,y:-height/2},{x:width/2,y:height/2},{x:-width/2,y:height/2},...ports];
  const rad=(c.rotation||0)*Math.PI/180,rotated=points.map(p=>({x:p.x*Math.cos(rad)-p.y*Math.sin(rad),y:p.x*Math.sin(rad)+p.y*Math.cos(rad)}));
  const x=Math.min(...rotated.map(p=>p.x)),y=Math.min(...rotated.map(p=>p.y));
@@ -105,7 +106,7 @@ export function validateProject(value){
  if(!value||value.format!=='cade-web'||value.version!==1||!Array.isArray(value.components)||!Array.isArray(value.wires))throw new Error('Formato não suportado. Abra um projeto JSON exportado pelo CADe Web.');
  if(value.components.length>500||value.wires.length>1500)throw new Error('Limite de 500 componentes e 1.500 conexões por projeto.');
  const ids=new Set();const finite=(v,min,max)=>typeof v==='number'&&Number.isFinite(v)&&v>=min&&v<=max;
- const components=value.components.map(c=>{if(!c||typeof c.id!=='string'||c.id.length>100||ids.has(c.id)||!definition(c.type)||!finite(c.x,0,1200)||!finite(c.y,0,840))throw new Error('Componente inválido no projeto.');ids.add(c.id);return {...(c.type==='ssw05'?{ssw:sswSettings(c)}:{}),id:c.id,type:c.type,x:c.x,y:c.y,rotation:[0,90,180,270].includes(c.rotation)?c.rotation:0,tag:String(c.tag||c.id).slice(0,30),ref:String(c.ref||'').slice(0,30),label:String(c.label||'').slice(0,60),delay:finite(c.delay,0,3600)?c.delay:3,preset:finite(c.preset,1,99999)?Math.round(c.preset):3,color:/^#[0-9a-f]{6}$/i.test(c.color)?c.color:'#27bd90',...(Number.isInteger(c.nativeCommand)?{nativeCommand:c.nativeCommand}:{}),...(Array.isArray(c.terminalNames)?{terminalNames:c.terminalNames.slice(0,portCount(c)).map(x=>String(x).slice(0,10))}:{})};});
+ const components=value.components.map(c=>{if(!c||typeof c.id!=='string'||c.id.length>100||ids.has(c.id)||!definition(c.type)||!finite(c.x,0,1200)||!finite(c.y,0,840))throw new Error('Componente inválido no projeto.');ids.add(c.id);return {...(c.type==='ssw05'?{ssw:sswSettings(c)}:{}),...(isMotor(c)&&motorRPM(c)!==null?{rpm:motorRPM(c)}:{}),id:c.id,type:c.type,x:c.x,y:c.y,rotation:[0,90,180,270].includes(c.rotation)?c.rotation:0,tag:String(c.tag||c.id).slice(0,30),ref:String(c.ref||'').slice(0,30),label:String(c.label||'').slice(0,60),delay:finite(c.delay,0,3600)?c.delay:3,preset:finite(c.preset,1,99999)?Math.round(c.preset):3,color:/^#[0-9a-f]{6}$/i.test(c.color)?c.color:'#27bd90',...(Number.isInteger(c.nativeCommand)?{nativeCommand:c.nativeCommand}:{}),...(Array.isArray(c.terminalNames)?{terminalNames:c.terminalNames.slice(0,portCount(c)).map(x=>String(x).slice(0,10))}:{})};});
  const byId=new Map(components.map(c=>[c.id,c]));const wireIds=new Set();
  const wires=value.wires.map(w=>{const valid=e=>e&&byId.has(e.id)&&Number.isInteger(e.port)&&e.port>=0&&e.port<portCount(byId.get(e.id));if(!w||typeof w.id!=='string'||wireIds.has(w.id)||!valid(w.from)||!valid(w.to))throw new Error('Conexão inválida no projeto.');wireIds.add(w.id);const points=Array.isArray(w.points)?w.points:[];if(points.length>100||points.some(p=>!finite(p.x,0,1200)||!finite(p.y,0,840)))throw new Error('Trajeto de conexão inválido.');return {id:w.id,from:{id:w.from.id,port:w.from.port},to:{id:w.to.id,port:w.to.port},...(/^#[0-9a-f]{6}$/i.test(w.color)?{color:w.color}:{}),points:points.map(p=>({x:p.x,y:p.y}))};});
  const annotations=(Array.isArray(value.annotations)?value.annotations:[]).slice(0,30).filter(a=>finite(a.x,0,1200)&&finite(a.y,0,840)).map(a=>({x:a.x,y:a.y,text:String(a.text||'').slice(0,80)}));
