@@ -1,3 +1,4 @@
+import {advanceSSW} from './ssw05.mjs';
 import {topology,portCount,sourceType} from './topology.mjs';
 /** Digital continuity/relay simulator with distinct phase rails. No analog calculations. */
 export function simulate(circuit, previousState = {}, inputs = {}, dt = 0.05) {
@@ -19,6 +20,7 @@ export function simulate(circuit, previousState = {}, inputs = {}, dt = 0.05) {
   const tag = c => c.tag || c.id;
   let relays = { ...(previousState.relays || {}) };
   let result;
+  let softGuess=previousState.softstarters||{};
   const seen = new Set();
   const signature = r => components.map(c => `${tag(c)}=${!!r[tag(c)]}`).join('|');
   seen.add(signature(relays));
@@ -44,6 +46,12 @@ export function simulate(circuit, previousState = {}, inputs = {}, dt = 0.05) {
       }
       if (closed !== undefined) { active[c.id] = closed;if(model.kind.endsWith('Change'))join(key(c.id,0),key(c.id,closed?2:1));else if(closed)for(const [a,b] of model.pairs)join(key(c.id,a),key(c.id,b)); }
     }
+    for(const c of components.filter(c=>c.type==='ssw05')){
+      const s=softGuess[c.id]||{};
+      join(key(c.id,2),key(c.id,5)); // SSW-05 controla duas fases; a terceira é direta.
+      if(s.operation){join(key(c.id,0),key(c.id,3));join(key(c.id,1),key(c.id,4));join(key(c.id,10),key(c.id,11));}
+      if(s.full)join(key(c.id,11),key(c.id,12));
+    }
     const rails=new Map();
     for(const c of components.filter(source)){const model=topology(c);model.rails.forEach((rail,p)=>{const root=find(key(c.id,p));if(!rails.has(root))rails.set(root,new Set());rails.get(root).add(rail);});}
     // Conversores ideais: secundários isolados, inclusive em cascata.
@@ -61,6 +69,15 @@ export function simulate(circuit, previousState = {}, inputs = {}, dt = 0.05) {
         model.outputs.forEach((p,i)=>{const root=find(key(c.id,p));if(!rails.has(root))rails.set(root,new Set());const rail=model.kind==='dcSupply'?'DC:'+c.id+':'+(i===0?'+':'-'):'AC:'+c.id+':'+(model.outputs.length===2?(i===0?'L1':'N'):input[i].phase);rails.get(root).add(rail);});
       }
       if(!progress)break;
+    }
+    const softstarters={};
+    const railAt=(c,p)=>{const r=rails.get(find(key(c.id,p)));return r?.size===1?[...r][0]:null;};
+    for(const c of components.filter(c=>c.type==='ssw05')){
+      const a=acInfo(railAt(c,6)),b=acInfo(railAt(c,7)),power=[0,1,2].map(p=>acInfo(railAt(c,p)));
+      const control=!!a&&!!b&&a.domain===b.domain&&a.phase!==b.phase;
+      const signal={control,power:power.every(r=>r?.phase.startsWith('L'))&&power.every(r=>r.domain===power[0].domain)&&new Set(power.map(r=>r?.phase)).size===3,enable:control&&railAt(c,8)===railAt(c,6),reset:control&&railAt(c,9)===railAt(c,6),frontReset:!!inputs[c.id]};
+      softstarters[c.id]=advanceSSW(c,previousState.softstarters?.[c.id],signal,delta);
+      active[c.id]=softstarters[c.id].operation;
     }
     const phaseRoots = new Set([...rails].filter(([,r])=>[...r].some(x=>acInfo(x)?.phase.startsWith('L')||x.endsWith(':+'))).map(([root])=>root));
     const neutralRoots = new Set([...rails].filter(([,r])=>[...r].some(x=>acInfo(x)?.phase==='N'||x.endsWith(':-'))).map(([root])=>root));
@@ -112,7 +129,7 @@ export function simulate(circuit, previousState = {}, inputs = {}, dt = 0.05) {
       if(c.type==='relayLatch'){const prior=previousState.latches?.[c.id]||{input:false,output:false};const output=powered&&!prior.input?!prior.output:prior.output;nextRelays[tag(c)]=!!nextRelays[tag(c)]||output;}
     }
     const latches=Object.fromEntries(components.filter(c=>c.type==='relayLatch').map(c=>[c.id,{input:active[c.id],output:!!nextRelays[tag(c)]}]));
-    result = { active, relays: nextRelays, energized, neutral, shortCircuit, unstable: false, timers, counters, latches, motorDirections, errors };
+    result = { active, relays: nextRelays, energized, neutral, shortCircuit, unstable: false, softstarters, timers, counters, latches, motorDirections, errors };
     if(shortCircuit){
       // Preserva o instante do fechamento que provocou o curto, antes da próxima iteração.
       result.relays={...relays};
@@ -122,6 +139,8 @@ export function simulate(circuit, previousState = {}, inputs = {}, dt = 0.05) {
       result.faultMessage=shortBetweenPhases?'Curto entre fases':'Curto-circuito entre potenciais diferentes';
       return result;
     }
+    const softStable=components.filter(c=>c.type==='ssw05').every(c=>!!softGuess[c.id]?.operation===!!softstarters[c.id]?.operation&&!!softGuess[c.id]?.full===!!softstarters[c.id]?.full);
+    if(!softStable){softGuess=softstarters;relays=nextRelays;continue;}
     const next = signature(nextRelays);
     if (next === signature(relays)) return result;
     if (seen.has(next)) { result.unstable = true; errors.push('Realimentação oscilante: o circuito não atingiu um estado estável.'); return result; }

@@ -1,7 +1,9 @@
+import {sswSettings,sswSymbol} from './ssw05.mjs';
 import {topology,portCount,sourceType} from './topology.mjs';
 import {nativeSymbols,nativeSymbol} from './symbol-library.mjs';
 export {portCount};
 export const catalog = [
+ {type:'ssw05',name:'WEG SSW-05 Plus',short:'Soft-starter com trimpots',group:'Potência',prefix:'SSW',code:'SSW'},
  {type:'junction',name:'Junção elétrica',short:'',group:'Conexões',prefix:'J',code:'J'},
  {type:'phase',name:'Fase / positivo',short:'Alimentação',group:'Alimentação',prefix:'L',code:'L'},
  {type:'neutral',name:'Neutro / retorno',short:'Retorno',group:'Alimentação',prefix:'N',code:'N'},
@@ -30,6 +32,7 @@ export const catalog = [
 catalog.push(...nativeSymbols.map(s=>({...s,short:s.name,prefix:s.command===32865?'F':'X',code:String(s.command)})));
 export const definition = type => catalog.find(c=>c.type===type);
 export function getSymbolBounds(c){
+ if(c.type==='ssw05')return {x:-110,y:-110,width:220,height:220};
  const s=nativeSymbol(c.type),ports=topology(c).ports;
  const width=s?.width||(/^(fuse|breaker|contactor)[234]$/.test(c.type)?90:70),height=s?.height||90;
  const points=[{x:-width/2,y:-height/2},{x:width/2,y:-height/2},{x:width/2,y:height/2},{x:-width/2,y:height/2},...ports];
@@ -43,6 +46,7 @@ export const isLoad = c => ['coil','lamp','motor','motor3','buzzer','resistor','
 export const escapeHTML = s => String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function terminal(c,p){const q=topology(c).ports[p];if(!q)return {x:c.x,y:c.y};const rad=(c.rotation||0)*Math.PI/180;return {x:c.x+q.x*Math.cos(rad)-q.y*Math.sin(rad),y:c.y+q.x*Math.sin(rad)+q.y*Math.cos(rad)};}
 export function symbol(type,active=false,color='#20ad86',input=false,variant=null){
+ if(type==='ssw05')return sswSymbol();
  const native=nativeSymbol(type);if(native)return `<g class="symbol-line">${native.svg}</g>`;
  if(type==='junction')return '<circle r="3" fill="currentColor"/>';
  const stem='<path d="M0 -40V-16 M0 16V40"/>';
@@ -85,7 +89,7 @@ export function symbol(type,active=false,color='#20ad86',input=false,variant=nul
  return `<g class="symbol-line">${shape}</g>`;
 }
 export const symbolSVG=(type)=>{const b=getSymbolBounds({type});return `<svg viewBox="${b.x-3} ${b.y-3} ${b.width+6} ${b.height+6}" aria-hidden="true">${symbol(type,['fuse','breaker','contactNC','buttonNC'].includes(type))}</svg>`;};
-export function terminalLabel(c,p){if(c.terminalNames?.[p]!==undefined)return c.terminalNames[p];if(c.nativeCommand===32928)return ['95','96'][p];if(c.nativeCommand===32927)return ['97','98'][p];const t=topology(c);if(t.kind==='dcSupply')return t.ports[p].label;if(t.kind==='source')return '';if(c.type==='motor3')return ['U1','V1','W1'][p];if(['coil','timerOn','timerOff','timerPulse','relayLatch','counter'].includes(c.type))return ['A1','A2'][p];if(c.type.endsWith('Change'))return ['11','12','14'][p];if(t.ports.length>2){const n=t.ports.length/2;return p<n?String(p*2+1):String((p-n)*2+2);}if(c.type.endsWith('NC'))return ['21','22'][p];if(/^(contact|button|switch)/.test(c.type))return ['13','14'][p];return ['1','2'][p];}
+export function terminalLabel(c,p){if(c.terminalNames?.[p]!==undefined)return c.terminalNames[p];if(c.nativeCommand===32928)return ['95','96'][p];if(c.nativeCommand===32927)return ['97','98'][p];const t=topology(c);if(c.type==='ssw05')return t.ports[p].label;if(t.kind==='dcSupply')return t.ports[p].label;if(t.kind==='source')return '';if(c.type==='motor3')return ['U1','V1','W1'][p];if(['coil','timerOn','timerOff','timerPulse','relayLatch','counter'].includes(c.type))return ['A1','A2'][p];if(c.type.endsWith('Change'))return ['11','12','14'][p];if(t.ports.length>2){const n=t.ports.length/2;return p<n?String(p*2+1):String((p-n)*2+2);}if(c.type.endsWith('NC'))return ['21','22'][p];if(/^(contact|button|switch)/.test(c.type))return ['13','14'][p];return ['1','2'][p];}
 function c(id,type,x,y,tag,label,extra={}){return {id,type,x,y,tag,label,ref:'',rotation:0,delay:3,preset:3,color:'#27bd90',...extra};}
 function w(id,a,ap,b,bp,points=[]){return {id,from:{id:a,port:ap},to:{id:b,port:bp},points};}
 export function example(name='starter'){
@@ -101,7 +105,7 @@ export function validateProject(value){
  if(!value||value.format!=='cade-web'||value.version!==1||!Array.isArray(value.components)||!Array.isArray(value.wires))throw new Error('Formato não suportado. Abra um projeto JSON exportado pelo CADe Web.');
  if(value.components.length>500||value.wires.length>1500)throw new Error('Limite de 500 componentes e 1.500 conexões por projeto.');
  const ids=new Set();const finite=(v,min,max)=>typeof v==='number'&&Number.isFinite(v)&&v>=min&&v<=max;
- const components=value.components.map(c=>{if(!c||typeof c.id!=='string'||c.id.length>100||ids.has(c.id)||!definition(c.type)||!finite(c.x,0,1200)||!finite(c.y,0,840))throw new Error('Componente inválido no projeto.');ids.add(c.id);return {id:c.id,type:c.type,x:c.x,y:c.y,rotation:[0,90,180,270].includes(c.rotation)?c.rotation:0,tag:String(c.tag||c.id).slice(0,30),ref:String(c.ref||'').slice(0,30),label:String(c.label||'').slice(0,60),delay:finite(c.delay,0,3600)?c.delay:3,preset:finite(c.preset,1,99999)?Math.round(c.preset):3,color:/^#[0-9a-f]{6}$/i.test(c.color)?c.color:'#27bd90',...(Number.isInteger(c.nativeCommand)?{nativeCommand:c.nativeCommand}:{}),...(Array.isArray(c.terminalNames)?{terminalNames:c.terminalNames.slice(0,portCount(c)).map(x=>String(x).slice(0,10))}:{})};});
+ const components=value.components.map(c=>{if(!c||typeof c.id!=='string'||c.id.length>100||ids.has(c.id)||!definition(c.type)||!finite(c.x,0,1200)||!finite(c.y,0,840))throw new Error('Componente inválido no projeto.');ids.add(c.id);return {...(c.type==='ssw05'?{ssw:sswSettings(c)}:{}),id:c.id,type:c.type,x:c.x,y:c.y,rotation:[0,90,180,270].includes(c.rotation)?c.rotation:0,tag:String(c.tag||c.id).slice(0,30),ref:String(c.ref||'').slice(0,30),label:String(c.label||'').slice(0,60),delay:finite(c.delay,0,3600)?c.delay:3,preset:finite(c.preset,1,99999)?Math.round(c.preset):3,color:/^#[0-9a-f]{6}$/i.test(c.color)?c.color:'#27bd90',...(Number.isInteger(c.nativeCommand)?{nativeCommand:c.nativeCommand}:{}),...(Array.isArray(c.terminalNames)?{terminalNames:c.terminalNames.slice(0,portCount(c)).map(x=>String(x).slice(0,10))}:{})};});
  const byId=new Map(components.map(c=>[c.id,c]));const wireIds=new Set();
  const wires=value.wires.map(w=>{const valid=e=>e&&byId.has(e.id)&&Number.isInteger(e.port)&&e.port>=0&&e.port<portCount(byId.get(e.id));if(!w||typeof w.id!=='string'||wireIds.has(w.id)||!valid(w.from)||!valid(w.to))throw new Error('Conexão inválida no projeto.');wireIds.add(w.id);const points=Array.isArray(w.points)?w.points:[];if(points.length>100||points.some(p=>!finite(p.x,0,1200)||!finite(p.y,0,840)))throw new Error('Trajeto de conexão inválido.');return {id:w.id,from:{id:w.from.id,port:w.from.port},to:{id:w.to.id,port:w.to.port},...(/^#[0-9a-f]{6}$/i.test(w.color)?{color:w.color}:{}),points:points.map(p=>({x:p.x,y:p.y}))};});
  const annotations=(Array.isArray(value.annotations)?value.annotations:[]).slice(0,30).filter(a=>finite(a.x,0,1200)&&finite(a.y,0,840)).map(a=>({x:a.x,y:a.y,text:String(a.text||'').slice(0,80)}));

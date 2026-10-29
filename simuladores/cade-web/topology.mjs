@@ -1,7 +1,9 @@
+import {sswPorts} from './ssw05.mjs';
 /** Digital conductor topology. Phase identity is preserved; no analog solver. */
 import {nativeSymbol} from './symbol-library.mjs';
 export function topology(c){
  const type=c.type;
+ if(type==='ssw05')return {kind:'ssw05',ports:sswPorts,pairs:[]};
  if(type==='junction')return {kind:'junction',ports:[{x:0,y:0}],pairs:[]};
  const graphic=nativeSymbol(type);
  const nativeRails={native32873:['L1'],native32874:['N'],native32883:['PE'],native33042:['PE'],native32872:['L1','N'],native32906:['L1','N','PE'],native32870:['L1','L2','L3'],native32879:['L1','L2','L3','PE'],native32869:['L1','L2','L3','N'],native32882:['L1','L2','L3','N','PE'],native32876:['DC:manual:+'],native32877:['DC:manual:-'],native32875:['DC:manual:+','DC:manual:-'],native33046:[`DC:${c.id}:+`,`DC:${c.id}:-`]};

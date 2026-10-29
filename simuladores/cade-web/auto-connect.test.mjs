@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {connectOverlappingTerminals,circuitWirePoints} from './auto-connect.mjs';
+let id=0;const uid=()=>`new${++id}`;
+const p={components:[{id:'a',type:'junction',x:100,y:100},{id:'b',type:'junction',x:300,y:100},{id:'k',type:'coil',x:200,y:140}],wires:[{id:'w',from:{id:'a',port:0},to:{id:'b',port:0},points:[]}]};
+assert.equal(connectOverlappingTerminals(p,uid),1);
+assert.equal(p.wires.length,2);assert.equal(p.wires[0].to.id,'k');assert.equal(p.wires[0].to.port,0);
+assert.equal(connectOverlappingTerminals(p,uid),0);
+assert.deepEqual(circuitWirePoints(p,p.wires[0]),[{x:100,y:100},{x:200,y:100}]);
+const crossing={components:[{id:'a',type:'junction',x:100,y:100},{id:'b',type:'junction',x:300,y:100},{id:'c',type:'junction',x:200,y:50},{id:'d',type:'junction',x:200,y:150}],wires:[{id:'h',from:{id:'a',port:0},to:{id:'b',port:0}},{id:'v',from:{id:'c',port:0},to:{id:'d',port:0}}]};
+assert.equal(connectOverlappingTerminals(crossing,uid),0);
+const near=structuredClone(crossing);near.components.push({id:'k',type:'coil',x:250,y:141});assert.equal(connectOverlappingTerminals(near,uid),0);
+console.log('OK: terminal sobre fio conecta, não duplica, preserva trajeto e não une cruzamentos ou terminais próximos.');
