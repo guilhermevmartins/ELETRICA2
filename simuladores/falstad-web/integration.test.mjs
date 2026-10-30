@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+const handlers={},scope='https://example.test/simuladores/falstad-web/';
+let offline=false,stored=new Response('antigo'),puts=0;
+const cache={match:async()=>stored,put:async(req,res)=>{stored=res;puts++;}};
+vm.runInNewContext(fs.readFileSync(new URL('./service-worker.js',import.meta.url),'utf8'),{self:{registration:{scope},addEventListener:(n,f)=>handlers[n]=f},URL,caches:{open:async()=>cache},fetch:async()=>{if(offline)throw Error('offline');return new Response('novo');}});
+async function request(url,method='GET'){let result;handlers.fetch({request:{url,method},respondWith:p=>result=p});return result;}
+assert.equal(await (await request(scope+'index.html')).text(),'novo');assert.equal(puts,1);
+offline=true;assert.equal(await (await request(scope+'index.html')).text(),'novo');
+assert.equal(await request('https://example.test/index.php'),undefined);
+assert.equal(await request(scope+'shortrelay.php?v=test'),undefined);
+assert.equal(await request(scope+'index.html','POST'),undefined);
+const events={},parent={innerHeight:900,postMessage(){}};let running=true;
+const sim={isRunning:()=>running,setSimRunning:v=>running=v};const window={CircuitJS1:sim,addEventListener:(n,f)=>events[n]=f};
+vm.runInNewContext(fs.readFileSync(new URL('./portal-integration.js',import.meta.url),'utf8'),{window,parent,document:{querySelector:()=>null},location:{origin:'https://example.test'}});
+window.oncircuitjsloaded();assert.equal(running,false);
+const toggle=active=>events.message({source:parent,origin:'https://example.test',data:{type:'lab-visibility',active}});
+toggle(true);assert.equal(running,true);toggle(false);assert.equal(running,false);toggle(true);assert.equal(running,true);
+running=false;toggle(false);toggle(true);assert.equal(running,false);
+console.log('OK: atualização online, cache offline, escopo, pausa automática e pausa manual.');

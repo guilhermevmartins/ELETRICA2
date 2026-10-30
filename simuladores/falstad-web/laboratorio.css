@@ -1,0 +1,23 @@
+/* Identidade do laboratório; mantém as dimensões usadas pelo motor GWT. */
+body {font-family: 'Segoe UI', Arial, sans-serif; background:#122738; color:#213c50;}
+.gwt-MenuBar-horizontal {background:#18384c!important; border:0!important; border-bottom:2px solid #ed1c24!important; box-sizing:border-box; padding-left:136px!important;}
+.gwt-MenuBar-horizontal::before {content:'BANCADA ELETRÔNICA'; position:absolute; left:12px; top:9px; color:#9fc9da; font:700 9px 'Segoe UI',sans-serif; letter-spacing:.7px;}
+.gwt-MenuBar-horizontal .gwt-MenuItem {color:#edf6fa!important; font-family:'Segoe UI',sans-serif!important; padding:5px 10px!important; border-radius:5px 5px 0 0; white-space:nowrap;}
+.gwt-MenuBar-horizontal .gwt-MenuItem-selected {background:#31566d!important; color:white!important;}
+.lab-toolstrip {background:#e9f0f4!important; border-bottom:1px solid #b8ccd8; box-sizing:border-box;}
+.lab-tools {border-collapse:separate!important; border-spacing:3px 0!important; height:38px;}
+.lab-tools > tbody > tr > td {padding:0!important;}
+.lab-tools > tbody > tr > td:nth-child(3),
+.lab-tools > tbody > tr > td:nth-child(7),
+.lab-tools > tbody > tr > td:nth-child(11) {border-left:1px solid #a8bfcd; padding-left:9px!important;}
+.lab-tools .gwt-Label {color:#25485d!important; background:#f8fbfd; border:1px solid #ccdce5; border-radius:5px; box-sizing:border-box; min-width:28px; height:30px; display:flex; align-items:center; justify-content:center; margin-right:0!important; padding:1px!important; font-size:20px!important;}
+.lab-tools .gwt-Label:hover {background:#d2e6ef; border-color:#588ba5;}
+.lab-tools .gwt-Label:focus-visible {outline:2px solid #be1520; outline-offset:1px;}
+.lab-side {background:#edf3f7!important; border-left:1px solid #b8ccd8; color:#244458; box-sizing:border-box;}
+.lab-side .gwt-Label {font-family:'Segoe UI',sans-serif; font-size:12px;}
+.lab-side .gwt-Button {background:#244d65; color:white; border:1px solid #244d65; border-radius:5px; padding:5px 9px; font-family:inherit; cursor:pointer;}
+.lab-side .gwt-Button:hover {background:#326880;}
+.gwt-MenuBar-vertical {background:#f3f7fa!important; border:1px solid #a9c0ce!important; color:#19394c;}
+.gwt-MenuBar-vertical .gwt-MenuItem {padding:5px 10px!important; font-family:'Segoe UI',sans-serif!important;}
+.gwt-MenuBar-vertical .gwt-MenuItem-selected {background:#d8e9f2!important; color:#163b50!important;}
+@media(max-width:850px){.gwt-MenuBar-horizontal{padding-left:0!important}.gwt-MenuBar-horizontal::before{display:none}.gwt-MenuBar-horizontal .gwt-MenuItem{padding-left:6px!important;padding-right:6px!important}.lab-tools{border-spacing:1px 0!important}.lab-tools > tbody > tr > td:nth-child(3),.lab-tools > tbody > tr > td:nth-child(7),.lab-tools > tbody > tr > td:nth-child(11){padding-left:3px!important}}

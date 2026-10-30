@@ -68,6 +68,7 @@ window.LAB_AREAS = [
     "topics": "Portas lógicas · Somadores · Flip-flops · Contadores · Programação Arduino",
     "modules": [
       "digital",
+      "falstad-digital",
       "arduino-estruturas"
     ],
     "icon": "M17 15h14v26H17zM10 20h7M10 28h7M10 36h7M31 20h7M31 28h7M31 36h7M22 9v6M27 9v6M22 41v6M27 41v6"
@@ -80,7 +81,8 @@ window.LAB_AREAS = [
     "topics": "Resistividade · Temperatura · Diodos · Camada de depleção · LED · Zener",
     "modules": [
       "materiais-condutores",
-      "diodos"
+      "diodos",
+      "falstad-analogica"
     ],
     "icon": "M6 28h7l3-9 5 18 6-18 5 18 3-9h7M9 44h30M9 11h30"
   },
