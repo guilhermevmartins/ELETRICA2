@@ -2,3 +2,8 @@ command-library-data.php
 command-library-login.php
 command-library.lock
 library-*
+
+improvements-data.php
+improvements-rate.php
+improvements.lock
+improvement-*
