@@ -10,3 +10,6 @@ improvement-*
 
 falstad-library-data.php
 falstad-library.lock
+access-count.php
+access-count.lock
+access-count-*

@@ -9,10 +9,10 @@ export function installMega(sim){
     <label class="mega-upload">Carregar programa .hex<input data-file type="file" accept=".hex"></label><p data-file-name>Nenhum programa carregado</p>
     <div class="mega-actions"><button data-start>▶ Iniciar</button><button data-pause disabled>Ⅱ Pausar</button><button data-reset disabled>↺ Reiniciar</button></div>
     <p data-status role="status">Pronto para receber um programa do Mega 2560.</p>
-    <details><summary>Como enviar meu programa?</summary><ol><li>Na IDE Arduino, selecione <b>Arduino Mega or Mega 2560</b>.</li><li>Use <b>Sketch → Exportar Binário Compilado</b>.</li><li>Carregue o arquivo <b>.hex sem bootloader</b> aqui.</li><li>Insira os terminais abaixo e conecte os fios no Falstad.</li></ol><p>O .ino é o código-fonte: compile-o na IDE antes de carregar. A simulação acontece no navegador; não grava numa placa física.</p></details>
+    <details><summary>Como enviar meu programa?</summary><ol><li>Na IDE Arduino, selecione <b>Arduino Mega or Mega 2560</b>.</li><li>Use <b>Sketch → Exportar Binário Compilado</b>.</li><li>Carregue o arquivo <b>.hex sem bootloader</b> aqui.</li><li>Insira os terminais abaixo e conecte os fios no CircuitLab.</li></ol><p>O .ino é o código-fonte: compile-o na IDE antes de carregar. A simulação acontece no navegador; não grava numa placa física.</p></details>
     <div class="mega-example"><label>Experiência pronta<select data-demo><option value="blink">LED piscando · D13</option><option value="button">Botão D22 → LED D13</option><option value="analog">Entrada A15 → PWM D44</option></select></label><button data-load-demo>Montar exemplo</button><a data-source href="mega/examples/blink.ino" download>Baixar código .ino</a></div>
     <section class="mega-board"><div class="mega-chip">ATmega2560 <small>16 MHz · 5 V</small><span data-clock>0,000 s</span></div><h3>Digitais · D0–D53</h3><div class="mega-pin-grid" data-digital></div><h3>Analógicos · A0–A15</h3><div class="mega-pin-grid" data-analog></div><p class="mega-legend"><span>● HIGH / 5 V</span> · ○ LOW / 0 V · ~ PWM</p></section>
-    <section class="mega-pin-detail"><h3 data-pin-title></h3><p data-pin-state></p><div class="mega-actions"><button data-input>Inserir entrada no circuito</button><button data-output>Inserir saída no circuito</button></div><label data-manual-label>Entrada de teste, sem fio: <output data-voltage>0 V</output><input data-manual type="range" min="0" max="5" step="0.01" value="0"></label><button data-release>Liberar entrada de teste</button><small>Entradas conectadas usam a tensão do Falstad. INPUT_PULLUP conectado precisa de resistor de pull-up no circuito. Saídas fornecem 0 ou 5 V; ligue-as a uma carga, nunca a outra fonte.</small></section>
+    <section class="mega-pin-detail"><h3 data-pin-title></h3><p data-pin-state></p><div class="mega-actions"><button data-input>Inserir entrada no circuito</button><button data-output>Inserir saída no circuito</button></div><label data-manual-label>Entrada de teste, sem fio: <output data-voltage>0 V</output><input data-manual type="range" min="0" max="5" step="0.01" value="0"></label><button data-release>Liberar entrada de teste</button><small>Entradas conectadas usam a tensão do CircuitLab. INPUT_PULLUP conectado precisa de resistor de pull-up no circuito. Saídas fornecem 0 ou 5 V; ligue-as a uma carga, nunca a outra fonte.</small></section>
     <details><summary>Monitor serial · Serial a Serial3</summary><pre data-serial aria-label="Monitor serial"></pre><button data-clear>Limpar monitor</button></details>
     <div class="mega-actions"><button data-save>Baixar projeto completo</button><label class="mega-upload">Abrir projeto<input data-project type="file" accept=".json"></label></div>
     <p class="mega-note">PWM aparece em pulsos de 0/5 V. A velocidade acompanha o tempo da simulação. SPI, I²C, USB, EEPROM e bibliotecas que dependem desses periféricos ainda não são simulados nesta integração.</p></div>`;
@@ -53,7 +53,7 @@ export function installMega(sim){
     const now=sim.getTime(),delta=now-previousTime;previousTime=now;
     if(delta<0){targetCycles=runner.cpu.cycles;return;}
     targetCycles+=delta*FREQUENCY;
-    if(targetCycles-runner.cpu.cycles>200000){pause();status('Passo de tempo muito grande. Reduza o passo máximo do Falstad para 50 µs ou menos.');return;}
+    if(targetCycles-runner.cpu.cycles>200000){pause();status('Passo de tempo muito grande. Reduza o passo máximo do CircuitLab para 50 µs ou menos.');return;}
     try{runner.advance(Math.max(0,Math.floor(targetCycles-runner.cpu.cycles)));}catch(e){pause();status(e.message);}
   };
   const previousAnalyze=sim.onanalyze;
@@ -101,7 +101,7 @@ export function installMega(sim){
     runner.syncInputs();show(true);status('Circuito e programa restaurados. Clique em Iniciar.');
   }
   window.labMega={snapshot,restore};
-  $('[data-save]').onclick=()=>{const blob=new Blob([JSON.stringify({format:'falstad-mega-project',version:1,project:snapshot()},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='projeto-mega-falstad.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+  $('[data-save]').onclick=()=>{const blob=new Blob([JSON.stringify({format:'falstad-mega-project',version:1,project:snapshot()},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='projeto-mega-circuitlab.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
   $('[data-project]').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>2000000)throw Error('Projeto muito grande.');const data=JSON.parse(await file.text());if(data.format!=='falstad-mega-project'||data.version!==1)throw Error('Escolha um projeto Mega + Falstad.');if(confirm('Substituir o circuito e o programa atuais?'))restore(data.project);}catch(e){status(e.message);}finally{e.target.value='';}};
   scan();controls();refresh();
 }

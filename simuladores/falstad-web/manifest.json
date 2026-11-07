@@ -1,11 +1,11 @@
 {
-  "name": "CircuitJS1",
-  "short_name": "CircuitJS1",
-  "start_url": "./circuitjs.html",
+  "name": "CircuitLab — Laboratório de circuitos",
+  "short_name": "CircuitLab",
+  "start_url": "./index.html?lang=pt",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#2196f3",
-  "description": "Circuit Simulator",
+  "background_color": "#20282f",
+  "theme_color": "#252e36",
+  "description": "Monte, programe e explore circuitos analógicos e digitais.",
   "icons": [
     {
       "src": "./icon512.png",
@@ -19,5 +19,3 @@
     }
   ]
 }
-
-

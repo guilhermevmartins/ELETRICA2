@@ -1,24 +1,32 @@
-/* Identidade do laboratório; mantém as dimensões usadas pelo motor GWT. */
+/* CircuitLab: identidade visual sem alterar a geometria usada pelo CircuitJS. */
+:root{--cl-ink:#26333d;--cl-muted:#647481;--cl-accent:#087f83;--cl-border:#c7d1d8;--cl-paper:#f1f4f6}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#20282f;color:var(--cl-ink)}
+.gwt-MenuBar-horizontal{position:relative;background:#252e36!important;border:0!important;border-bottom:2px solid #39b9ad!important;box-sizing:border-box;padding-left:140px!important}
+.gwt-MenuBar-horizontal::before{content:'◈ CircuitLab';position:absolute;left:13px;top:5px;color:#e2fbf5;font:700 17px 'Segoe UI',sans-serif;letter-spacing:-.5px;pointer-events:none}
+.gwt-MenuBar-horizontal .gwt-MenuItem{color:#dce3e8!important;font-family:'Segoe UI',sans-serif!important;padding:5px 10px!important;border-radius:5px 5px 0 0;white-space:nowrap}
+.gwt-MenuBar-horizontal .gwt-MenuItem-selected{background:#44515c!important;color:white!important}
+.lab-toolstrip{background:#dfe5e9!important;border-bottom:1px solid #b7c3cb;box-sizing:border-box}
+.lab-tools{border-collapse:separate!important;border-spacing:3px 0!important;height:38px}
+.lab-tools>tbody>tr>td{padding:0!important}
+.lab-tools>tbody>tr>td:nth-child(3),.lab-tools>tbody>tr>td:nth-child(7),.lab-tools>tbody>tr>td:nth-child(11){border-left:1px solid #b6c3cc;padding-left:9px!important}
+.lab-tools .gwt-Label{color:#455560!important;background:#f7f9fa;border:1px solid #c2cdd5;border-radius:6px;box-sizing:border-box;min-width:28px;height:30px;display:flex;align-items:center;justify-content:center;margin-right:0!important;padding:1px!important;font-size:20px!important;box-shadow:0 1px 2px #162b3a0a}
+.lab-tools .gwt-Label:hover{background:#d6eeeb;border-color:#55a89f;color:#08635e!important}
+.lab-tools .gwt-Label:focus-visible{outline:2px solid #087f83;outline-offset:1px}
+.lab-side{background:#edf1f4!important;border-left:1px solid #bdcad3;color:#354751;box-sizing:border-box}
+.lab-side .gwt-Label{font-family:'Segoe UI',sans-serif;font-size:12px}
+.lab-side .gwt-Button{background:#fff;color:#344b58;border:1px solid #bdcbd4;border-radius:6px;padding:5px 9px;font-family:inherit;cursor:pointer}
+.lab-side .gwt-Button:hover{background:#d6eeeb;border-color:#55a89f}
+.lab-side input[type=range]{accent-color:#087f83}
+.topButton,.topButton-red{font-family:'Segoe UI',sans-serif!important;border-radius:6px!important;box-shadow:none!important;padding:5px 10px!important;border:1px solid #b9c7cf!important}
+.topButton{background:#f5f7f9!important;color:#344b58!important}.topButton-red{background:#087f83!important;color:white!important;border-color:#07696d!important}
+.gwt-MenuBar-vertical{background:#f8fafb!important;border:1px solid #b8c8d1!important;color:#263d49;border-radius:7px;box-shadow:0 7px 22px #122b3d28}
+.gwt-MenuBar-vertical .gwt-MenuItem{padding:6px 12px!important;font-family:'Segoe UI',sans-serif!important}
+.gwt-MenuBar-vertical .gwt-MenuItem-selected{background:#d6eeeb!important;color:#075b57!important}
+.gwt-MenuItem-disabled{color:#89959e!important}
+.lab-examples-button{background:#35434e!important;color:#edf7f8!important;border:1px solid #536570!important;border-radius:6px!important;font:600 11px 'Segoe UI',sans-serif!important;padding:5px 10px!important;margin:0 2px;cursor:pointer}
+.lab-examples-button:hover{background:#49616b!important}.lab-examples-button[aria-controls=mega-panel]{background:#087f83!important;border-color:#44a9a5!important}.lab-examples-button[aria-pressed=true]{background:#49616b!important}
+.lab-examples-button:focus-visible{outline:2px solid #74e3d5;outline-offset:2px}
+.gwt-DialogBox .Caption{background:#35434e!important;color:#fff!important;font-family:'Segoe UI',sans-serif!important;padding:8px!important}
 .lab-fullscreen-floating{position:fixed;right:10px;top:85px;z-index:500}
-body {font-family: 'Segoe UI', Arial, sans-serif; background:#122738; color:#213c50;}
-.gwt-MenuBar-horizontal {background:#18384c!important; border:0!important; border-bottom:2px solid #ed1c24!important; box-sizing:border-box; padding-left:136px!important;}
-.gwt-MenuBar-horizontal::before {content:'BANCADA ELETRÔNICA'; position:absolute; left:12px; top:9px; color:#9fc9da; font:700 9px 'Segoe UI',sans-serif; letter-spacing:.7px;}
-.gwt-MenuBar-horizontal .gwt-MenuItem {color:#edf6fa!important; font-family:'Segoe UI',sans-serif!important; padding:5px 10px!important; border-radius:5px 5px 0 0; white-space:nowrap;}
-.gwt-MenuBar-horizontal .gwt-MenuItem-selected {background:#31566d!important; color:white!important;}
-.lab-toolstrip {background:#e9f0f4!important; border-bottom:1px solid #b8ccd8; box-sizing:border-box;}
-.lab-tools {border-collapse:separate!important; border-spacing:3px 0!important; height:38px;}
-.lab-tools > tbody > tr > td {padding:0!important;}
-.lab-tools > tbody > tr > td:nth-child(3),
-.lab-tools > tbody > tr > td:nth-child(7),
-.lab-tools > tbody > tr > td:nth-child(11) {border-left:1px solid #a8bfcd; padding-left:9px!important;}
-.lab-tools .gwt-Label {color:#25485d!important; background:#f8fbfd; border:1px solid #ccdce5; border-radius:5px; box-sizing:border-box; min-width:28px; height:30px; display:flex; align-items:center; justify-content:center; margin-right:0!important; padding:1px!important; font-size:20px!important;}
-.lab-tools .gwt-Label:hover {background:#d2e6ef; border-color:#588ba5;}
-.lab-tools .gwt-Label:focus-visible {outline:2px solid #be1520; outline-offset:1px;}
-.lab-side {background:#edf3f7!important; border-left:1px solid #b8ccd8; color:#244458; box-sizing:border-box;}
-.lab-side .gwt-Label {font-family:'Segoe UI',sans-serif; font-size:12px;}
-.lab-side .gwt-Button {background:#244d65; color:white; border:1px solid #244d65; border-radius:5px; padding:5px 9px; font-family:inherit; cursor:pointer;}
-.lab-side .gwt-Button:hover {background:#326880;}
-.gwt-MenuBar-vertical {background:#f3f7fa!important; border:1px solid #a9c0ce!important; color:#19394c;}
-.gwt-MenuBar-vertical .gwt-MenuItem {padding:5px 10px!important; font-family:'Segoe UI',sans-serif!important;}
-.gwt-MenuBar-vertical .gwt-MenuItem-selected {background:#d8e9f2!important; color:#163b50!important;}
-@media(max-width:850px){.gwt-MenuBar-horizontal{padding-left:0!important}.gwt-MenuBar-horizontal::before{display:none}.gwt-MenuBar-horizontal .gwt-MenuItem{padding-left:6px!important;padding-right:6px!important}.lab-tools{border-spacing:1px 0!important}.lab-tools > tbody > tr > td:nth-child(3),.lab-tools > tbody > tr > td:nth-child(7),.lab-tools > tbody > tr > td:nth-child(11){padding-left:3px!important}}
+@media(max-width:1050px){.gwt-MenuBar-horizontal{padding-left:113px!important}.gwt-MenuBar-horizontal::before{font-size:14px;left:8px;top:7px}.gwt-MenuBar-horizontal .gwt-MenuItem{padding-left:5px!important;padding-right:5px!important}.lab-examples-button{padding-left:6px!important;padding-right:6px!important;margin:0 1px}.lab-tools{border-spacing:1px 0!important}.lab-tools>tbody>tr>td:nth-child(3),.lab-tools>tbody>tr>td:nth-child(7),.lab-tools>tbody>tr>td:nth-child(11){padding-left:3px!important}}
+@media(max-width:760px){.gwt-MenuBar-horizontal{padding-left:0!important}.gwt-MenuBar-horizontal::before{display:none}}

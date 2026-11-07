@@ -19,7 +19,8 @@ if($method==='POST'){
   $rate=fopen($dir.'/improvements-rate.php','c+');if(!$rate||!flock($rate,LOCK_EX))errorReply('Serviço indisponível.',503);
   $saved=stream_get_contents($rate);$rates=$saved?json_decode(substr($saved,strlen($prefix)),true):[];if(!is_array($rates))errorReply('Serviço indisponível.',503);
   $rates=array_filter($rates,fn($r)=>$r['until']>time());$key=hash('sha256',($_SERVER['REMOTE_ADDR']??'local').$action);$r=$rates[$key]??['count'=>0,'until'=>time()+900];
-  if($r['count']>=($action==='login'?10:20))errorReply('Limite temporário atingido. Tente novamente em 15 minutos.',429);
+  // Uma turma inteira pode compartilhar o mesmo IP da escola.
+  if($r['count']>=($action==='login'?10:200))errorReply('Limite temporário atingido. Tente novamente em 15 minutos.',429);
   $r['count']++;$rates[$key]=$r;rewind($rate);ftruncate($rate,0);fwrite($rate,$prefix.json_encode($rates));fflush($rate);flock($rate,LOCK_UN);fclose($rate);
  }
  if($action==='login'){
@@ -31,13 +32,20 @@ $lock=fopen($dir.'/improvements.lock','c+');if(!$lock||!flock($lock,$method==='G
 $items=[];if(is_file($file)){$raw=file_get_contents($file);if($raw===false||!str_starts_with($raw,$prefix))errorReply('Dados preservados. Histórico indisponível.',503);$items=json_decode(substr($raw,strlen($prefix)),true);if(!is_array($items))errorReply('Histórico inválido. Dados preservados.',503);}
 if($method==='GET')answer(['items'=>array_reverse($items),'admin'=>$admin,'csrf'=>$_SESSION['improvements_csrf']]);
 if($action==='submit'){
- $title=$input['title']??'';$description=$input['description']??'';
- if(!is_string($title)||!is_string($description)||trim($title)===''||trim($description)===''||strlen($title)>360||strlen($description)>6000)errorReply('Preencha o título e a descrição dentro dos limites.');
- if(count($items)>=3000)errorReply('O histórico atingiu o limite de sugestões.',409);
- $items[]=['id'=>bin2hex(random_bytes(12)),'title'=>trim($title),'description'=>trim($description),'done'=>false,'created'=>gmdate('c'),'revision'=>bin2hex(random_bytes(8)),'history'=>[]];
+ $title=$input['title']??'';$description=$input['description']??'';$name=$input['name']??'';$presence=($input['presence']??false)===true;
+ if(!is_string($title)||!is_string($description)||!is_string($name)||strlen($title)>360||strlen($description)>6000||strlen($name)>240)errorReply('Preencha os campos dentro dos limites.');
+ $title=trim($title);$description=trim($description);$name=trim($name);
+ if($presence&&$name==='')errorReply('Diga como você quer ser chamado para marcar presença.');
+ if(!$presence&&($title===''||$description===''))errorReply('Preencha o título e a descrição da sugestão.');
+ if($presence&&$title!==''&&$description==='')errorReply('Descreva sua ideia ou deixe o título vazio.');
+ $kind=$description===''?'presence':'suggestion';
+ if($presence&&$kind==='suggestion'&&$title==='')$title='Ideia para o laboratório';
+ if(count($items)>=3000)errorReply('O mural atingiu o limite de registros.',409);
+ $items[]=['id'=>bin2hex(random_bytes(12)),'kind'=>$kind,'name'=>$name,'title'=>$kind==='presence'?'Passei por aqui':$title,'description'=>$description,'done'=>false,'created'=>gmdate('c'),'revision'=>bin2hex(random_bytes(8)),'history'=>[]];
 }else{
  $index=null;foreach($items as $i=>$item)if($item['id']===($input['id']??null)){$index=$i;break;}
  if($index===null)errorReply('Sugestão não encontrada.',404);
+ if(($items[$index]['kind']??'suggestion')==='presence')errorReply('Presenças não possuem status de melhoria.');
  if(($input['revision']??null)!==$items[$index]['revision'])errorReply('Esta sugestão mudou. Atualize o histórico.',409);
  if(!is_bool($input['done']??null))errorReply('Estado inválido.');
  if($items[$index]['done']!==$input['done']){$items[$index]['done']=$input['done'];$items[$index]['history'][]=['done'=>$input['done'],'date'=>gmdate('c')];$items[$index]['revision']=bin2hex(random_bytes(8));}

@@ -33,7 +33,7 @@
       host.documentElement.classList.toggle('falstad-expanded-host', expanded);
       updateFullscreenButton();
       window.dispatchEvent(new Event('resize'));
-    } catch { fullscreenButton.title = 'Abra o Falstad diretamente para usar tela cheia.'; }
+    } catch { fullscreenButton.title = 'Abra o CircuitLab diretamente para usar tela cheia.'; }
   }
   document.addEventListener('fullscreenchange', () => {
     if (parent !== window) return;
@@ -58,7 +58,7 @@
     document.querySelector('#painel')?.parentElement?.classList.add('lab-side');
     sim = window.CircuitJS1;
     window.installFalstadExamples?.(sim);
-    import('./mega/mega-panel.mjs?v=1').then(({installMega}) => installMega(sim)).catch(error => console.error('Arduino Mega:', error));
+    import('./mega/mega-panel.mjs?v=circuitlab1').then(({installMega}) => installMega(sim)).catch(error => console.error('Arduino Mega:', error));
     if (!fullscreenButton) {
       fullscreenButton = document.createElement('button');
       fullscreenButton.id = 'lab-fullscreen';
