@@ -1,4 +1,5 @@
 /* Identidade do laboratório; mantém as dimensões usadas pelo motor GWT. */
+.lab-fullscreen-floating{position:fixed;right:10px;top:85px;z-index:500}
 body {font-family: 'Segoe UI', Arial, sans-serif; background:#122738; color:#213c50;}
 .gwt-MenuBar-horizontal {background:#18384c!important; border:0!important; border-bottom:2px solid #ed1c24!important; box-sizing:border-box; padding-left:136px!important;}
 .gwt-MenuBar-horizontal::before {content:'BANCADA ELETRÔNICA'; position:absolute; left:12px; top:9px; color:#9fc9da; font:700 9px 'Segoe UI',sans-serif; letter-spacing:.7px;}
