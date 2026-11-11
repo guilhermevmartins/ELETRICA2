@@ -13,7 +13,9 @@ assert.equal(await request(scope+'shortrelay.php?v=test'),undefined);
 assert.equal(await request(scope+'index.html','POST'),undefined);
 const events={},parent={innerHeight:900,postMessage(){}};let running=true;
 const sim={isRunning:()=>running,setSimRunning:v=>running=v};const window={CircuitJS1:sim,addEventListener:(n,f)=>events[n]=f};
-vm.runInNewContext(fs.readFileSync(new URL('./portal-integration.js',import.meta.url),'utf8'),{window,parent,document:{querySelector:()=>null},location:{origin:'https://example.test'}});
+// The portal also installs a fullscreen button; provide its DOM surface in this test.
+const document={querySelector:()=>null,addEventListener(){},body:{append(){}},createElement:()=>({setAttribute(){},classList:{add(){}}})};
+vm.runInNewContext(fs.readFileSync(new URL('./portal-integration.js',import.meta.url),'utf8'),{window,parent,document,location:{origin:'https://example.test'}});
 window.oncircuitjsloaded();assert.equal(running,false);
 const toggle=active=>events.message({source:parent,origin:'https://example.test',data:{type:'lab-visibility',active}});
 toggle(true);assert.equal(running,true);toggle(false);assert.equal(running,false);toggle(true);assert.equal(running,true);

@@ -1,0 +1,27 @@
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'C:/Users/Senai/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const assert=require('node:assert/strict');
+(async()=>{const browser=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});try{
+ const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.addInitScript(()=>{const original=CanvasRenderingContext2D.prototype.fillRect;CanvasRenderingContext2D.prototype.fillRect=function(x,y,w,h){if(w===344&&h===152){const t=this.getTransform();window.lcdPaint={x:t.a*x+t.c*y+t.e,y:t.b*x+t.d*y+t.f,scale:t.a};}return original.call(this,x,y,w,h);};});
+ await page.goto('http://127.0.0.1:8034/simuladores/falstad-web/index.html?lang=pt');await page.waitForFunction(()=>document.querySelector('#lab-menu-chip'));
+ await page.evaluate(()=>CircuitJS1.importCircuit('$ 1 0.000005 10 50 5 50\n',false));
+ await page.getByText('Desenhar',{exact:true}).click();await page.locator('[data-chip-menu]').hover();await page.locator('#lab-menu-chip').waitFor({state:'visible'});assert.equal(await page.locator('#lab-menu-chip button').count(),32);assert.equal(await page.locator('dialog[open]').count(),0);
+ await page.locator('#lab-menu-chip button').filter({hasText:'4011 ·'}).click();assert.match(await page.evaluate(()=>CircuitJS1.exportCircuit()),/CL_4011_v1/);
+ await page.getByText('Desenhar',{exact:true}).click();await page.locator('[data-arduino-menu]').hover();await page.locator('#lab-menu-arduino').waitFor({state:'visible'});
+ await page.screenshot({path:'submenu-qa.png'});
+ await page.getByRole('menuitem',{name:'Display LCD 16 × 2',exact:true}).click();assert.match(await page.evaluate(()=>CircuitJS1.exportCircuit()),/ARD_LCD16x2_v1/);
+ console.log('PASS: flyout menus on hover, 31 CIs plus pending entry, direct insertion without dialogs');
+ await page.evaluate(async()=>{const {lcdCircuit}=await import('./mega/lcd-display.mjs');let c='$ 1 0.000005 10 50 5 50\n'+lcdCircuit(192,128);for(let i=0;i<6;i++){const y=128+32*i;c+=`418 128 ${y} 80 ${y} 0 1 40 5 0 0 0.5 MEGA.D${22+i}\nw 128 ${y} 192 ${y} 0\n`;}CircuitJS1.importCircuit(c,false);});
+ await page.getByRole('button',{name:'Arduino Mega',exact:true}).click();
+ await page.locator('[data-code]').fill('#include <LiquidCrystal.h>\nLiquidCrystal lcd(22,23,24,25,26,27);\nvoid setup(){lcd.begin(16,2);lcd.print("OLA TURMA");lcd.setCursor(0,1);lcd.print("MEGA + CIRCUITO");}\nvoid loop(){}');await page.locator('[data-compile]').click();await page.waitForFunction(()=>!document.querySelector('[data-compile]').disabled,{},{timeout:120000});
+ console.log(await page.locator('[data-build-log]').textContent());await page.waitForFunction(()=>document.querySelector('#arduino-lcd-text').textContent.includes('MEGA + CIRCUITO'));
+ await page.locator('[data-pause]').click();await page.locator('[data-hide]').click();await page.screenshot({path:'lcd-qa.png'});
+ const before=await page.evaluate(()=>({paint:lcdPaint,circuit:CircuitJS1.exportCircuit()}));
+ await page.mouse.move(before.paint.x+100,before.paint.y+50);await page.mouse.down();await page.mouse.move(before.paint.x+148,before.paint.y+82,{steps:8});await page.mouse.up();
+ await page.waitForFunction(old=>CircuitJS1.exportCircuit()!==old,before.circuit);await page.waitForTimeout(100);
+ const moved=await page.evaluate(()=>lcdPaint);assert.ok(Math.abs(moved.x-before.paint.x)>10||Math.abs(moved.y-before.paint.y)>10,'screen follows component drag');
+ await page.mouse.move(moved.x+100,moved.y+50);await page.mouse.wheel(0,-120);await page.waitForFunction(scale=>lcdPaint.scale!==scale,moved.scale);
+ console.log('PASS: LCD canvas follows native chip movement and zoom');
+ const saved=await page.evaluate(()=>labMega.snapshot());await page.evaluate(p=>labMega.restore(p),saved);assert.match(await page.evaluate(()=>CircuitJS1.exportCircuit()),/ARD_LCD16x2_v1/);assert.equal(await page.evaluate(()=>CircuitJS1.getElements().find(e=>e.getType()==='CustomCompositeElm').getPostCount()),6);
+ assert.deepEqual(errors,[]);console.log('PASS: native LCD terminals receive compiled LiquidCrystal data; both screen rows updated');
+ }finally{await browser.close();}})().catch(e=>{console.error(e);process.exit(1);});

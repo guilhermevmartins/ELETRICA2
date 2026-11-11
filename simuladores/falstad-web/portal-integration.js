@@ -58,7 +58,7 @@
     document.querySelector('#painel')?.parentElement?.classList.add('lab-side');
     sim = window.CircuitJS1;
     window.installFalstadExamples?.(sim);
-    import('./mega/mega-panel.mjs?v=circuitlab1').then(({installMega}) => installMega(sim)).catch(error => console.error('Arduino Mega:', error));
+    import('./mega/mega-panel.mjs?v=ino1').then(async ({installMega}) => { installMega(sim); const {installArduinoParts} = await import('./mega/arduino-parts.mjs?v=2'); installArduinoParts(sim); const {installChipLibrary} = await import('./mega/chip-library.mjs?v=3'); installChipLibrary(sim); }).catch(error => console.error('Arduino Mega:', error));
     if (!fullscreenButton) {
       fullscreenButton = document.createElement('button');
       fullscreenButton.id = 'lab-fullscreen';

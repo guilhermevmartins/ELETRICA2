@@ -67,12 +67,14 @@ if ($action==='delete') {
  if (is_array($project)) {
   if (($project['format']??null)!=='falstad-mega'||($project['version']??null)!==1||!is_array($project['mega']??null)) fail('Projeto Mega inválido.');
   $mega=$project['mega'];
-  if (!is_string($mega['hex']??null)||strlen($mega['hex'])>800000||!preg_match('/^:[0-9a-f\r\n:]+$/i',trim($mega['hex']))||!is_string($mega['name']??null)||strlen($mega['name'])>640) fail('Programa Mega inválido.');
+  $source=$mega['source']??'';$compiledSource=$mega['compiledSource']??null;$inoName=$mega['inoName']??'sketch.ino';
+  if (!is_string($source)||strlen($source)>800000||($compiledSource!==null&&(!is_string($compiledSource)||strlen($compiledSource)>800000))||!is_string($inoName)||strlen($inoName)>640) fail('Código Arduino inválido.');
+  if (!is_string($mega['hex']??null)||strlen($mega['hex'])>800000||($mega['hex']!==''&&!preg_match('/^:[0-9a-f\r\n:]+$/i',trim($mega['hex'])))||($mega['hex']===''&&trim($source)==='')||!is_string($mega['name']??null)||strlen($mega['name'])>640) fail('Programa Mega inválido.');
   $manual=$mega['manual']??[];
   if (!is_array($manual)||count($manual)>70) fail('Entradas inválidas.');
   foreach($manual as $pin=>$voltage) if (!ctype_digit((string)$pin)||(int)$pin>69||!is_numeric($voltage)||$voltage<0||$voltage>5) fail('Entrada inválida.');
   $circuit=$project['circuit']??null;
-  $project=['format'=>'falstad-mega','version'=>1,'circuit'=>$circuit,'mega'=>['hex'=>$mega['hex'],'name'=>$mega['name'],'manual'=>$manual]];
+  $project=['format'=>'falstad-mega','version'=>1,'circuit'=>$circuit,'mega'=>['hex'=>$mega['hex'],'name'=>$mega['name'],'manual'=>$manual,'source'=>$source,'compiledSource'=>$compiledSource,'inoName'=>$inoName]];
  }
  if (!is_string($circuit)||strlen($circuit)>500000||!preg_match('/^\$ [^\r\n]+\r?\n/',$circuit)||count(explode("\n",trim($circuit)))<2) fail('Circuito inválido ou vazio.');
  if ($index===null&&count($items)>=200) fail('Limite de 200 exemplos atingido.');
